@@ -1,0 +1,132 @@
+aside {
+    float: left;
+    width: 200px;
+    margin-right: 20px;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    font-size: 12px;
+    box-sizing: border-box;
+}
+
+article {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    font-size: 15px;
+    float: r;
+    background-color: #ffffff;
+}
+
+.searchCriteria {
+    border: 1px solid #d6cfcf;
+}
+
+.searchText {
+    width: 150px;
+}
+
+.searchSelect {
+    width: 150px;
+    margin-left: 30px;
+}
+
+.selectFigure {
+    margin: 0px;
+    padding: 0px;
+}
+
+.selectImage {
+    height: 150px;
+    width: 200px;
+    margin: 0px;
+}
+
+.searchResult {
+    margin: 10px;
+}
+
+.petName {
+    background-color: #ffffff;
+    margin: 0px;
+    padding: 20px 0px;
+}
+
+.flex {
+    display: flex;
+}
+
+.paging {
+    padding: 0px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.paging ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.paging ul li {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    margin-right: 1em;
+    color: #000000;
+}
+
+.paging ul li a {
+    text-decoration: none;
+    background-color: white;
+    color: #000000;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 15px;
+    border: solid 1px;
+    border-radius: 10px;
+}
+
+.paging ul li:first-child {
+    background-color: red;
+    color: white;
+    border: solid 1px;
+    text-align: center;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.paging ul li a:hover {
+    background-color: #eeeeee;
+}
+
+.detailImage {
+    width: 400px;
+    height: 300px;
+}
+
+h2 {
+    text-align: center;
+}
+
+.detailTable {
+    border: #f5f5f5 solid 1px;
+    border-collapse: collapse;
+    margin-left: 30px;
+}
+
+.detailTable th {
+    background-color: #fafafa;
+    border: #f5f5f5 solid 1px;
+    width: 120px;
+}
+
+.detailTable td {
+    border: #f5f5f5 solid 1px;
+    width: 90px;
+    height: 40px;
+}

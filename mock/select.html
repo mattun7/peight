@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ペット情報</title>
+<link rel="stylesheet" href="../css/pet.css">
+</head>
+<body>
+    <header>
+        <h1>ペット一覧</h1>
+    </header>
+    <aside>
+        <ul>
+            <li><a href="">ペット一覧</a></li>
+            <li><a href="">ペット情報登録</a></li>
+        </ul>
+    </aside>
+    <article>
+        <section>
+            <h1>ぺットを探す</h1>
+        </section>
+        <section>
+            <table class="searchCriteria">
+                <tr>
+                    <td>
+                         <label>ぺット名</label>
+                    </td>
+                    <td>
+                        <label>品種</label>
+                    </td>
+                    <td>
+                        <label>カラー</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="petName" class="searchText">
+                    </td>
+                    <td>
+                        <select id="type" class="searchSelect"></select>
+                    </td>
+                    <td>
+                        <select id="color" class="searchSelect"></select>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h1>検索結果3件</h1>
+            <div class="flex">
+                <section class="searchResult">
+                    <a href="Detail.html">
+                        <figure class="selectFigure">
+                            <img src="../img/jeri.JPG" class="selectImage">
+                        </figure>
+                        <div>
+                            <h3 class="petName">じぇり吉</h3>
+                        </div>
+                    </a>
+                </section>
+                <section class="searchResult">
+                    <a href="Detail.html">
+                        <figure class="selectFigure">
+                            <img src="../img/hima.png" class="selectImage">
+                        </figure>
+                        <div>
+                            <h3 class="petName">ひまり</h3>
+                        </div>
+                    </a>
+                </section>
+                <section class="searchResult">
+                    <a href="Detail.html">
+                        <figure class="selectFigure">
+                            <img src="../img/fuku.jpeg" class="selectImage">
+                        </figure>
+                        <div>
+                            <h3 class="petName">ふく</h3>
+                        </div>
+                    </a>
+                </section>
+            </div>
+        </section>
+        <section class="paging">
+            <ul>
+                <li>
+                    1
+                </li>
+                <li>
+                    <a href="#">2</a>
+                </li>
+                <li>
+                    <a href="#">3</a>
+                </li>
+            </ul>
+        </section>
+    </article>
+    <footer>
+        
+    </footer>
+</body>
+</html>
