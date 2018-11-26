@@ -105,8 +105,8 @@ article {
 }
 
 .detailImage {
-    width: 400px;
-    height: 300px;
+    width: 360px;
+    height: 360px;
 }
 
 h2 {
@@ -127,6 +127,11 @@ h2 {
 
 .detailTable td {
     border: #f5f5f5 solid 1px;
-    width: 90px;
+    width: 200px;
     height: 40px;
+}
+
+#graph {
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
