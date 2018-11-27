@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>ペット情報</title>
+<link rel="stylesheet" href="../css/pet.css">
+</head>
+<body>
+    <header>
+        <h1>ペット一覧</h1>
+    </header>
+    <aside>
+        <ul>
+            <li><a href="select.html">ペット一覧</a></li>
+            <li><a href="InsertPetInfo.html">ペット情報登録</a></li>
+        </ul>
+    </aside>
+    <article>
+        <h2>
+            ぺット情報登録
+        </h2>
+        <table class="insertPetInfoTable">
+            <colgroup width="150"></colgroup>
+            <colgroup width="300"></colgroup>
+            <tr>
+                <th>
+                    ぺット名
+                </th>
+                <td>
+                    <input type="text" id="petName" />
+                </td>
+            <tr>
+                <th>
+                    誕生日
+                </th>
+                <td>
+                    <input type="date" id="birthday" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    品種
+                </th>
+                <td>
+                    <input type="text" id="type" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    カラー
+                </th>
+                <td>
+                    <input type="text" id="color" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    備考
+                </th>
+                <td>
+                    <textarea></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    画像
+                </th>
+                <td>
+                    <input type="file" id="file" name="file" />
+                </td>
+            </tr>
+        </table>
+        <div class="center">
+            <input type="button" id="insert" value="送信" />
+        </div>
+    </article>
+</body>
+</html>
