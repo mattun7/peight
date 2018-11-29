@@ -84,20 +84,36 @@
         </section>
         <div class="underLineNav">
             <nav>
-                <a href="DetailGraph.html" style="border-bottom-color: #e36209">体重グラフ</a>
-                <a href="InsertBodyWeight.html" >体重入力</a>
+                <a href="DetailGraph.html">体重グラフ</a>
+                <a href="InsertBodyWeight.html" style="border-bottom-color: #e36209">体重入力</a>
             </nav>
         </div>
         <section>
-            <div id="graph">
+            <table class="insertBodyWeightTable">
+                <colgroup width="150"></colgroup>
+                <colgroup width="300"></colgroup>
+                <tr>
+                    <th>
+                        計測日
+                    </th>
+                    <td>
+                        <input type="date" id="measurementDate" />
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        体重
+                    </th>
+                    <td>
+                        <input type="text" id="weight" />
+                    </td>
+                </tr>
+            </table>
+            <div class="center">
+                <a href="DetailGraph.html">
+                    <input type="button" id="send" value="送信" />
+                </a>
             </div>
-            <label>
-                体重表示日程
-                <input type="date" id="start" />
-                -
-                <input type="date" id="end" />
-            </label>
-            <input type="button" value="体重表示" />
         </section>
     </article>
 </body>
