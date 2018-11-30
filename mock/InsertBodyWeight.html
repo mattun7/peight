@@ -5,10 +5,8 @@
 <title>ペット詳細</title>
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
-<script src="../js/Graph.js"></script>
-<script src="../js/c3.js"></script>
-<script src="../js/d3.min.js"></script>
-<link rel="stylesheet" href="../css/c3.css">
+<script src="../js/InsertBodyWeight.js"></script>
+<script src="../js/Util.js"></script>
 </head>
 <body>
     <header>
@@ -110,9 +108,7 @@
                 </tr>
             </table>
             <div class="center">
-                <a href="DetailGraph.html">
-                    <input type="button" id="send" value="送信" />
-                </a>
+                <input type="button" id="send" value="登録" onclick="checkMessage();"/>
             </div>
         </section>
     </article>
