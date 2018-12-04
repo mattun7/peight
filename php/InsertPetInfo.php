@@ -1,3 +1,21 @@
+<?php
+    if(isset($_POST["pet_name"])){
+        $pet_name = $_POST["pet_name"];
+        $birthday = $_POST["birthday"];
+        $pet_type = $_POST["pet_type"];
+        $color = $_POST["color"];
+        $remarks = $_POST["remarks"];
+        $pet_image = $_FILES["pet_image"]["name"];
+
+        // 画像データを保存するファイルパスを取得
+        $json = file_get_contents("../json/const.json");
+        $json = mb_convert_encoding($json, "utf8", "ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN");
+        $json_arr = json_decode($json, true);
+        $image_path = $json_arr["petImagePath"];
+    
+        echo "<script>alert('テスト')</script>";
+    }
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -17,7 +35,7 @@
             <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
         </ul>
     </aside>
-    <form method_exists="post" action="InsertPetInfo.php" >
+    <form action="" method="post" enctype="multipart/form-data" >
         <article>
             <h2>
                 ぺット情報登録
@@ -30,14 +48,14 @@
                         ぺット名
                     </th>
                     <td>
-                        <input type="text" id="pet_name" />
+                        <input type="text" id="pet_name" name="pet_name" />
                     </td>
                 <tr>
                     <th>
                         誕生日
                     </th>
                     <td>
-                        <input type="date" id="birthday" />
+                        <input type="date" id="birthday" name="birthday" />
                     </td>
                 </tr>
                 <tr>
@@ -45,7 +63,7 @@
                         品種
                     </th>
                     <td>
-                        <input type="text" id="pet_type" />
+                        <input type="text" id="pet_type" name="pet_type" />
                     </td>
                 </tr>
                 <tr>
@@ -53,7 +71,7 @@
                         カラー
                     </th>
                     <td>
-                        <input type="text" id="color" />
+                        <input type="text" id="color" name="color" />
                     </td>
                 </tr>
                 <tr>
@@ -61,7 +79,7 @@
                         備考
                     </th>
                     <td>
-                        <textarea id="remarks"></textarea>
+                        <textarea id="remarks" name="remarks"></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -69,7 +87,7 @@
                         画像
                     </th>
                     <td>
-                        <input type="file" id="image_path" name="file" />
+                        <input type="file" id="pet_image" name="pet_image" />
                     </td>
                 </tr>
             </table>
@@ -78,18 +96,5 @@
             </div>
         </article>
     </form>
-    <?php
-        if(!isset($_POST["pet_name"])){
-            exit;
-        }
-         $pet_name = $_POST["pet_name"];
-         $birthday = $_POST["birthday"];
-         $pet_type = $_POST["pet_type"];
-         $color = $_POST["color"];
-         $remarks = $_POST["remarks"];
-         $image_path = $_POST["image_path"];
-
-         echo "<script>alert('テスト')</script>";
-    ?>
 </body>
 </html>
