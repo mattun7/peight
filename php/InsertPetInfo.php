@@ -1,19 +1,41 @@
 <?php
-    if(isset($_POST["pet_name"])){
-        $pet_name = $_POST["pet_name"];
-        $birthday = $_POST["birthday"];
-        $pet_type = $_POST["pet_type"];
-        $color = $_POST["color"];
-        $remarks = $_POST["remarks"];
-        $pet_image = $_FILES["pet_image"]["name"];
+    if(isset($_POST['pet_name'])){
+        $pet_name = $_POST['pet_name'];
+        $birthday = $_POST['birthday'];
+        $pet_type = $_POST['pet_type'];
+        $color = $_POST['color'];
+        $remarks = $_POST['remarks'];
+        $pet_image = $_FILES['pet_image']['name'];
 
         // 画像データを保存するファイルパスを取得
-        $json = file_get_contents("../json/const.json");
-        $json = mb_convert_encoding($json, "utf8", "ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN");
+        $json = file_get_contents('../json/const.json');
+        $json = mb_convert_encoding($json, 'utf8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
         $json_arr = json_decode($json, true);
-        $image_path = $json_arr["petImagePath"];
+        $image_path = $json_arr['petImagePath'];
     
-        echo "<script>alert('テスト')</script>";
+        $dsn = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
+        $username = 'root';
+        $password = '';
+        $driver_options = '';
+        
+        try{
+            $pdo = new PDO($dsn, $username, $password);
+            /* 
+            [
+                PDO::ATTR_ERRMODE => PDO::ERROMODE_EXCEPTION,
+                //PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES =>false,
+            ]*/
+            $print = 0;
+
+            foreach($pdo->query('SELECT 1 as value FROM DUAL') as $row) {
+                $print += $row['value'];
+            }
+        } catch (PDOException $e) {
+            
+            echo '<script>alert("' + $e->getMessage() + '")</script>';
+        }
+        
     }
 ?>
 <!DOCTYPE html>
