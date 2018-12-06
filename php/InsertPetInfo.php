@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set('display_errors', '1');
     if(isset($_POST['pet_name'])){
         $pet_name = $_POST['pet_name'];
         $birthday = $_POST['birthday'];
@@ -20,17 +22,29 @@
         
         try{
             $pdo = new PDO($dsn, $username, $password);
-            /* 
-            [
-                PDO::ATTR_ERRMODE => PDO::ERROMODE_EXCEPTION,
-                //PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES =>false,
-            ]*/
             $print = 0;
-
+            /*
             foreach($pdo->query('SELECT 1 as value FROM DUAL') as $row) {
                 $print += $row['value'];
-            }
+            }*/
+
+            $pdo->beginTransaction();
+
+            $stmt = $pdo->prepare("INSERT INTO PET_INFO (PET_NAME, BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH, CREATE_TIME) VALUES (:pet_name, :birthday, :pet_type, :color, :remarks, :image_path, NOW())");
+
+            $stmt->bindParam(':pet_name', $pet_name, PDO::PARAM_STR);
+            $stmt->bindParam(':birthday', $birthday, PDO::PARAM_STR);
+            $stmt->bindParam(':pet_type', $pet_type, PDO::PARAM_STR);
+            $stmt->bindParam(':color', $color, PDO::PARAM_STR);
+            $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
+            $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
+            
+            $stmt->execute();
+
+            $pdo->commit();
+
+            $pdo = null;
+
         } catch (PDOException $e) {
             
             echo '<script>alert("' + $e->getMessage() + '")</script>';
@@ -70,14 +84,14 @@
                         ぺット名
                     </th>
                     <td>
-                        <input type="text" id="pet_name" name="pet_name" />
+                        <input type="text" id="pet_name" name="pet_name" required />
                     </td>
                 <tr>
                     <th>
                         誕生日
                     </th>
                     <td>
-                        <input type="date" id="birthday" name="birthday" />
+                        <input type="date" id="birthday" name="birthday" required />
                     </td>
                 </tr>
                 <tr>
@@ -85,7 +99,7 @@
                         品種
                     </th>
                     <td>
-                        <input type="text" id="pet_type" name="pet_type" />
+                        <input type="text" id="pet_type" name="pet_type" required />
                     </td>
                 </tr>
                 <tr>
@@ -93,7 +107,7 @@
                         カラー
                     </th>
                     <td>
-                        <input type="text" id="color" name="color" />
+                        <input type="text" id="color" name="color" required />
                     </td>
                 </tr>
                 <tr>
