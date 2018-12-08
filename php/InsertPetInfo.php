@@ -14,6 +14,14 @@
         $json = mb_convert_encoding($json, 'utf8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
         $json_arr = json_decode($json, true);
         $image_path = $json_arr['petImagePath'];
+        
+        // 画像アップロード
+        // アップロードされていない場合は空でDBに登録する
+        if(empty($pet_image)){
+            $image_path = "";
+        } else {
+            $image_path .= $pet_image;
+        }
     
         $dsn = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
         $username = 'root';
@@ -28,7 +36,7 @@
                 $print += $row['value'];
             }*/
 
-            $pdo->beginTransaction();
+            //$pdo->beginTransaction();
 
             $stmt = $pdo->prepare("INSERT INTO PET_INFO (PET_NAME, BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH, CREATE_TIME) VALUES (:pet_name, :birthday, :pet_type, :color, :remarks, :image_path, NOW())");
 
@@ -39,9 +47,11 @@
             $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
             $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
             
-            $stmt->execute();
+            //$stmt->execute();
+            
+            imageUpload($image_path);
 
-            $pdo->commit();
+            //$pdo->commit();
 
             $pdo = null;
 
@@ -50,6 +60,19 @@
             echo '<script>alert("' + $e->getMessage() + '")</script>';
         }
         
+    }
+
+    function imageUpload($image_path){
+
+        if(empty($image_path)){
+            return;
+        }
+        $tmp_name = $_FILES['pet_image']['tmp_name'];
+        $result = move_uploaded_file($tmp_name, $image_path);
+
+        if(!$result){
+            echo '<script>alert("アップロード失敗")</script>';
+        }
     }
 ?>
 <!DOCTYPE html>
