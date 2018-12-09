@@ -10,33 +10,23 @@
         $pet_image = $_FILES['pet_image']['name'];
 
         // 画像データを保存するファイルパスを取得
-        $json = file_get_contents('../json/const.json');
-        $json = mb_convert_encoding($json, 'utf8', 'ASCII,JIS,UTF-8,EUC-JP,SJIS-WIN');
-        $json_arr = json_decode($json, true);
-        $image_path = $json_arr['petImagePath'];
+        require_once(dirname(__FILE__).'/Util/Json.php');
+        $image_path = \Json\Json::get_json('petImagePath');
         
         // 画像アップロード
         // アップロードされていない場合は空でDBに登録する
         if(empty($pet_image)){
-            $image_path = "";
+            $image_path = '';
         } else {
             $image_path .= $pet_image;
         }
-    
-        $dsn = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
-        $username = 'root';
-        $password = '';
-        $driver_options = '';
         
         try{
-            $pdo = new PDO($dsn, $username, $password);
-            $print = 0;
-            /*
-            foreach($pdo->query('SELECT 1 as value FROM DUAL') as $row) {
-                $print += $row['value'];
-            }*/
+            require_once(dirname(__FILE__).'/Util/DbConnection.php');
 
-            //$pdo->beginTransaction();
+            $pdo = DbConnection::get_connection();
+
+            $pdo->beginTransaction();
 
             $stmt = $pdo->prepare("INSERT INTO PET_INFO (PET_NAME, BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH, CREATE_TIME) VALUES (:pet_name, :birthday, :pet_type, :color, :remarks, :image_path, NOW())");
 
@@ -48,8 +38,8 @@
             $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
             
             //$stmt->execute();
-            
-            imageUpload($image_path);
+            require_once(dirname(__FILE__).'/Util/FileUtil.php');
+            FileUtil::imageUpload($image_path);
 
             //$pdo->commit();
 
@@ -60,19 +50,6 @@
             echo '<script>alert("' + $e->getMessage() + '")</script>';
         }
         
-    }
-
-    function imageUpload($image_path){
-
-        if(empty($image_path)){
-            return;
-        }
-        $tmp_name = $_FILES['pet_image']['tmp_name'];
-        $result = move_uploaded_file($tmp_name, $image_path);
-
-        if(!$result){
-            echo '<script>alert("アップロード失敗")</script>';
-        }
     }
 ?>
 <!DOCTYPE html>
