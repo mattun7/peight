@@ -8,7 +8,9 @@ class FileUtil{
         $tmp_name = $_FILES['pet_image']['tmp_name'];
         $result = move_uploaded_file($tmp_name, $image_path);
 
-        return $result;
+        if(!$result){
+            throw new Exception('ファイルが登録できませんでした。');
+        }
     }
 }
 ?>
