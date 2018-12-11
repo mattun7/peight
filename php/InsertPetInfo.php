@@ -37,11 +37,11 @@
             $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
             $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
             
-            //$stmt->execute();
+            $stmt->execute();
             require_once(dirname(__FILE__).'/Util/FileUtil.php');
             FileUtil::imageUpload($image_path);
 
-            //$pdo->commit();
+            $pdo->commit();
 
             $pdo = null;
 
