@@ -7,16 +7,16 @@ if(is_null($session)){
     $color = $_GET['color'];
 
     require_once(dirname(__FILE__).'/Dto/PetInfoSelectDto.php');
-    $selectDto = new PetInfoSelectDto;
+    $selectDto = new PetInfoSelectDto();
 
-    $selectDto->set_pet_name($pet_name);
-    $selectDto->set_type($type);
-    $selectDto->set_color($color);
+    $selectDto->setPetName($pet_name);
+    $selectDto->setType($type);
+    $selectDto->setColor($color);
 
     require_once(dirname(__FILE__).'/Util/DbConnection.php');
 
     try{
-        $pdo = DbConnection::get_connection();
+        $pdo = DbConnection::getConnection();
     } catch (Exception $e) {
 
     }

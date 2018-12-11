@@ -11,7 +11,7 @@
 
         // 画像データを保存するファイルパスを取得
         require_once(dirname(__FILE__).'/Util/Json.php');
-        $image_path = \Json\Json::get_json('petImagePath');
+        $image_path = Json::getJson('petImagePath');
         
         // 画像アップロード
         // アップロードされていない場合は空でDBに登録する
@@ -24,7 +24,7 @@
         try{
             require_once(dirname(__FILE__).'/Util/DbConnection.php');
 
-            $pdo = DbConnection::get_connection();
+            $pdo = DbConnection::getConnection();
 
             $pdo->beginTransaction();
 

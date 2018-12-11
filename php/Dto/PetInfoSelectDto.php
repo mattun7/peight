@@ -4,27 +4,27 @@ class PetInfoSelectDto {
     private $type;
     private $color;
 
-    function get_pet_name(){
+    function getPetName(){
         return $this->pet_name;
     }
 
-    function set_pet_name($pet_name){
+    function setPetName($pet_name){
         $this->pet_name = $pet_name;
     }
 
-    function get_type(){
+    function getType(){
         return $this->type;
     }
 
-    function set_type($type){
+    function setType($type){
         $this->type = $type;
     }
 
-    function get_color(){
+    function getColor(){
         return $this->color;
     }
 
-    function set_color($color) {
+    function setColor($color) {
         $this->color = $color;
     }
 }
