@@ -13,44 +13,17 @@ class PetInfoSelectDao {
             . 'BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH ' 
             . 'FROM PET_INFO ';
 
-        if(!(empty($petName) && empty($type) && empty($color))){
-            $sql .= 'WHERE ';
-        }
+        require_once(dirname(__FILE__).'/Dao.php');
 
-        if(!empty($petName)){
-            $sql .= 'PET_NAME LIKE :pet_name ';
-        }
-
-        if(!empty($petName) && !empty($type)){
-            $sql .= 'AND ';
-        }
-
-        if(!empty($dto->getType())){
-            $sql .= 'PET_TYPE = :pet_type ';
-        }
-
-        if((!empty($petName) || !empty($type)) && !empty($color)){
-            $sql .= 'AND ';
-        }
-
-        if(!empty($dto->getColor())){
-            $sql .= 'COLOR = :color ';
-        }
+        $sql = Dao::where($sql, 'PET_NAME LIKE :pet_name', $petName);
+        $sql = Dao::where($sql, 'PET_TYPE = :pet_type', $type);
+        $sql = Dao::where($sql, 'COLOR = :color', $color);
 
         $stmt = $pdo->prepare($sql);
 
-
-        if(!empty($petName)){
-            $stmt->bindParam(':pet_name', $petName, PDO::PARAM_STR);
-        }
-
-        if(!empty($type)){
-            $stmt->bindParam(':pet_type', $type, PDO::PARAM_STR);
-        }
-
-        if(!empty($color)){
-            $stmt->bindParam(':color', $color, PDO::PARAM_STR);
-        }
+        $stmt = Dao::setParam($stmt, ':pet_name', $petName);
+        $stmt = Dao::setParam($stmt, ':pet_type', $type);
+        $stmt = Dao::setParam($stmt, ':color', $color);
 
         $stmt->execute();
 
