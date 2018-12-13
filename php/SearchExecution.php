@@ -37,6 +37,7 @@ if(empty($_SESSION['select_dto'])){
 <title>ペット情報</title>
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
+<script src="../js/Util.js"></script>
 </head>
 <body>
     <header>
@@ -93,16 +94,19 @@ if(empty($_SESSION['select_dto'])){
             <div class="flex">
                 <?php foreach($result as $key): ?>
                     <section class="searchResult">
-                        <a href="DetailGraph.html">
-                            <figure class="selectFigure">
-                                <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
-                            </figure>
-                            <div>
-                                <h3 class="petName">
-                                    <?php echo $key['PET_NAME'] ?>
-                                </h3>
-                            </div>
-                        </a>
+                        <form action="DetailGraph.php" method="GET" id="petInfo">
+                            <a onclick="formSubmit('petInfo');">
+                                <figure class="selectFigure">
+                                    <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
+                                </figure>
+                                <div>
+                                    <h3 class="petName">
+                                        <?php echo $key['PET_NAME'] ?>
+                                    </h3>
+                                </div>
+                                <input type="hidden" name="id" value="<?php echo $key['ID']; ?>" />
+                            </a>
+                        </form>
                     </section>
                 <?php endforeach; ?>
             </div>
