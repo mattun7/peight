@@ -6,12 +6,19 @@ if(empty($_SESSION['select_dto'])){
     $type = $_GET['type'];
     $color = $_GET['color'];
 
+    if(empty($_GET['page'])){
+        $page = 0;
+    } else {
+        $page = (int)$_GET['page'];
+    }
+
     require_once(dirname(__FILE__).'/Dto/PetInfoSelectDto.php');
     $selectDto = new PetInfoSelectDto();
 
     $selectDto->setPetName($pet_name);
     $selectDto->setType($type);
     $selectDto->setColor($color);
+    $selectDto->setPage($page);
 
     require_once(dirname(__FILE__).'/Util/DbConnection.php');
 
@@ -21,6 +28,8 @@ if(empty($_SESSION['select_dto'])){
         $pdo = DbConnection::getConnection();
         require_once(dirname(__FILE__).'/Dao/PetInfoSelectDao.php');
         $result = PetInfoSelectDao::getPetInfo($pdo, $selectDto);
+
+        $count = PetInfoSelectDao::getCount($pdo);
     } catch (Exception $e) {
 
     }
@@ -28,6 +37,11 @@ if(empty($_SESSION['select_dto'])){
 } else {
     // ヘッダーを押下
 }
+
+
+
+$typeOptions = ['', 'デグー'];
+$colorOptions = ['', 'サンド', 'ブルーパイド'];
 
 ?>
 <!DOCTYPE html>
@@ -69,19 +83,24 @@ if(empty($_SESSION['select_dto'])){
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" id="pet_name" name="pet_name" class="searchText">
+                            <input type="text" id="pet_name" name="pet_name" class="searchText" value="<?php echo $pet_name ?>">
                         </td>
                         <td>
                             <select id="type" name="type" class="searchSelect">
-                                <option></option>
-                                <option>デグー</option>
+                                <?php foreach($typeOptions as $typeOption): ?>
+                                    <option <?php echo $typeOption == $type ? 'selected' : '' ?>>
+                                        <?php echo $typeOption; ?>
+                                    </option>
+                                <?php endforeach ?>
                             </select>
                         </td>
                         <td>
                             <select id="color" name="color" class="searchSelect">
-                                <option></option>
-                                <option>サンド</option>
-                                <option>ブルーパイド</option>
+                                <?php foreach($colorOptions as $colorOption): ?>
+                                    <option <?php echo $colorOption == $color ? 'selected' : '' ?>>
+                                        <?php echo $colorOption; ?>
+                                    </option>
+                                <?php endforeach ?>
                             </select>
                         </td>
                     </tr>
@@ -90,7 +109,7 @@ if(empty($_SESSION['select_dto'])){
             </form>
         </section>
         <section>
-            <h1>検索結果<?php echo count($result) ?>件</h1>
+            <h1>検索結果<?php echo $count ?>件</h1>
             <div class="flex">
                 <?php foreach($result as $key): ?>
                     <section class="searchResult">
