@@ -20,7 +20,7 @@ class Dao {
      * bindParamの設定
      */
     public static function setParam($stmt, $parameter, $variable){
-        if(!empty($variable)){
+        if(!(is_null($variable) || $variable === '')){
             $type = gettype($variable);
             if($type === 'string'){
                 $stmt->bindParam($parameter, $variable, PDO::PARAM_STR);

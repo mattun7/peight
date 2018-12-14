@@ -1,3 +1,4 @@
 {
-    "petImagePath": "../img/"
+    "petImagePath": "../img/",
+    "pagination": "3"
 }
