@@ -1,44 +1,47 @@
 <?php
+require_once(dirname(__FILE__).'/Dto/PetInfoSelectDto.php');
 session_start();
-if(empty($_SESSION['select_dto'])){
+
+if(empty($_GET['page'])){
+    $page = 1;
+} else {
+    $page = (int)$_GET['page'];
+}
+
+if(empty($_SESSION['selectDto'])){
     // 検索ボタンを押下
     $pet_name = $_GET['pet_name'];
     $type = $_GET['type'];
     $color = $_GET['color'];
 
-    if(empty($_GET['page'])){
-        $page = 0;
-    } else {
-        $page = (int)$_GET['page'];
-    }
-
-    require_once(dirname(__FILE__).'/Dto/PetInfoSelectDto.php');
     $selectDto = new PetInfoSelectDto();
-
+    
     $selectDto->setPetName($pet_name);
     $selectDto->setType($type);
     $selectDto->setColor($color);
     $selectDto->setPage($page);
-
-    require_once(dirname(__FILE__).'/Util/DbConnection.php');
-
-    $result = "";
-
-    try{
-        $pdo = DbConnection::getConnection();
-        require_once(dirname(__FILE__).'/Dao/PetInfoSelectDao.php');
-        $result = PetInfoSelectDao::getPetInfo($pdo, $selectDto);
-
-        $count = PetInfoSelectDao::getCount($pdo);
-    } catch (Exception $e) {
-
-    }
-
 } else {
     // ヘッダーを押下
+    $selectDto = $_SESSION['selectDto'];
+    $pet_name = $selectDto->getPetName();
+    $type = $selectDto->getType();
+    $color = $selectDto->getColor();
+
+    $selectDto->setPage($page);
 }
 
+require_once(dirname(__FILE__).'/Util/DbConnection.php');
+require_once(dirname(__FILE__).'/Dao/PetInfoSelectDao.php');
 
+try{
+    $pdo = DbConnection::getConnection();
+    $result = PetInfoSelectDao::getPetInfo($pdo, $selectDto);
+    $count = PetInfoSelectDao::getCount($pdo);
+} catch (Exception $e) {
+
+}
+
+$_SESSION['selectDto'] = $selectDto;
 
 $typeOptions = ['', 'デグー'];
 $colorOptions = ['', 'サンド', 'ブルーパイド'];
@@ -131,17 +134,45 @@ $colorOptions = ['', 'サンド', 'ブルーパイド'];
             </div>
         </section>
         <section class="paging">
-            <ul>
-                <li>
-                    1
-                </li>
-                <li>
-                    <a href="#">2</a>
-                </li>
-                <li>
-                    <a href="#">3</a>
-                </li>
-            </ul>
+            <form action="" method="GET" name="pagination" >
+                <ul>
+                    <?php if(($page) >= 2){ ?>
+                        <li>
+                            <a href="?page=1">
+                                <<
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page=<?php echo $page-1; ?>">
+                                <
+                            </a>
+                        </li>
+                    <?php } ?>
+                    <?php if(ceil($count/3) >= 2) { 
+                        for($i=0; $i<3 && ($page+$i-1) <= ceil($count/3); $i++){ ?>
+                            <?php if(($page+$i) != 1){ ?>
+                                <li>
+                                    <a href="?page=<?php echo $page+$i-1 ?>" class="<?php if($i == 1) echo 'active' ?>" >
+                                        <?php echo $page+$i-1; ?>
+                                    </a>
+                                </li>
+                            <?php } ?>
+                        <?php } ?>
+                    <?php } ?>
+                    <?php if($page != ceil($count/3)){ ?>
+                        <li>
+                            <a href="?page=<?php echo $page+1 ?>">
+                                >
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page=<?php echo ceil($count/3); ?>">
+                                >>
+                            </a>
+                        </li>
+                    <?php } ?>
+                </ul>
+            </form>
         </section>
     </article>
     <footer>

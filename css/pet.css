@@ -42,18 +42,20 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    width: 700px;
 }
 
 .paging ul {
     padding: 0px;
     margin: 0px;
+    display: inline-block;
 }
 
 .paging ul li {
     margin: 0px;
     padding: 0px;
     display: inline-block;
-    margin-right: 1em;
+    margin-right: 10px;
     color: #000000;
 }
 
@@ -64,17 +66,21 @@
     text-align: center;
     display: inline-block;
     padding: 10px 15px;
+    margin: 1px;
+    width: 10px;
     border: solid 1px;
     border-radius: 10px;
 }
 
-.paging ul li:first-child {
+.paging .active {
     background-color: red;
     color: white;
     border: solid 1px;
     text-align: center;
     display: inline-block;
     padding: 10px 15px;
+    margin: 1px;
+    width: 10px;
     border-radius: 10px;
 }
 
