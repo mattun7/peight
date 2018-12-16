@@ -8,7 +8,9 @@ if(empty($_GET['page'])){
     $page = (int)$_GET['page'];
 }
 
-if(empty($_SESSION['selectDto'])){
+$referer = $_SERVER['HTTP_REFERER'];
+
+if(preg_match('/SearchExecution.php/', $referer)){
     // 検索ボタンを押下
     $pet_name = $_GET['pet_name'];
     $type = $_GET['type'];
@@ -22,6 +24,9 @@ if(empty($_SESSION['selectDto'])){
     $selectDto->setPage($page);
 } else {
     // ヘッダーを押下
+    if(empty($_SESSION['selectDto'])){
+        exit;
+    }
     $selectDto = $_SESSION['selectDto'];
     $pet_name = $selectDto->getPetName();
     $type = $selectDto->getType();
@@ -36,7 +41,7 @@ require_once(dirname(__FILE__).'/Dao/PetInfoSelectDao.php');
 try{
     $pdo = DbConnection::getConnection();
     $result = PetInfoSelectDao::getPetInfo($pdo, $selectDto);
-    $count = PetInfoSelectDao::getCount($pdo);
+    $count = PetInfoSelectDao::getCount($pdo, $selectDto);
 } catch (Exception $e) {
 
 }
