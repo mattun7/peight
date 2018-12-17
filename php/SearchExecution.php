@@ -10,7 +10,7 @@ if(empty($_GET['page'])){
 
 $referer = $_SERVER['HTTP_REFERER'];
 
-if(preg_match('/SearchExecution.php/', $referer)){
+if(preg_match('/SearchExecution.php/', $referer) || empty($_SESSION['selectDto'])){
     // 検索ボタンを押下
     $pet_name = $_GET['pet_name'];
     $type = $_GET['type'];
@@ -44,6 +44,8 @@ try{
     $count = PetInfoSelectDao::getCount($pdo, $selectDto);
 } catch (Exception $e) {
 
+} finally {
+    $pdo = null;
 }
 
 $_SESSION['selectDto'] = $selectDto;
@@ -51,6 +53,7 @@ $_SESSION['selectDto'] = $selectDto;
 $typeOptions = ['', 'デグー'];
 $colorOptions = ['', 'サンド', 'ブルーパイド'];
 
+$url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&page=';
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -143,12 +146,12 @@ $colorOptions = ['', 'サンド', 'ブルーパイド'];
                 <ul>
                     <?php if(($page) >= 2){ ?>
                         <li>
-                            <a href="?page=1">
+                            <a href="<?php echo $url . '1' ?>">
                                 <<
                             </a>
                         </li>
                         <li>
-                            <a href="?page=<?php echo $page-1; ?>">
+                            <a href="<?php echo $url . ($page-1); ?>">
                                 <
                             </a>
                         </li>
@@ -157,7 +160,7 @@ $colorOptions = ['', 'サンド', 'ブルーパイド'];
                         for($i=0; $i<3 && ($page+$i-1) <= ceil($count/3); $i++){ ?>
                             <?php if(($page+$i) != 1){ ?>
                                 <li>
-                                    <a href="?page=<?php echo $page+$i-1 ?>" class="<?php if($i == 1) echo 'active' ?>" >
+                                    <a href="<?php echo $url . ($page+$i-1) ?>" class="<?php if($i == 1) echo 'active' ?>" >
                                         <?php echo $page+$i-1; ?>
                                     </a>
                                 </li>
@@ -166,12 +169,12 @@ $colorOptions = ['', 'サンド', 'ブルーパイド'];
                     <?php } ?>
                     <?php if($page != ceil($count/3)){ ?>
                         <li>
-                            <a href="?page=<?php echo $page+1 ?>">
+                            <a href="<?php echo $url . ($page+1) ?>">
                                 >
                             </a>
                         </li>
                         <li>
-                            <a href="?page=<?php echo ceil($count/3); ?>">
+                            <a href="<?php echo $url . ceil($count/3); ?>">
                                 >>
                             </a>
                         </li>
