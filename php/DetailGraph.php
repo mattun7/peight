@@ -1,3 +1,29 @@
+<?php
+$id = $_GET['id'];
+if(empty($id)) exit;
+
+require_once(dirname(__FILE__).'/Util/DbConnection.php');
+require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
+
+try{
+    $pdo = DbConnection::getConnection();
+    $result = DetailGraphDao::getPetDetail($pdo, $id);
+    if($result === false || $result.count() != 0) {
+        throw new Exception('DB検索失敗');
+    }
+} catch (Exception $e) {
+
+} finally {
+    $pdo = null;
+}
+
+$pet_name = $result[0]['PET_NAME'];
+$birthday = $result[0]['BIRTHDAY'];
+$type = $result[0]['PET_TYPE'];
+$color = $result[0]['COLOR'];
+$remarks = $result[0]['REMARKS'];
+$image_path = $result[0]['IMAGE_PATH'];
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>

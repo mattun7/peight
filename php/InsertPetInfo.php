@@ -42,12 +42,11 @@
             FileUtil::imageUpload($image_path);
 
             $pdo->commit();
-
-            $pdo = null;
-
         } catch (PDOException $e) {
             
             echo '<script>alert("' + $e->getMessage() + '")</script>';
+        } finally {
+            $pdo = null;
         }
         
     }
