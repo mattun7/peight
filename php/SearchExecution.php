@@ -63,6 +63,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
 <script src="../js/Util.js"></script>
+<script src="../js/SearchExecution.js"></script>
 </head>
 <body>
     <header>
@@ -124,8 +125,8 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
             <div class="flex">
                 <?php foreach($result as $key): ?>
                     <section class="searchResult">
-                        <form action="DetailGraph.php" method="GET" id="petInfo">
-                            <a onclick="formSubmit('petInfo');">
+                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['ID'] ?>">
+                            <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
                                 <figure class="selectFigure">
                                     <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
                                 </figure>

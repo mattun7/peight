@@ -3,12 +3,13 @@ $id = $_GET['id'];
 if(empty($id)) exit;
 
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
+require_once(dirname(__FILE__).'/Util/DateUtil.php');
 require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
 
 try{
     $pdo = DbConnection::getConnection();
     $result = DetailGraphDao::getPetDetail($pdo, $id);
-    if($result === false || $result.count() != 0) {
+    if($result === false || count($result) != 0) {
         throw new Exception('DB検索失敗');
     }
 } catch (Exception $e) {
@@ -19,6 +20,7 @@ try{
 
 $pet_name = $result[0]['PET_NAME'];
 $birthday = $result[0]['BIRTHDAY'];
+$age = DateUtil::getAgeFromBirthday($birthday);
 $type = $result[0]['PET_TYPE'];
 $color = $result[0]['COLOR'];
 $remarks = $result[0]['REMARKS'];
@@ -43,22 +45,22 @@ $image_path = $result[0]['IMAGE_PATH'];
     </header>
     <aside>
         <ul>
-            <li><a href="Select.html">ペット一覧</a></li>
-            <li><a href="InsertPetInfo.html">ペット情報登録</a></li>
+            <li><a href="Select.php">ペット一覧</a></li>
+            <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
         </ul>
     </aside>
     <article>
         <section>
-            <h2>じぇり吉</h2>
+            <h2><?php echo $pet_name ?></h2>
             <div class="flex">
-                <img src="../img/jerikichi.jpg" class="detailImage">
+                <img src="<?php echo $image_path ?>" class="detailImage">
                 <table class="detailTable">
                     <tr>
                         <th>
                             ペット名
                         </th>
                         <td>
-                            じぇり吉
+                            <?php echo $pet_name ?>
                         </td>
                     </tr>
                     <tr>
@@ -66,7 +68,7 @@ $image_path = $result[0]['IMAGE_PATH'];
                             誕生日
                         </th>
                         <td>
-                            18/04 下旬
+                            <?php echo $birthday ?>
                         </td>
                     </tr>
                     <tr>
@@ -74,7 +76,7 @@ $image_path = $result[0]['IMAGE_PATH'];
                             年齢
                         </th>
                         <td>
-                            7ヶ月
+                            <?php echo $age ?>
                         </td>
                     </tr>
                     <tr>
@@ -82,7 +84,7 @@ $image_path = $result[0]['IMAGE_PATH'];
                             品種
                         </th>
                         <td>
-                            デグー
+                            <?php echo $type ?>
                         </td>
                     </tr>
                     <tr>
@@ -90,7 +92,7 @@ $image_path = $result[0]['IMAGE_PATH'];
                             カラー
                         </th>
                         <td>
-                            オレンジ
+                            <?php echo $color ?>
                         </td>
                     </tr>
                     <tr style="height: 100px;">
@@ -98,7 +100,7 @@ $image_path = $result[0]['IMAGE_PATH'];
                             備考
                         </th>
                         <td>
-                            好きなこと：ぴるぴるダンス
+                            <?php echo $remarks ?>
                         </td>
                     </tr>
                     <tr>

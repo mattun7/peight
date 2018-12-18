@@ -10,8 +10,3 @@ function getSysDate() {
     var result = y + "-" + m + "-" + d;
     return result;
 }
-
-function formSubmit(formId) {
-    let petInfo = $(formId);
-    petInfo.submit();
-}
