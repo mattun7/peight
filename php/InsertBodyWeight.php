@@ -1,3 +1,31 @@
+<?php
+$id = $_GET['id'];
+if(empty($id)) exit;
+
+require_once(dirname(__FILE__).'/Util/DbConnection.php');
+require_once(dirname(__FILE__).'/Util/DateUtil.php');
+require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
+
+try{
+    $pdo = DbConnection::getConnection();
+    $result = DetailGraphDao::getPetDetail($pdo, $id);
+    if($result === false || count($result) != 0) {
+        throw new Exception('DB検索失敗');
+    }
+} catch (Exception $e) {
+
+} finally {
+    $pdo = null;
+}
+
+$pet_name = $result[0]['PET_NAME'];
+$birthday = date('Y年n月j日', strtotime($result[0]['BIRTHDAY']));
+$age = DateUtil::getAgeFromBirthday($result[0]['BIRTHDAY']);
+$type = $result[0]['PET_TYPE'];
+$color = $result[0]['COLOR'];
+$remarks = $result[0]['REMARKS'];
+$image_path = $result[0]['IMAGE_PATH'];
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,6 +35,7 @@
 <link rel="stylesheet" href="../css/pet.css">
 <script src="../js/InsertBodyWeight.js"></script>
 <script src="../js/Util.js"></script>
+<script src="../js/DetailGraph.js"></script>
 </head>
 <body>
     <header>
@@ -20,16 +49,16 @@
     </aside>
     <article>
         <section>
-            <h2>じぇり吉</h2>
+            <h2><?php echo $pet_name ?></h2>
             <div class="flex">
-                <img src="../img/jerikichi.jpg" class="detailImage">
+                <img src="<?php echo $image_path ?>" class="detailImage">
                 <table class="detailTable">
                     <tr>
                         <th>
                             ペット名
                         </th>
                         <td>
-                            じぇり吉
+                            <?php echo $pet_name ?>
                         </td>
                     </tr>
                     <tr>
@@ -37,7 +66,7 @@
                             誕生日
                         </th>
                         <td>
-                            18/04 下旬
+                            <?php echo $birthday ?>
                         </td>
                     </tr>
                     <tr>
@@ -45,7 +74,7 @@
                             年齢
                         </th>
                         <td>
-                            7ヶ月
+                            <?php echo $age ?>
                         </td>
                     </tr>
                     <tr>
@@ -53,7 +82,7 @@
                             品種
                         </th>
                         <td>
-                            デグー
+                            <?php echo $type ?>
                         </td>
                     </tr>
                     <tr>
@@ -61,7 +90,7 @@
                             カラー
                         </th>
                         <td>
-                            オレンジ
+                            <?php echo $color ?>
                         </td>
                     </tr>
                     <tr style="height: 100px;">
@@ -69,7 +98,7 @@
                             備考
                         </th>
                         <td>
-                            好きなこと：ぴるぴるダンス
+                            <?php echo $remarks ?>
                         </td>
                     </tr>
                     <tr>
@@ -82,8 +111,11 @@
         </section>
         <div class="underLineNav">
             <nav>
-                <a href="DetailGraph.html">体重グラフ</a>
-                <a href="InsertBodyWeight.html" style="border-bottom-color: #e36209">体重入力</a>
+                    <form action="" method="GET" id="form">
+                    <a onclick="formSubmit('DetailGraph.php');"  style="border-bottom-color: #e36209">体重グラフ</a>
+                    <a onclick="formSubmit('');" >体重入力</a>
+                    <input type="hidden" name="id" value="<?php echo $id ?>" />
+                </form>
             </nav>
         </div>
         <section>

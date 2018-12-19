@@ -8,14 +8,11 @@ document.addEventListener("DOMContentLoaded", function(){
             ]
         }
     })
-
-    // 体重表示日程設定
-    let sysDate = getSysDate();
-    $('end').value = sysDate;
-    let date = new Date();
-    date.setMonth(date.getMonth() + 1);
-    date.setDate(date.getDate() - 10);
-    $('start').value = date.getFullYear() + '-' 
-                     + date.getMonth() + '-'
-                     + date.getDate();
 })
+
+function formSubmit(action) {
+    let form = $('form');
+    form.action = action;
+
+    form.submit();
+}

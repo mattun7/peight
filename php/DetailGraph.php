@@ -25,6 +25,9 @@ $type = $result[0]['PET_TYPE'];
 $color = $result[0]['COLOR'];
 $remarks = $result[0]['REMARKS'];
 $image_path = $result[0]['IMAGE_PATH'];
+
+$start = date('Y-m-d', strtotime('-10 day'));
+$end = date('Y-m-d');
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -111,23 +114,26 @@ $image_path = $result[0]['IMAGE_PATH'];
                 </table>
             </div>
         </section>
-        <div class="underLineNav">
-            <nav>
-                <a href="DetailGraph.html" style="border-bottom-color: #e36209">体重グラフ</a>
-                <a href="InsertBodyWeight.html" >体重入力</a>
-            </nav>
-        </div>
-        <section>
-            <div id="graph">
+        <form action="" method="GET" id="form">
+            <div class="underLineNav">
+                <nav>
+                    <a onclick="formSubmit('');"  style="border-bottom-color: #e36209">体重グラフ</a>
+                    <a onclick="formSubmit('InsertBodyWeight.php');" >体重入力</a>
+                    <input type="hidden" name="id" value="<?php echo $id ?>" />
+                </nav>
             </div>
-            <label>
-                体重表示日程
-                <input type="date" id="start" />
-                -
-                <input type="date" id="end" />
-            </label>
-            <input type="button" value="体重表示" />
-        </section>
+            <section>
+                <div id="graph">
+                </div>
+                <label>
+                    体重表示日程
+                    <input type="date" name="start" value="<?php echo $start ?>" />
+                    -
+                    <input type="date" name="end" value="<?php echo $end ?>" />
+                </label>
+                <input type="button" value="体重表示" />
+            </section>
+        </form>
     </article>
 </body>
 </html>
