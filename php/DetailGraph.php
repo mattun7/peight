@@ -19,8 +19,8 @@ try{
 }
 
 $pet_name = $result[0]['PET_NAME'];
-$birthday = $result[0]['BIRTHDAY'];
-$age = DateUtil::getAgeFromBirthday($birthday);
+$birthday = date('Y年n月j日', strtotime($result[0]['BIRTHDAY']));
+$age = DateUtil::getAgeFromBirthday($result[0]['BIRTHDAY']);
 $type = $result[0]['PET_TYPE'];
 $color = $result[0]['COLOR'];
 $remarks = $result[0]['REMARKS'];
