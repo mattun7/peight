@@ -1,5 +1,5 @@
 <?php
-$id = $_GET['id'];
+$id = $_POST['id'];
 if(empty($id)) exit;
 
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
@@ -119,29 +119,32 @@ $image_path = $result[0]['IMAGE_PATH'];
             </nav>
         </div>
         <section>
-            <table class="insertBodyWeightTable">
-                <colgroup width="150"></colgroup>
-                <colgroup width="300"></colgroup>
-                <tr>
-                    <th>
-                        計測日
-                    </th>
-                    <td>
-                        <input type="date" id="measurementDate" />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        体重
-                    </th>
-                    <td>
-                        <input type="text" id="weight" />
-                    </td>
-                </tr>
-            </table>
-            <div class="center">
-                <input type="button" id="send" value="登録" onclick="checkMessage();"/>
-            </div>
+            <form action="" method="POST" >
+                <table class="insertBodyWeightTable">
+                    <colgroup width="150"></colgroup>
+                    <colgroup width="300"></colgroup>
+                    <tr>
+                        <th>
+                            計測日
+                        </th>
+                        <td>
+                            <input type="date" id="instrumentationDays" name="instrumentationDays" require />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            体重
+                        </th>
+                        <td>
+                            <input type="tel" id="weight" name="weight" require />
+                        </td>
+                    </tr>
+                </table>
+                <div class="center">
+                    <input type="submit" id="send" value="登録" onclick="checkMessage();"/>
+                </div>
+                <input type="hidden" name="id" value="<?php echo $id ?>" />
+            </form>
         </section>
     </article>
 </body>

@@ -114,7 +114,7 @@ $end = date('Y-m-d');
                 </table>
             </div>
         </section>
-        <form action="" method="GET" id="form">
+        <form action="" method="POST" id="form">
             <div class="underLineNav">
                 <nav>
                     <a onclick="formSubmit('');"  style="border-bottom-color: #e36209">体重グラフ</a>
