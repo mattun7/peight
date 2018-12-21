@@ -1,9 +1,12 @@
 <?php
 class InsertBodyWeightDao {
+    /**
+     * IDと計測日が既に登録されているかチェック
+     * @return true:未登録　false:登録済み
+     */
     public static function checkInstrumentationDays($pdo, $dto) {
         $id = $dto->getId();
         $instrumentationDays = $dto->getInstrumentationDays();
-        $weight = $dto->getWeight();
 
         $sql = 'SELECT COUNT(*) FROM PET_WEIGHT ';
 
@@ -22,6 +25,9 @@ class InsertBodyWeightDao {
         return $resultCount == 0 ? true : false;
     }
 
+    /**
+     * 計測日・体重登録
+     */
     public static function insertPetWeight($pdo, $dto) {
         $id = $dto->getId();
         $instrumentationDays = $dto->getInstrumentationDays();
@@ -35,7 +41,7 @@ class InsertBodyWeightDao {
         ');
 
         require_once(dirname(__FILE__).'/Dao.php');
-        
+
         $stmt = $pdo->prepare($sql);
 
         $stmt = Dao::setParam($stmt, ':id', $id);
@@ -43,9 +49,11 @@ class InsertBodyWeightDao {
         $stmt = Dao::setParam($stmt, ':weight', $weight);
         
         $stmt->execute();
-
     }
 
+    /**
+     * 計測日・体重更新
+     */
     public static function updatePetWeight($pdo, $dto) {
         $id = $dto->getId();
         $instrumentationDays = $dto->getInstrumentationDays();
