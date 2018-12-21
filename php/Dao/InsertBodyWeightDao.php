@@ -35,6 +35,8 @@ class InsertBodyWeightDao {
         ');
 
         require_once(dirname(__FILE__).'/Dao.php');
+        
+        $stmt = $pdo->prepare($sql);
 
         $stmt = Dao::setParam($stmt, ':id', $id);
         $stmt = Dao::setParam($stmt, ':instrumentationDays', $instrumentationDays);
@@ -56,6 +58,8 @@ class InsertBodyWeightDao {
         ');
 
         require_once(dirname(__FILE__).'/Dao.php');
+
+        $stmt = $pdo->prepare($sql);
 
         $stmt = Dao::setParam($stmt, ':id', $id);
         $stmt = Dao::setParam($stmt, ':instrumentationDays', $instrumentationDays);

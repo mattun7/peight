@@ -5,11 +5,22 @@ if(empty($id)) exit;
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
 require_once(dirname(__FILE__).'/Util/DateUtil.php');
 require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
+require_once(dirname(__FILE__).'/Dto/InsertBodyWeightDto.php');
+require_once(dirname(__FILE__).'/logic/InsertBodyWeightLogic.php');
 
 try{
     $pdo = DbConnection::getConnection();
+    if(!(empty($_POST['instrumentationDays']) && empty($_POST['weight']))){
+        $dto = new InsertBodyWeightDto();
+        $dto->setId($id);
+        $dto->setInstrumentationDays($_POST['instrumentationDays']);
+        $dto->setWeight($_POST['weight']);
+
+        InsertBodyWeightLogic::registInstrumentationDays($pdo, $dto);
+    }
+
     $result = DetailGraphDao::getPetDetail($pdo, $id);
-    if($result === false || count($result) != 0) {
+    if($result === false || count($result) != 1) {
         throw new Exception('DB検索失敗');
     }
 } catch (Exception $e) {
@@ -33,6 +44,8 @@ $image_path = $result[0]['IMAGE_PATH'];
 <title>ペット詳細</title>
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
+<script src="../js/c3.js"></script>
+<script src="../js/d3.min.js"></script>
 <script src="../js/InsertBodyWeight.js"></script>
 <script src="../js/Util.js"></script>
 <script src="../js/DetailGraph.js"></script>
@@ -112,8 +125,8 @@ $image_path = $result[0]['IMAGE_PATH'];
         <div class="underLineNav">
             <nav>
                     <form action="" method="GET" id="form">
-                    <a onclick="formSubmit('DetailGraph.php');"  style="border-bottom-color: #e36209">体重グラフ</a>
-                    <a onclick="formSubmit('');" >体重入力</a>
+                    <a onclick="formSubmit('DetailGraph.php');" >体重グラフ</a>
+                    <a onclick="formSubmit('');" style="border-bottom-color: #e36209">体重入力</a>
                     <input type="hidden" name="id" value="<?php echo $id ?>" />
                 </form>
             </nav>

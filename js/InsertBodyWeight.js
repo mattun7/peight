@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     var date = getSysDate();
-    $('measurementDate').value = date;
+    $('instrumentationDays').value = date;
 })
 
 function checkMessage() {
