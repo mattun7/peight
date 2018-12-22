@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
+
+    let weightList = $('weightList');
+
     var graph = c3.generate({
         bindto: '#graph',
         data: {

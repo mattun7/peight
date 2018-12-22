@@ -2,32 +2,39 @@
 $id = $_GET['id'];
 if(empty($id)) exit;
 
+if(empty($_GET['start']) && empty($_GET['end'])){
+    $start = date('Y-m-d', strtotime('-10 day'));
+    $end = date('Y-m-d');
+} else {
+    $start = $_GET['start'];
+    $end = $_GET['end'];
+}
+
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
 require_once(dirname(__FILE__).'/Util/DateUtil.php');
 require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
 
 try{
     $pdo = DbConnection::getConnection();
-    $result = DetailGraphDao::getPetDetail($pdo, $id);
-    if($result === false || count($result) != 0) {
+    $petDetail = DetailGraphDao::getPetDetail($pdo, $id);
+    if($petDetail === false || count($petDetail) != 1) {
         throw new Exception('DB検索失敗');
     }
+
+    $weightList = DetailGraphDao::getWeight($pdo, $id, $start, $end);
 } catch (Exception $e) {
 
 } finally {
     $pdo = null;
 }
 
-$pet_name = $result[0]['PET_NAME'];
-$birthday = date('Y年n月j日', strtotime($result[0]['BIRTHDAY']));
-$age = DateUtil::getAgeFromBirthday($result[0]['BIRTHDAY']);
-$type = $result[0]['PET_TYPE'];
-$color = $result[0]['COLOR'];
-$remarks = $result[0]['REMARKS'];
-$image_path = $result[0]['IMAGE_PATH'];
-
-$start = date('Y-m-d', strtotime('-10 day'));
-$end = date('Y-m-d');
+$pet_name = $petDetail[0]['PET_NAME'];
+$birthday = date('Y年n月j日', strtotime($petDetail[0]['BIRTHDAY']));
+$age = DateUtil::getAgeFromBirthday($petDetail[0]['BIRTHDAY']);
+$type = $petDetail[0]['PET_TYPE'];
+$color = $petDetail[0]['COLOR'];
+$remarks = $petDetail[0]['REMARKS'];
+$image_path = $petDetail[0]['IMAGE_PATH'];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -135,5 +142,6 @@ $end = date('Y-m-d');
             </section>
         </form>
     </article>
+    <input type="hidden" id="weightList" name="weightList" value="<?php echo $weightList ?>" />
 </body>
 </html>
