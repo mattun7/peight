@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", function(){
 
-    let weightList = $('weightList');
+    //let weightList = $('weightList').value;
+
+    //let weightList = JSON.parse('<?php echo $json_weightList; ?>');
+
 
     var graph = c3.generate({
         bindto: '#graph',

@@ -28,6 +28,18 @@ try{
     $pdo = null;
 }
 
+$array = array();
+$key_i = 0;
+
+for($i=0; $i < count($weightList); $i++){
+    $list = $weightList[$i];
+    $array += array($i=>array('INSTRUMENTANTION_DAYS' => $list['INSTRUMENTANTION_DAYS'],
+                          'WEIGHT' => $list['WEIGHT']));
+}
+
+
+$json_weightList = json_encode($array);
+
 $pet_name = $petDetail[0]['PET_NAME'];
 $birthday = date('Y年n月j日', strtotime($petDetail[0]['BIRTHDAY']));
 $age = DateUtil::getAgeFromBirthday($petDetail[0]['BIRTHDAY']);
@@ -35,6 +47,8 @@ $type = $petDetail[0]['PET_TYPE'];
 $color = $petDetail[0]['COLOR'];
 $remarks = $petDetail[0]['REMARKS'];
 $image_path = $petDetail[0]['IMAGE_PATH'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -43,7 +57,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
 <title>ペット詳細</title>
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
-<script src="../js/DetailGraph.js"></script>
+<script src="../js/DetailGraph.js" date-param="<?php echo json_encode($array); ?>"></script>
 <script src="../js/c3.js"></script>
 <script src="../js/d3.min.js"></script>
 <script src="../js/Util.js"></script>
@@ -142,6 +156,6 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
             </section>
         </form>
     </article>
-    <input type="hidden" id="weightList" name="weightList" value="<?php echo $weightList ?>" />
+    <input type="hidden" id="weightList" name="weightList" value="<?php echo $array; ?>" />
 </body>
 </html>
