@@ -156,6 +156,6 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
             </section>
         </form>
     </article>
-    <input type="hidden" id="weightList" name="weightList" value="<?php echo $array; ?>" />
+    <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
 </body>
 </html>
