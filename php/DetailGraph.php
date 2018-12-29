@@ -57,11 +57,11 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
 <title>ペット詳細</title>
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
-<script src="../js/DetailGraph.js" date-param="<?php echo json_encode($array); ?>"></script>
+<link rel="stylesheet" href="../css/c3.css">
+<script src="../js/DetailGraph.js"></script>
 <script src="../js/c3.js"></script>
 <script src="../js/d3.min.js"></script>
 <script src="../js/Util.js"></script>
-<link rel="stylesheet" href="../css/c3.css">
 </head>
 <body>
     <header>
@@ -144,7 +144,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                 </nav>
             </div>
             <section>
-                <div id="graph">
+                <div id="chart">
                 </div>
                 <label>
                     体重表示日程
