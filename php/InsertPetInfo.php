@@ -1,54 +1,43 @@
 <?php
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
+
+    require_once(dirname(__FILE__).'/Dto/InsertPetInfoDto.php');
+    require_once(dirname(__FILE__).'/Dao/InsertPetInfoDao.php');
+    require_once(dirname(__FILE__).'/Util/DbConnection.php');
+    require_once(dirname(__FILE__).'/Util/FileUtil.php');
+    require_once(dirname(__FILE__).'/Util/Json.php');
+
     if(isset($_POST['pet_name'])){
-        $pet_name = $_POST['pet_name'];
-        $birthday = $_POST['birthday'];
-        $pet_type = $_POST['pet_type'];
-        $color = $_POST['color'];
-        $remarks = $_POST['remarks'];
-        $pet_image = $_FILES['pet_image']['name'];
 
         // 画像データを保存するファイルパスを取得
-        require_once(dirname(__FILE__).'/Util/Json.php');
         $image_path = Json::getJson('petImagePath');
+        $pet_image = $_FILES['pet_image']['name'];
         
         // 画像アップロード
-        // アップロードされていない場合は空でDBに登録する
         if(empty($pet_image)){
             $image_path = '';
         } else {
             $image_path .= $pet_image;
         }
+
+        $dto = new InsertPetInfoDto();
+        $dto->setPetName($_POST['pet_name']);
+        $dto->setBirthday($_POST['birthday']);
+        $dto->setPetType($_POST['pet_type']);
+        $dto->setColor($_POST['color']);
+        $dto->setRemarks($_POST['remarks']);
+        $dto->setImagePath($image_path);
         
         try{
-            require_once(dirname(__FILE__).'/Util/DbConnection.php');
-
             $pdo = DbConnection::getConnection();
-
-            $pdo->beginTransaction();
-
-            $stmt = $pdo->prepare("INSERT INTO PET_INFO (PET_NAME, BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH, CREATE_TIME) VALUES (:pet_name, :birthday, :pet_type, :color, :remarks, :image_path, NOW())");
-
-            $stmt->bindParam(':pet_name', $pet_name, PDO::PARAM_STR);
-            $stmt->bindParam(':birthday', $birthday, PDO::PARAM_STR);
-            $stmt->bindParam(':pet_type', $pet_type, PDO::PARAM_STR);
-            $stmt->bindParam(':color', $color, PDO::PARAM_STR);
-            $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
-            $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
-            
-            $stmt->execute();
-            require_once(dirname(__FILE__).'/Util/FileUtil.php');
+            InsertPetInfoDao::insertPetInfo($pdo, $dto);
             FileUtil::imageUpload($image_path);
-
-            $pdo->commit();
         } catch (PDOException $e) {
-            
             echo '<script>alert("' + $e->getMessage() + '")</script>';
         } finally {
             $pdo = null;
         }
-        
     }
 ?>
 <!DOCTYPE html>
