@@ -30,12 +30,12 @@ class InsertPetInfoDao {
             ');
 
         require_once(dirname(__FILE__).'/Dao.php');
-        $stmt = Dao::setParam($stmt, ':pet_name', $pet_name);
-        $stmt = Dao::setParam($stmt, ':birthday', $birthday);
-        $stmt = Dao::setParam($stmt, ':pet_type', $pet_type);
-        $stmt = Dao::setParam($stmt, ':color', $color);
-        $stmt = Dao::setParam($stmt, ':remarks', $remarks);
-        $stmt = Dao::setParam($stmt, ':image_path', $image_path);
+        $stmt->bindParam(':pet_name', $pet_name, PDO::PARAM_STR);
+        $stmt->bindParam(':birthday', $birthday, PDO::PARAM_STR);
+        $stmt->bindParam(':pet_type', $pet_type, PDO::PARAM_STR);
+        $stmt->bindParam(':color', $color, PDO::PARAM_STR);
+        $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
+        $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
         
         $pdo->beginTransaction();
         $stmt->execute();
