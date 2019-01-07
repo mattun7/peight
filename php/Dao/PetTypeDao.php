@@ -21,6 +21,9 @@ class PetTypeDao {
         return $count != 0 ? true : false;
     }
 
+    /**
+     * PET_TYPEテーブルを全件取得する
+     */
     public static function getPetType($pdo) {
         $stmt = $pdo->prepare('
             SELECT ID, PET_TYPE
@@ -30,6 +33,24 @@ class PetTypeDao {
         $stmt->execute();
         $result = $stmt->fetchAll();
         return $result;
+    }
+
+    /**
+     * PET_TYPEテーブルに１件登録する
+     */
+    public static function insertPetType($pdo, $dto) {
+        require_once(dirname(__FILE__).'/Dao.php');
+        $petType = $dto->getPetType();
+        
+        $stmt = $pdo->prepare('
+            INSERT INTO PET_TYPE 
+                (PET_TYPE)
+            VALUES
+                (:pet_type)
+        ');
+
+        $stmt = Dao::setParam($stmt, ':pet_type', $petType);
+        $stmt->execute();
     }
 }
 ?>
