@@ -3,6 +3,20 @@ session_start();
 if(empty($_SESSION['select_dto'])){
     session_destroy();
 }
+
+require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
+require_once(dirname(__FILE__).'/Util/DbConnection.php');
+try{
+    $pdo = DbConnection::getConnection();
+    $petTypeResult = PetTypeDao::getPetType($pdo);
+    $petTypeColorResult = PetTypeColorDao::getPetTypeColor($pdo);
+} catch (Exception $e) {
+
+} finally {
+    $pdo = null;
+}
+$json_petTypeColorResult = json_encode($petTypeColorResult);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -11,6 +25,8 @@ if(empty($_SESSION['select_dto'])){
 <title>ペット情報</title>
 <link rel="stylesheet" href="../css/Element.css">
 <link rel="stylesheet" href="../css/pet.css">
+<script src="../js/Util.js"></script>
+<script src="../js/Select.js"></script>
 </head>
 <body>
     <header>
@@ -45,9 +61,11 @@ if(empty($_SESSION['select_dto'])){
                             <input type="text" id="pet_name" name="pet_name" class="searchText">
                         </td>
                         <td>
-                            <select id="type" name="type" class="searchSelect">
+                            <select id="type" name="type" class="searchSelect" onchange="setColor()">
                                 <option></option>
-                                <option>デグー</option>
+                                <?php foreach($petTypeResult as $petType): ?>
+                                <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                <?php endforeach ?>
                             </select>
                         </td>
                         <td>
@@ -56,6 +74,7 @@ if(empty($_SESSION['select_dto'])){
                                 <option>サンド</option>
                                 <option>ブルーパイド</option>
                             </select>
+                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                         </td>
                     </tr>
                 </table>

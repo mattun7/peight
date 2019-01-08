@@ -24,7 +24,7 @@ class PetTypeColorDao {
     /**
      * PET_TYPE_COLORテーブルを全件取得する
      */
-    public static function getPetTypeColor() {
+    public static function getPetTypeColor($pdo) {
         $stmt = $pdo->prepare('
             SELECT PET_TYPE_ID, ID, COLOR
             FROM PET_TYPE_COLOR
