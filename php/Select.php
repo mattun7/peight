@@ -71,14 +71,12 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
                         <td>
                             <select id="color" name="color" class="searchSelect">
                                 <option></option>
-                                <option>サンド</option>
-                                <option>ブルーパイド</option>
                             </select>
                             <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                         </td>
                     </tr>
                 </table>
-                <input type="submit" id="search" value="検索" />
+                <input type="submit" id="search" value="検索" onclick="setSelectedColorIndex()"/>
             </form>
         </section>
     </article>
