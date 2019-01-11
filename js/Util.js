@@ -10,3 +10,10 @@ function getSysDate() {
     var result = y + "-" + m + "-" + d;
     return result;
 }
+
+function setOption(id, value, text) {
+    let option = document.createElement('option');
+    option.value = value;
+    option.text = text;
+    $(id).appendChild(option);
+}
