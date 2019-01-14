@@ -22,6 +22,7 @@ if(preg_match('/SearchExecution.php/', $referer) || empty($_SESSION['selectDto']
     $selectDto->setType($type);
     $selectDto->setColor($color);
     $selectDto->setPage($page);
+    
 } else {
     // ヘッダーを押下
     if(empty($_SESSION['selectDto'])){
@@ -37,11 +38,16 @@ if(preg_match('/SearchExecution.php/', $referer) || empty($_SESSION['selectDto']
 
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
 require_once(dirname(__FILE__).'/Dao/PetInfoSelectDao.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
 
 try{
     $pdo = DbConnection::getConnection();
     $result = PetInfoSelectDao::getPetInfo($pdo, $selectDto);
     $count = PetInfoSelectDao::getCount($pdo, $selectDto);
+
+    $petTypeResult = PetTypeDao::getPetType($pdo);
+    $petTypeColorResult = PetTypeColorDao::getPetTypeColor($pdo);
 } catch (Exception $e) {
 
 } finally {
@@ -50,8 +56,7 @@ try{
 
 $_SESSION['selectDto'] = $selectDto;
 
-$typeOptions = ['', 'デグー'];
-$colorOptions = ['', 'サンド', 'ブルーパイド'];
+$json_petTypeColorResult = json_encode($petTypeColorResult);
 
 $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&page=';
 ?>
@@ -98,26 +103,23 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             <input type="text" id="pet_name" name="pet_name" class="searchText" value="<?php echo $pet_name ?>">
                         </td>
                         <td>
-                            <select id="type" name="type" class="searchSelect">
-                                <?php foreach($typeOptions as $typeOption): ?>
-                                    <option <?php echo $typeOption == $type ? 'selected' : '' ?>>
-                                        <?php echo $typeOption; ?>
-                                    </option>
+                            <select id="type" name="type" class="searchSelect" onchange="setColor()">
+                                <option></option>
+                                <?php foreach($petTypeResult as $petType): ?>
+                                <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
                                 <?php endforeach ?>
                             </select>
+                            <input type="hidden" id="pet_type" name="pet_type" value='<?php echo $type; ?>' />
                         </td>
                         <td>
                             <select id="color" name="color" class="searchSelect">
-                                <?php foreach($colorOptions as $colorOption): ?>
-                                    <option <?php echo $colorOption == $color ? 'selected' : '' ?>>
-                                        <?php echo $colorOption; ?>
-                                    </option>
-                                <?php endforeach ?>
+                                <option></option>
                             </select>
+                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                         </td>
                     </tr>
                 </table>
-                <input type="submit" id="search" value="検索" />
+                <input type="submit" id="search" value="検索" onclick="setSelectedColorIndex()" />
             </form>
         </section>
         <section>
