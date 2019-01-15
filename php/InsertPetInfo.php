@@ -2,8 +2,12 @@
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
 
-    require_once(dirname(__FILE__).'/Dto/InsertPetInfoDto.php');
     require_once(dirname(__FILE__).'/Dao/InsertPetInfoDao.php');
+    require_once(dirname(__FILE__).'/Dto/InsertPetInfoDto.php');
+    require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
+    require_once(dirname(__FILE__).'/Dto/PetTypeDto.php');
+    require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
+    require_once(dirname(__FILE__).'/Dto/PetTypeColorDto.php');
     require_once(dirname(__FILE__).'/Util/DbConnection.php');
     require_once(dirname(__FILE__).'/Util/FileUtil.php');
     require_once(dirname(__FILE__).'/Util/Json.php');
@@ -21,20 +25,38 @@
             $image_path .= $pet_image;
         }
 
-        $dto = new InsertPetInfoDto();
-        $dto->setPetName($_POST['pet_name']);
-        $dto->setBirthday($_POST['birthday']);
-        $dto->setPetType($_POST['pet_type']);
-        $dto->setColor($_POST['color']);
-        $dto->setRemarks($_POST['remarks']);
-        $dto->setImagePath($image_path);
+        // dto設定
+        $insertPetInfoDto = new InsertPetInfoDto();
+        $insertPetInfoDto->setPetName($_POST['pet_name']);
+        $insertPetInfoDto->setBirthday($_POST['birthday']);
+        $insertPetInfoDto->setRemarks($_POST['remarks']);
+        $insertPetInfoDto->setImagePath($image_path);
+
+        $petTypeDto = new PetTypeDto();
+        $petTypeDto->setPetType($_POST['pet_type']);
         
+        $petTypeColorDto = new PetTypeColorDto();
+        $petTypeColorDto->setColor($_POST['color']);
+
         try{
             $pdo = DbConnection::getConnection();
-            InsertPetInfoDao::insertPetInfo($pdo, $dto);
+            $pdo->beginTransaction();
+
+            // DBから品種とカラーを取得
+            $pet_type = PetTypeDao::fetchPetType($pdo, $petTypeDto);
+            $color = PetTypeColorDao::fetchPetTypeColor($pdo, $petTypeColorDto);
+
+            // DBからの取得結果をぺット情報DTOに登録
+            $insertPetInfoDto->setPetType($pet_type);
+            $insertPetInfoDto->setColor($color);
+
+            // ぺット情報の登録
+            InsertPetInfoDao::insertPetInfo($pdo, $insertPetInfoDto);
             FileUtil::imageUpload($image_path);
+            $pdo->commit();
         } catch (PDOException $e) {
             echo '<script>alert("' + $e->getMessage() + '")</script>';
+            $pdo->rollBack();
         } finally {
             $pdo = null;
         }

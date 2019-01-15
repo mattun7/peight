@@ -5,20 +5,25 @@ class PetTypeDao {
      * 引数のDTOにある種類がPET_TYPEテーブルに存在するか
      * @return true:存在している　false:存在していない
      */
-    public static function exeistPetType($pdo, $dto) {
+    public static function fetchPetType($pdo, $dto) {
         require_once(dirname(__FILE__).'/Dao.php');
         $petType = $dto->getPetType();
 
         $stmt = $pdo->prepare('
-            SELECT COUNT(*)
+            SELECT ID
             FROM PET_TYPE
             WHERE PET_TYPE = :pet_type
         ');
         $stmt = Dao::setParam($stmt, ':pet_type', $petType);
         $stmt->execute();
-        $count = $stmt->fetchColumn();
+        $result = $stmt->fetchAll();
 
-        return $count != 0 ? true : false;
+        if($result.count() != 1) {
+            insertPetType($pdo, $dto);
+            $result = fetchPetType($pdo, $dto);
+        } 
+
+        return $result[0]['ID'];
     }
 
     /**
@@ -38,7 +43,7 @@ class PetTypeDao {
     /**
      * PET_TYPEテーブルに１件登録する
      */
-    public static function insertPetType($pdo, $dto) {
+    private static function insertPetType($pdo, $dto) {
         require_once(dirname(__FILE__).'/Dao.php');
         $petType = $dto->getPetType();
         

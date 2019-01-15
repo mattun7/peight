@@ -5,20 +5,27 @@ class PetTypeColorDao {
      * 引数のDTOにある種類がPET_TYPE_COLORテーブルに存在するか
      * @return true:存在している　false:存在していない
      */
-    public static function exeistPetTypeColor($pdo, $dto) {
+    public static function fetchPetTypeColor($pdo, $dto) {
         require_once(dirname(__FILE__).'/Dao.php');
+        $pet_type_id = $dto->getPetTypeId();
         $petType = $dto->getPetType();
 
         $stmt = $pdo->prepare('
-            SELECT COUNT(*)
+            SELECT ID
             FROM PET_TYPE_COLOR
-            WHERE COLOR = :color
+            WHERE PET_TYPE_ID = :pet_type_id and COLOR = :color
         ');
+        $stmt = Dao::setParam($stmt, ':pet_type_id', $petTypeId);
         $stmt = Dao::setParam($stmt, ':color', $petType);
         $stmt->execute();
-        $count = $stmt->fetchColumn();
+        $result = $stmt->fetchAll();
 
-        return $count != 0 ? true : false;
+        if($result.count() != 1) {
+            insertPetTypeColor($pdo, $dto);
+            $result = fetchPetTypeColor($pdo, $dto);
+        } 
+
+        return $result[0]['ID'];
     }
 
     /**

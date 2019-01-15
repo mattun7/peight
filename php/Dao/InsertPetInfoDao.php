@@ -37,9 +37,7 @@ class InsertPetInfoDao {
         $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
         $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
         
-        $pdo->beginTransaction();
         $stmt->execute();
-        $pdo->commit();
     }
 }
 ?>
