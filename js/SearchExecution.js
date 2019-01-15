@@ -45,8 +45,6 @@ function setSelectedColorIndex() {
 }
 
 function formSubmit(id) {
-    setSelectedColorIndex();
-    
     // submit
     let form = $('petInfo_' + id);
     form.submit();
