@@ -18,12 +18,12 @@ class PetTypeDao {
         $stmt->execute();
         $result = $stmt->fetchAll();
 
-        if($result.count() != 1) {
-            insertPetType($pdo, $dto);
-            $result = fetchPetType($pdo, $dto);
-        } 
-
-        return $result[0]['ID'];
+        if(Count($result) != 1) {
+            PetTypeDao::insertPetType($pdo, $dto);
+            return PetTypeDao::fetchPetType($pdo, $dto);
+        } else {
+            return $result[0]['ID'];
+        }
     }
 
     /**

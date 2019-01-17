@@ -44,7 +44,8 @@
 
             // DBから品種とカラーを取得
             $pet_type = PetTypeDao::fetchPetType($pdo, $petTypeDto);
-            $color = PetTypeColorDao::fetchPetTypeColor($pdo, $petTypeColorDto);
+            $petTypeDto->setId($pet_type);
+            $color = PetTypeColorDao::fetchPetTypeColor($pdo, $petTypeDto, $petTypeColorDto);
 
             // DBからの取得結果をぺット情報DTOに登録
             $insertPetInfoDto->setPetType($pet_type);
