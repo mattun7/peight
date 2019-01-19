@@ -4,7 +4,10 @@ document.addEventListener("DOMContentLoaded", function(){
     $('type').selectedIndex = type;
 
     // Select.phpで選択した色を設定する
-    const selectedColor = sessionStorage.getItem('selectedExecuitonColor');
+    const selectedExecuitonColor = sessionStorage.getItem('selectedExecuitonColor');
+    let selectedColor = selectedExecuitonColor !== '' ?
+                        selectedExecuitonColor : sessionStorage.getItem('selectedColor');
+
     setColor(Number(selectedColor));
 })
 

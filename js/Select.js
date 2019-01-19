@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     const selectedColor = sessionStorage.getItem('selectedColor');
+    sessionStorage.setItem('selectedExecuitonColor', '');
     setColor(Number(selectedColor));
 })
 
