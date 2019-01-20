@@ -148,11 +148,11 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                 </div>
                 <label>
                     体重表示日程
-                    <input type="date" name="start" value="<?php echo $start ?>" />
+                    <input type="date" id="start" name="start" value="<?php echo $start ?>" />
                     -
-                    <input type="date" name="end" value="<?php echo $end ?>" />
+                    <input type="date" id="end" name="end" value="<?php echo $end ?>" />
                 </label>
-                <input type="button" value="体重表示" />
+                <input type="button" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
             </section>
         </form>
     </article>
