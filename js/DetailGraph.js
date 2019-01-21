@@ -49,16 +49,23 @@ function ajaxGraph() {
    req.onreadystatechange = function() {
        if(req.readyState == 4) {
             if(req.status == 200) {
-                var json_weightList = JSON.parse(eval('(' + req.responseText + ')'));
+                var json_weightList = JSON.parse(req.responseText);
+                const list = json_weightList.map((weightList, index) => {
+                    return weightList[index] * 2;
+                });
             } else {
                
             }
        }
    }
+
+   const start = $('start').value;
+   const end = $('end').value;
+
    req.open('GET'
-           ,'/logic/DetailGraphLogic.php?'        
-                   + 'start=' + encodeURIComponent($('start').value) + '&'
-                   + 'end=' + encodeURIComponent($('end').value)
+           ,'logic/DetailGraphLogic.php?'        
+                   + 'start=' + encodeURIComponent(start) + '&'
+                   + 'end=' + encodeURIComponent(end)
            ,true);
    req.send();
 }
