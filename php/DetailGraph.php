@@ -135,26 +135,26 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                 </table>
             </div>
         </section>
-        <form action="" method="POST" id="form">
-            <div class="underLineNav">
-                <nav>
+        <div class="underLineNav">
+            <nav>
+                <form action="" method="POST" id="form">
                     <a onclick="formSubmit('');"  style="border-bottom-color: #e36209">体重グラフ</a>
                     <a onclick="formSubmit('InsertBodyWeight.php');" >体重入力</a>
-                    <input type="hidden" name="id" value="<?php echo $id ?>" />
-                </nav>
+                    <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
+                </form>
+            </nav>
+        </div>
+        <section>
+            <div id="chart">
             </div>
-            <section>
-                <div id="chart">
-                </div>
-                <label>
-                    体重表示日程
-                    <input type="date" id="start" name="start" value="<?php echo $start ?>" />
-                    -
-                    <input type="date" id="end" name="end" value="<?php echo $end ?>" />
-                </label>
-                <input type="button" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
-            </section>
-        </form>
+            <label>
+                体重表示日程
+                <input type="date" id="start" name="start" value="<?php echo $start ?>" />
+                -
+                <input type="date" id="end" name="end" value="<?php echo $end ?>" />
+            </label>
+            <input type="button" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
+        </section>
     </article>
     <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
 </body>

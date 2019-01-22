@@ -1,11 +1,20 @@
 <?php
-    $start = $_GET['start'];
-    $end = $_GET['end'];
+require_once(dirname(__FILE__).'/../Util/DbConnection.php');
+require_once(dirname(__FILE__).'/../Util/DateUtil.php');
+require_once(dirname(__FILE__).'/../Dao/DetailGraphDao.php');
 
-    $array = array(
-        1,
-        2
-    );
+$id = $_GET['id'];
+$start = $_GET['start'];
+$end = $_GET['end'];
 
-    echo json_encode($array);
+try{
+    $pdo = DbConnection::getConnection();
+    $weightList = DetailGraphDao::getWeight($pdo, $id, $start, $end);
+} catch (Exception $e) {
+
+} finally {
+    $pdo = null;
+}
+
+    echo json_encode($weightList);
 ?>

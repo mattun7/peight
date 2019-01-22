@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function(){
 function dispDetailGraph(weightList) {
     let result = weightList.map((keisoku, index) => {
         return {INSTRUMENTANTION_DAYS: keisoku['INSTRUMENTANTION_DAYS'], 
-                weight: parseInt(keisoku['WEIGHT'])};
+                WEIGHT: parseInt(keisoku['WEIGHT'])};
     });
 
     var graph = c3.generate({
@@ -49,21 +49,21 @@ function ajaxGraph() {
    req.onreadystatechange = function() {
        if(req.readyState == 4) {
             if(req.status == 200) {
-                var json_weightList = JSON.parse(req.responseText);
-                const list = json_weightList.map((weightList, index) => {
-                    return weightList[index] * 2;
-                });
+                let json_weightList = JSON.parse(req.responseText);
+                dispDetailGraph(json_weightList);
             } else {
                
             }
        }
    }
-
+   
+   const id = $('id').value;
    const start = $('start').value;
    const end = $('end').value;
 
    req.open('GET'
-           ,'logic/DetailGraphLogic.php?'        
+           ,'logic/DetailGraphLogic.php?'  
+                   + 'id=' + encodeURIComponent(id) + '&'
                    + 'start=' + encodeURIComponent(start) + '&'
                    + 'end=' + encodeURIComponent(end)
            ,true);
