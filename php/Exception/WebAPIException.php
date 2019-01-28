@@ -1,8 +1,12 @@
 <?php
 class WebAPIException extends Exception{
-    public function __construct($message) {
-        error_log($message . '\n');
-        header("HTTP/1.0 404 Not Found");
+    public static function errorLog($e, $message='') {
+        error_log($e->getCode() . '\n', 3, '/var/log/test.log');
+        error_log($e->getFile() . '\n', 3, './test.log');
+        error_log($e->getLine() . '\n', 3, './test.log');
+        error_log($e->getMessage() . '\n', 3, './test.log');
+        //header("HTTP/1.0 404 Not Found");
+        header('Location: http://example.com/', true, 301);
     }
 }
 ?>
