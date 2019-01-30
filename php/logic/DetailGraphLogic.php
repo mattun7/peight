@@ -11,10 +11,11 @@ try{
     $pdo = DbConnection::getConnection();
     $weightList = DetailGraphDao::getWeight($pdo, $id, $start, $end);
 } catch (Exception $e) {
-
+    require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
+    WebAPIException::errorLog($e);
 } finally {
     $pdo = null;
 }
 
-    echo json_encode($weightList);
+echo json_encode($weightList);
 ?>

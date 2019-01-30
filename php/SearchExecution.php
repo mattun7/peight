@@ -49,7 +49,8 @@ try{
     $petTypeResult = PetTypeDao::getPetType($pdo);
     $petTypeColorResult = PetTypeColorDao::getPetTypeColor($pdo);
 } catch (Exception $e) {
-
+    require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
+    WebAPIException::errorLog($e);
 } finally {
     $pdo = null;
 }

@@ -19,11 +19,12 @@ try{
         InsertBodyWeightLogic::registInstrumentationDays($pdo, $dto);
     }
 
-    //$result = DetailGraphDao::getPetDetail($pdo, $id);
+    $result = DetailGraphDao::getPetDetail($pdo, $id);
     if($result === false || count($result) != 1) {
         throw new Exception('DB検索失敗');
     }
 } catch (Exception $e) {
+    $pdo->rollback();
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
     WebAPIException::errorLog($e);
 } finally {

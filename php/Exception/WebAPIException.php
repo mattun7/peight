@@ -6,7 +6,7 @@ class WebAPIException extends Exception{
         error_log($e->getLine() . '\n', 3, './test.log');
         error_log($e->getMessage() . '\n', 3, './test.log');
         //header("HTTP/1.0 404 Not Found");
-        header('Location: http://example.com/', true, 301);
+        header('Location: /php/Exception/500.php');
     }
 }
 ?>

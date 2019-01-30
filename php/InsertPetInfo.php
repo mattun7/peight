@@ -56,8 +56,9 @@
             FileUtil::imageUpload($image_path);
             $pdo->commit();
         } catch (PDOException $e) {
-            echo '<script>alert("' + $e->getMessage() + '")</script>';
             $pdo->rollBack();
+            require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
+            WebAPIException::errorLog($e);
         } finally {
             $pdo = null;
         }
