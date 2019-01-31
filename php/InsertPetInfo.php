@@ -69,28 +69,36 @@
 <head>
 <meta charset="utf-8">
 <title>ペット情報</title>
-<link rel="stylesheet" href="../css/Element.css">
-<link rel="stylesheet" href="../css/pet.css">
+<link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/InsertPetInfo.js"></script>
 </head>
 <body>
-    <header>
-        <h1>ペット一覧</h1>
+    <div class="is-success" style="float: right; z-index: 1; position: relative;">
+        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="navbar-menu is-right" id="navMenu" style="width: 200px; text-align:right; z-index: 999;">
+            <ul>
+                <li><a href="Select.php" class="navbar-item">ペット一覧</a></li>
+                <li><a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a></li>
+            </ul>
+        </div>
+    </div>
+    <header class="hero is-blod is-success" style="z-index: 0; position: relative;">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">ペット一覧</h1>
+            </div>
+        </div>
     </header>
-    <aside>
-        <ul>
-            <li><a href="Select.php">ペット一覧</a></li>
-            <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
-        </ul>
-    </aside>
     <form action="" method="post" enctype="multipart/form-data" >
-        <article>
+        <article style="text-align:center; margin-top: 30px;">
             <h2>
                 ぺット情報登録
             </h2>
-            <table class="insertPetInfoTable">
-                <colgroup width="150"></colgroup>
-                <colgroup width="300"></colgroup>
+            <table>
                 <tr>
                     <th>
                         ぺット名
@@ -140,9 +148,30 @@
                 </tr>
             </table>
             <div class="center">
-                <input type="submit" id="insert" value="登録" onclick="checkMessage();"/>
+                <input type="submit" id="insert" class="button is-black is-medium" value="登録" onclick="checkMessage();"/>
             </div>
         </article>
     </form>
+    <script>
+document.addEventListener('DOMContentLoaded', function () { //①
+
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0); //②
+
+  if ($navbarBurgers.length > 0) {
+
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () { //③
+
+        var target = $el.dataset.target; //④
+        var $target = document.getElementById(target); //④
+
+        $el.classList.toggle('is-active'); //⑤
+        $target.classList.toggle('is-active'); //⑤
+
+      });
+    });
+  }
+});
+</script>
 </body>
 </html>
