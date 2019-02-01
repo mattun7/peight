@@ -73,23 +73,23 @@
 <script src="../js/InsertPetInfo.js"></script>
 </head>
 <body>
-    <div class="is-success" style="float: right; z-index: 1; position: relative;">
-        <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
-        <div class="navbar-menu is-right" id="navMenu" style="width: 200px; text-align:right; z-index: 999;">
-            <ul>
-                <li><a href="Select.php" class="navbar-item">ペット一覧</a></li>
-                <li><a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a></li>
-            </ul>
-        </div>
-    </div>
-    <header class="hero is-blod is-success" style="z-index: 0; position: relative;">
+    <header class="hero is-blod is-success" style="position: relative;">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">ペット一覧</h1>
+                <h1 class="title">ぺット体調管理</h1>
+            </div>
+        </div>
+        <div class="is-white" style="position: absolute; right: 0;">
+            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+            <div class="navbar-menu" id="navMenu" style="width: 200px; text-align:right;">
+                <ul>
+                    <li><a href="Select.php" class="navbar-item">ペット一覧</a></li>
+                    <li><a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a></li>
+                </ul>
             </div>
         </div>
     </header>
