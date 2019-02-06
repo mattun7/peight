@@ -65,93 +65,118 @@
     }
 ?>
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="route-documentation fontawesome-i2svg-active fontawesome-i2svg-complete translated-ltr">
 <head>
 <meta charset="utf-8">
 <title>ペット情報</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/InsertPetInfo.js"></script>
+<script src="../js/Util.js"></script>
 </head>
-<body>
-    <header class="hero is-blod is-success" style="position: relative;">
-        <div class="hero-body">
+<body class="layout-documentation page-layout">
+    <nav class="navbar">
+        <div class="navbar has-shadow is-spaced">
             <div class="container">
-                <h1 class="title">ぺット体調管理</h1>
+                <div class="navbar-brand">
+                    <div class="navbar-item">
+                        <h2 class="title is-2">ぺット体調管理</h2>
+                    </div>
+                    <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="navbar-menu" id="navMenu">
+                    <a href="Select.php" class="navbar-item">ペット一覧</a>
+                    <a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a>
+                </div>
             </div>
         </div>
-        <div class="is-white" style="position: absolute; right: 0;">
-            <a role="button" class="navbar-burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-            <div class="navbar-menu" id="navMenu" style="width: 200px; text-align:right;">
-                <ul>
-                    <li><a href="Select.php" class="navbar-item">ペット一覧</a></li>
-                    <li><a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a></li>
-                </ul>
+    </nav>
+    <main class="bd-main">
+        <div class="bd-side-background"></div>
+        <div class="bd-main-container container">
+            <div class="bd-duo">
+                <div class="bd-lead" style="padding: 1.5rem;">
+                    <div class="bd-breadcrumb">
+                        <nav class="breadcrumb" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">ホーム</a></li>
+                                <li><a href="#">ぺット情報登録</a></li>
+                            </ul>
+                        </nav>
+                        <form action="" method="post" enctype="multipart/form-data" >
+                            <table>
+                                <tr>
+                                    <th>
+                                        ぺット名
+                                    </th>
+                                    <td class="control">
+                                        <input type="text" id="pet_name" class="input" name="pet_name" required />
+                                    </td>
+                                <tr>
+                                    <th>
+                                        誕生日
+                                    </th>
+                                    <td class="control">
+                                        <input type="date" id="birthday" class="input" name="birthday" required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        品種
+                                    </th>
+                                    <td class="control">
+                                        <input type="text" id="pet_type" class="input" name="pet_type" required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        カラー
+                                    </th>
+                                    <td class="control">
+                                        <input type="text" id="color" class="input" name="color" required />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        備考
+                                    </th>
+                                    <td>
+                                        <textarea id="remarks" class="textarea" rows="5" name="remarks"></textarea>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="file has-name">
+                                            <label class="file-label">
+                                                <input type="file" class="file-input" id="pet_image" name="pet_image" onchange="fileName()" />
+                                                <span class="file-cta">
+                                                    <span class="file-icon">
+                                                        <i class="fas fa-upload"></i>
+                                                    </span>
+                                                    <span class="file-label">
+                                                        ぺットの写真
+                                                    </span>
+                                                </span>
+                                                <span id="file_name" class="file-name">
+                                                </span>
+                                            </label>
+                                        </div>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="center">
+                                <input type="submit" id="insert" class="button is-primary is-outlined" value="登録" onclick="checkMessage();"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
-    <form action="" method="post" enctype="multipart/form-data" >
-        <article style="text-align:center; margin-top: 30px;">
-            <h2>
-                ぺット情報登録
-            </h2>
-            <table>
-                <tr>
-                    <th>
-                        ぺット名
-                    </th>
-                    <td>
-                        <input type="text" id="pet_name" name="pet_name" required />
-                    </td>
-                <tr>
-                    <th>
-                        誕生日
-                    </th>
-                    <td>
-                        <input type="date" id="birthday" name="birthday" required />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        品種
-                    </th>
-                    <td>
-                        <input type="text" id="pet_type" name="pet_type" required />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        カラー
-                    </th>
-                    <td>
-                        <input type="text" id="color" name="color" required />
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        備考
-                    </th>
-                    <td>
-                        <textarea id="remarks" name="remarks"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        画像
-                    </th>
-                    <td>
-                        <input type="file" id="pet_image" name="pet_image" />
-                    </td>
-                </tr>
-            </table>
-            <div class="center">
-                <input type="submit" id="insert" class="button is-black is-medium" value="登録" onclick="checkMessage();"/>
-            </div>
-        </article>
-    </form>
+    </main>
     <script>
 document.addEventListener('DOMContentLoaded', function () { //①
 

@@ -1,7 +1,4 @@
-function checkMessage() {
-    /*
-    if(confirm('ぺット情報を登録してよろしいですか')){
-        //window.location.href = 'Select.php';
-        
-    }*/
+function fileName() {
+    let filename = $('pet_image');
+    $('file_name').textContent = filename.value;
 }
