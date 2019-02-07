@@ -1,4 +1,4 @@
 function fileName() {
-    let filename = $('pet_image');
-    $('file_name').textContent = filename.value;
+    let filenameList = $('pet_image').value.split('\\');
+    $('file_name').textContent = filenameList[filenameList.length - 1];
 }

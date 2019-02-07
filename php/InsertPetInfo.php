@@ -79,7 +79,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <div class="navbar-item">
-                        <h2 class="title is-2">ぺット体調管理</h2>
+                        <h4 class="title is-4" style="padding-left: 1em;">ぺット体調管理</h4>
                     </div>
                     <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                         <span aria-hidden="true"></span>
@@ -107,70 +107,58 @@
                             </ul>
                         </nav>
                         <form action="" method="post" enctype="multipart/form-data" >
-                            <table>
-                                <tr>
-                                    <th>
-                                        ぺット名
-                                    </th>
-                                    <td class="control">
-                                        <input type="text" id="pet_name" class="input" name="pet_name" required />
-                                    </td>
-                                <tr>
-                                    <th>
-                                        誕生日
-                                    </th>
-                                    <td class="control">
-                                        <input type="date" id="birthday" class="input" name="birthday" required />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        品種
-                                    </th>
-                                    <td class="control">
-                                        <input type="text" id="pet_type" class="input" name="pet_type" required />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        カラー
-                                    </th>
-                                    <td class="control">
-                                        <input type="text" id="color" class="input" name="color" required />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        備考
-                                    </th>
-                                    <td>
-                                        <textarea id="remarks" class="textarea" rows="5" name="remarks"></textarea>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="file has-name">
-                                            <label class="file-label">
-                                                <input type="file" class="file-input" id="pet_image" name="pet_image" onchange="fileName()" />
-                                                <span class="file-cta">
-                                                    <span class="file-icon">
-                                                        <i class="fas fa-upload"></i>
-                                                    </span>
-                                                    <span class="file-label">
-                                                        ぺットの写真
-                                                    </span>
-                                                </span>
-                                                <span id="file_name" class="file-name">
-                                                </span>
-                                            </label>
-                                        </div>
-                                        
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="center">
-                                <input type="submit" id="insert" class="button is-primary is-outlined" value="登録" onclick="checkMessage();"/>
+                            <div class="field">
+                                <label class="label">ぺット名</label>
+                                <div class="control">
+                                    <input type="text" id="pet_name" class="input" name="pet_name" required />
+                                </div>
                             </div>
+                            <div class="field">
+                                <label class="label">誕生日</label>
+                                <div class="control">
+                                    <input type="date" id="birthday" class="input" name="birthday" required />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">品種</label>
+                                <div class="control">
+                                <input type="text" id="pet_type" class="input" name="pet_type" required />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">カラー</label>
+                                <div class="control">
+                                    <input type="text" id="color" class="input" name="color" required />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">備考</label>
+                                <div class="control">
+                                    <textarea id="remarks" class="textarea" rows="5" name="remarks"></textarea>
+                                </div>
+                            </div>
+                            <div class="field" style="margin: 2em 0;">
+                                <div class="file has-name is-fullwidth">
+                                    <label class="file-label">
+                                        <input type="file" class="file-input" id="pet_image" name="pet_image" onchange="fileName()" />
+                                        <span class="file-cta">
+                                            <span class="file-label">
+                                                ぺットの写真
+                                            </span>
+                                        </span>
+                                        <span id="file_name" class="file-name">
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <section class="section">
+                                <div class="container">
+                                    <div class="control" style="text-align: right;" >
+                                        <input type="submit" id="insert" class="button is-primary" value="登録" onclick="checkMessage();"/>
+                                    </div>
+                                </div>
+                            </section>
+                            
                         </form>
                     </div>
                 </div>
