@@ -154,11 +154,10 @@
                             <section class="section">
                                 <div class="container">
                                     <div class="control" style="text-align: right;" >
-                                        <input type="submit" id="insert" class="button is-primary" value="登録" onclick="checkMessage();"/>
+                                        <input type="submit" id="insert" class="button is-primary is-medium" value="登録" onclick="checkMessage();"/>
                                     </div>
                                 </div>
                             </section>
-                            
                         </form>
                     </div>
                 </div>
