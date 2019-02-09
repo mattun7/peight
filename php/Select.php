@@ -24,65 +24,94 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
 <head>
 <meta charset="utf-8">
 <title>ペット情報</title>
-<link rel="stylesheet" href="../css/Element.css">
-<link rel="stylesheet" href="../css/pet.css">
+<link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/Util.js"></script>
 <script src="../js/Select.js"></script>
 </head>
 <body>
-    <header>
-        <h1>ペット一覧</h1>
-    </header>
-    <aside>
-        <ul>
-            <li><a href="Select.php">ペット一覧</a></li>
-            <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
-        </ul>
-    </aside>
-    <article>
-        <section>
-            <h1>ぺットを探す</h1>
-        </section>
-        <section>
-            <form action="SearchExecution.php" method="GET">
-                <table>
-                    <tr>
-                        <th>
-                            <label>ぺット名</label>
-                        </th>
-                        <th>
-                            <label>品種</label>
-                        </th>
-                        <th>
-                            <label>カラー</label>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" id="pet_name" name="pet_name" class="searchText">
-                        </td>
-                        <td>
-                            <select id="type" name="type" class="searchSelect" onchange="setColor()">
-                                <option></option>
-                                <?php foreach($petTypeResult as $petType): ?>
-                                <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
-                                <?php endforeach ?>
-                            </select>
-                        </td>
-                        <td>
-                            <select id="color" name="color" class="searchSelect">
-                                <option></option>
-                            </select>
-                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
-                        </td>
-                    </tr>
-                </table>
-                <input type="submit" id="search" value="検索" onclick="setSelectedColorIndex()"/>
-            </form>
-        </section>
-    </article>
-    <footer>
-        
-    </footer>
+    <nav class="navbar">
+        <div class="navbar has-shadow is-spaced">
+            <div class="container">
+                <div class="navbar-brand">
+                    <div class="navbar-item">
+                        <h4 class="title is-4" style="padding-left: 1em;">ぺット体調管理</h4>
+                    </div>
+                    <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="navbar-menu" id="navMenu">
+                    <a href="Select.php" class="navbar-item">ペット一覧</a>
+                    <a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="bd-main">
+        <div class="bd-side-background"></div>
+        <div class="bd-main-container container">
+            <div class="bd-duo">
+                <div class="bd-lead" style="padding: 1.5rem;">
+                    <div class="bd-breadcrumb">
+                        <nav class="breadcrumb" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">ホーム</a></li>
+                                <li><a href="#">ぺットを探す</a></li>
+                            </ul>
+                        </nav>
+                        <form action="SearchExecution.php" method="GET">
+                            <div class="columns">
+                                <div class="column">
+                                    <label>ぺット名</label>
+                                </div>
+                                <div class="column">
+                                    <label>品種</label>
+                                </div>
+                                <div class="column">
+                                    <label>カラー</label>
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="control">
+                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <div class="control">
+                                            <div class="select is-success">
+                                                <select id="type" name="type" onchange="setColor()">
+                                                    <option></option>
+                                                    <?php foreach($petTypeResult as $petType): ?>
+                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <div class="control" style="width: 100%;">
+                                            <div class="select is-success">
+                                                <select id="color" name="color">
+                                                    <option></option>
+                                                </select>
+                                                <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" id="search" class="button is-primary is-medium" value="検索" onclick="setSelectedColorIndex()"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
