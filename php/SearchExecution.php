@@ -223,7 +223,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                     for($i=0; $i<3 && ($page+$i-1) <= ceil($count/3); $i++){ ?>
                                         <?php if(($page+$i) != 1){ ?>
                                             <li>
-                                                <a class="pagination-link <?php if($i == 1) echo 'is-current' ?>" href="<?php echo $url . ($page+$i-1) ?>" >
+                                                <a class="pagination-link <?php if($i == 1) echo 'is-primary' ?>" href="<?php echo $url . ($page+$i-1) ?>" >
                                                     <?php echo $page+$i-1; ?>
                                                 </a>
                                             </li>
