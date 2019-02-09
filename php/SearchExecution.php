@@ -66,129 +66,211 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
 <head>
 <meta charset="utf-8">
 <title>ペット情報</title>
-<link rel="stylesheet" href="../css/Element.css">
-<link rel="stylesheet" href="../css/pet.css">
+<link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/Util.js"></script>
 <script src="../js/SearchExecution.js"></script>
 </head>
 <body>
-    <header>
-        <h1>ペット一覧</h1>
-    </header>
-    <aside>
-        <ul>
-            <li><a href="Select.php">ペット一覧</a></li>
-            <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
-        </ul>
-    </aside>
-    <article>
-        <section>
-            <h1>ぺットを探す</h1>
-        </section>
-        <section>
-            <form action="" method="GET">
-                <table>
-                    <tr>
-                        <th>
-                            <label>ぺット名</label>
-                        </th>
-                        <th>
-                            <label>品種</label>
-                        </th>
-                        <th>
-                            <label>カラー</label>
-                        </th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="text" id="pet_name" name="pet_name" class="searchText" value="<?php echo $pet_name ?>">
-                        </td>
-                        <td>
-                            <select id="type" name="type" class="searchSelect" onchange="setColor()">
-                                <option></option>
-                                <?php foreach($petTypeResult as $petType): ?>
-                                <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
-                                <?php endforeach ?>
-                            </select>
-                            <input type="hidden" id="pet_type" name="pet_type" value='<?php echo $type; ?>' />
-                        </td>
-                        <td>
-                            <select id="color" name="color" class="searchSelect">
-                                <option></option>
-                            </select>
-                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
-                        </td>
-                    </tr>
-                </table>
-                <input type="submit" id="search" value="検索" onclick="setSelectedColorIndex()" />
-            </form>
-        </section>
-        <section>
-            <h1>検索結果<?php echo $count ?>件</h1>
-            <div class="flex">
-                <?php foreach($result as $key): ?>
-                    <section class="searchResult">
-                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['ID'] ?>">
-                            <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
-                                <figure class="selectFigure">
-                                    <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
-                                </figure>
-                                <div>
-                                    <h3 class="petName">
-                                        <?php echo $key['PET_NAME'] ?>
-                                    </h3>
-                                </div>
-                                <input type="hidden" name="id" value="<?php echo $key['ID']; ?>" />
-                            </a>
-                        </form>
-                    </section>
-                <?php endforeach; ?>
+    <nav class="navbar">
+        <div class="navbar has-shadow is-spaced">
+            <div class="container">
+                <div class="navbar-brand">
+                    <div class="navbar-item">
+                        <h4 class="title is-4" style="padding-left: 1em;">ぺット体調管理</h4>
+                    </div>
+                    <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="navbar-menu" id="navMenu">
+                    <a href="Select.php" class="navbar-item">ペット一覧</a>
+                    <a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a>
+                </div>
             </div>
-        </section>
-        <section class="paging">
-            <form action="" method="GET" name="pagination" >
-                <ul>
-                    <?php if(($page) >= 2){ ?>
-                        <li>
-                            <a href="<?php echo $url . '1' ?>">
-                                <<
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo $url . ($page-1); ?>">
-                                <
-                            </a>
-                        </li>
-                    <?php } ?>
-                    <?php if(ceil($count/3) >= 2) { 
-                        for($i=0; $i<3 && ($page+$i-1) <= ceil($count/3); $i++){ ?>
-                            <?php if(($page+$i) != 1){ ?>
-                                <li>
-                                    <a href="<?php echo $url . ($page+$i-1) ?>" class="<?php if($i == 1) echo 'active' ?>" >
-                                        <?php echo $page+$i-1; ?>
-                                    </a>
-                                </li>
+        </div>
+    </nav>
+    <main class="bd-main">
+        <div class="bd-side-background"></div>
+        <div class="bd-main-container container">
+            <div class="bd-duo">
+                <div class="bd-lead" style="padding: 1.5rem;">
+                    <div class="bd-breadcrumb">
+                        <nav class="breadcrumb" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">ホーム</a></li>
+                                <li><a href="#">ぺットを探す</a></li>
+                            </ul>
+                        </nav>
+                        <form action="SearchExecution.php" method="GET">
+                            <div class="columns">
+                                <div class="column">
+                                    <label>ぺット名</label>
+                                </div>
+                                <div class="column">
+                                    <label>品種</label>
+                                </div>
+                                <div class="column">
+                                    <label>カラー</label>
+                                </div>
+                            </div>
+                            <div class="columns">
+                                <div class="column">
+                                    <div class="control">
+                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <div class="control">
+                                            <div class="select is-success">
+                                                <select id="type" name="type" onchange="setColor()">
+                                                    <option></option>
+                                                    <?php foreach($petTypeResult as $petType): ?>
+                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                    <?php endforeach ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="field">
+                                        <div class="control" style="width: 100%;">
+                                            <div class="select is-success">
+                                                <select id="color" name="color">
+                                                    <option></option>
+                                                </select>
+                                                <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" id="search" class="button is-primary is-medium" value="検索" onclick="setSelectedColorIndex()"/>
+                        </form>
+                        <section class="section" style="margin-top: 2rem;">
+                            <div class="container">
+                                <h1 class="subtitle">検索結果<?php echo $count ?>件</h1>
+                            </div>
+                        </section>
+                        <div class="columns">
+                            <?php foreach($result as $key): ?>
+                                    <div class="column">
+                                        <div class="card">
+                                            <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['ID'] ?>">
+                                                <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
+                                                    <div class="card-image">
+                                                        <figure class="image is-square">
+                                                            <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
+                                                        </figure>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="media">
+                                                            <div class="media-content">
+                                                                <p class="subtitle is-4">
+                                                                    <?php echo $key['PET_NAME'] ?>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="id" value="<?php echo $key['ID']; ?>" />
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <nav class="pagination is-rounded is-centered" style="margin-top: 2rem;" role="navigation" aria-label="pagination">
+                            <?php if(($page) >= 2){ ?>
+                                <a class="pagination-previous" href="<?php echo $url . ($page-1); ?>">
+                                    前のページ
+                                </a>
+                            <?php } else { ?>
+                                <a class="pagination-previous" style="visibility: hidden;">
+                                    前のページ
+                                </a>
                             <?php } ?>
-                        <?php } ?>
-                    <?php } ?>
-                    <?php if($page != ceil($count/3)){ ?>
-                        <li>
-                            <a href="<?php echo $url . ($page+1) ?>">
-                                >
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?php echo $url . ceil($count/3); ?>">
-                                >>
-                            </a>
-                        </li>
-                    <?php } ?>
-                </ul>
-            </form>
-        </section>
-    </article>
-    <footer>
-        
-    </footer>
+                            <ul class="pagination-list">
+                                <?php if(($page) > 2){ ?>
+                                    <li>
+                                        <a class="pagination-link" href="<?php echo $url . '1' ?>">
+                                            1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <span class="pagination-ellipsis">...</span>
+                                    </li>
+                                <?php } else { ?>
+                                    <li>
+                                        <a class="pagination-link" style="visibility: hidden;">
+                                            1
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <span class="pagination-ellipsis" style="visibility: hidden;">...</span>
+                                    </li>
+                                <?php } ?>
+                                <?php if($page == ceil($count/3) && ceil($count/3) != 1) { ?>
+                                        <li>
+                                            <a class="pagination-link" href="<?php echo $url . (ceil($count/3) - 2) ?>">
+                                                <?php echo ceil($count/3) - 2 ?>
+                                            </a>
+                                        </li>
+                                <?php } ?>
+                                <?php if(ceil($count/3) >= 2) { 
+                                    for($i=0; $i<3 && ($page+$i-1) <= ceil($count/3); $i++){ ?>
+                                        <?php if(($page+$i) != 1){ ?>
+                                            <li>
+                                                <a class="pagination-link <?php if($i == 1) echo 'is-current' ?>" href="<?php echo $url . ($page+$i-1) ?>" >
+                                                    <?php echo $page+$i-1; ?>
+                                                </a>
+                                            </li>
+                                        <?php } ?>
+                                    <?php } ?>
+                                <?php } ?>
+                                <?php if($page === 1) { ?>
+                                        <li>
+                                            <a class="pagination-link" href="<?php echo $url . 3 ?>">
+                                                3
+                                            </a>
+                                        </li>
+                                <?php } ?>
+                                <?php if($page < ceil($count/3) - 1){ ?>
+                                    <li>
+                                        <span class="pagination-ellipsis">...</span>
+                                    </li>
+                                    <li>
+                                        <a class="pagination-link" href="<?php echo $url . ceil($count/3) ?>">
+                                            <?php echo ceil($count/3) ?>
+                                        </a>
+                                    </li>
+                                <?php } else { ?>
+                                    <li>
+                                        <span class="pagination-ellipsis" style="visibility: hidden;">...</span>
+                                    </li>
+                                    <li>
+                                        <a class="pagination-link" style="visibility: hidden;">
+                                            <?php echo ceil($count/3) ?>
+                                        </a>
+                                    </li>
+                                <?php } ?>
+                            </ul>
+                            <?php if($page != ceil($count/3)){ ?>
+                                <a class="pagination-next" href="<?php echo $url . ceil($page+1) ?>">
+                                    次のページ
+                                </a>
+                            <?php } else { ?>
+                                <a class="pagination-next" style="visibility: hidden;">
+                                    次のページ
+                                </a>
+                            <?php } ?>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
