@@ -44,123 +44,147 @@ $image_path = $result[0]['IMAGE_PATH'];
 <head>
 <meta charset="utf-8">
 <title>ペット詳細</title>
-<link rel="stylesheet" href="../css/Element.css">
-<link rel="stylesheet" href="../css/pet.css">
+<link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/c3.js"></script>
 <script src="../js/d3.min.js"></script>
 <script src="../js/InsertBodyWeight.js"></script>
 <script src="../js/Util.js"></script>
 <script src="../js/DetailGraph.js"></script>
 </head>
-<body>
-    <header>
-        <h1>ペット詳細</h1>
-    </header>
-    <aside>
-        <ul>
-            <li><a href="Select.php">ペット一覧</a></li>
-            <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
-        </ul>
-    </aside>
-    <article>
-        <section>
-            <h2><?php echo $pet_name ?></h2>
-            <div class="flex">
-                <img src="<?php echo $image_path ?>" class="detailImage">
-                <table class="detailTable">
-                    <tr>
-                        <th>
-                            ペット名
-                        </th>
-                        <td>
-                            <?php echo $pet_name ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            誕生日
-                        </th>
-                        <td>
-                            <?php echo $birthday ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            年齢
-                        </th>
-                        <td>
-                            <?php echo $age ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            品種
-                        </th>
-                        <td>
-                            <?php echo $type ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            カラー
-                        </th>
-                        <td>
-                            <?php echo $color ?>
-                        </td>
-                    </tr>
-                    <tr style="height: 100px;">
-                        <th>
-                            備考
-                        </th>
-                        <td>
-                            <?php echo $remarks ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: center;">
-                            
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-        <div class="underLineNav">
-            <nav>
-                    <form action="" method="GET" id="form">
-                    <a onclick="formSubmit('DetailGraph.php');" >体重グラフ</a>
-                    <a onclick="formSubmit('');" style="border-bottom-color: #e36209">体重入力</a>
-                    <input type="hidden" name="id" value="<?php echo $id ?>" />
-                </form>
-            </nav>
-        </div>
-        <section>
-            <form action="" method="POST" >
-                <table class="insertBodyWeightTable">
-                    <colgroup width="150"></colgroup>
-                    <colgroup width="300"></colgroup>
-                    <tr>
-                        <th>
-                            計測日
-                        </th>
-                        <td>
-                            <input type="date" id="instrumentationDays" name="instrumentationDays" require />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            体重
-                        </th>
-                        <td>
-                            <input type="tel" id="weight" name="weight" require />
-                        </td>
-                    </tr>
-                </table>
-                <div class="center">
-                    <input type="submit" id="send" value="登録" onclick="checkMessage();"/>
+<body class="layout-documentation">
+    <nav class="navbar">
+        <div class="navbar has-shadow is-spaced">
+            <div class="container">
+                <div class="navbar-brand">
+                    <div class="navbar-item">
+                        <h4 class="title is-4" style="padding-left: 1em;">ぺット体調管理</h4>
+                    </div>
+                    <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </div>
                 </div>
-                <input type="hidden" name="id" value="<?php echo $id ?>" />
-            </form>
-        </section>
-    </article>
+                <div class="navbar-menu" id="navMenu">
+                    <a href="Select.php" class="navbar-item">ペット一覧</a>
+                    <a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="bd-main">
+        <div class="bd-side-background"></div>
+        <div class="bd-main-container container">
+            <div class="bd-duo">
+                <div class="bd-lead" style="padding: 1.5rem;">
+                    <div class="bd-breadcrumb">
+                        <nav class="breadcrumb" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">ホーム</a></li>
+                                <li><a href="#">ぺットを探す</a></li>
+                                <li class="is-active"><a><?php echo $pet_name ?></a></li>
+                            </ul>
+                        </nav>
+                        <div class="columns is-multiline">
+                            <div class="column is-half" style="padding-left: 3rem;">
+                            <figure class="image is-1by1">
+                                <img src="<?php echo $image_path ?>">
+                            </figure>
+                            </div>
+                            <div class="column is-half" style="padding-right: 3rem;">
+                                <table class="table is-bordered is-striped is-narrow is-fullwidth">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                ペット名
+                                            </th>
+                                            <td>
+                                                <?php echo $pet_name ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                誕生日
+                                            </th>
+                                            <td>
+                                                <?php echo $birthday ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                年齢
+                                            </th>
+                                            <td>
+                                                <?php echo $age ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                品種
+                                            </th>
+                                            <td>
+                                                <?php echo $type ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                カラー
+                                            </th>
+                                            <td>
+                                                <?php echo $color ?>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 100px;">
+                                            <th>
+                                                備考
+                                            </th>
+                                            <td>
+                                                <?php echo $remarks ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <form action="" method="GET" id="form">
+                                <ul>
+                                    <li>
+                                        <a onclick="formSubmit('DetailGraph.php');">体重グラフ</a>
+                                    </li>
+                                    <li class="is-active">
+                                        <a onclick="formSubmit('');" >体重入力</a>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
+                                </ul>
+                            </form>
+                        </div>
+                        <form action="" method="post" enctype="multipart/form-data" >
+                            <div class="field">
+                                <label class="label">計測日</label>
+                                <div class="control">
+                                    <input type="date" class="input" id="instrumentationDays" name="instrumentationDays" require />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">体重</label>
+                                <div class="control">
+                                    <input type="tel" class="input" id="weight" name="weight" require />
+                                </div>
+                            </div>
+                            <section class="section">
+                                <div class="container">
+                                    <div class="control" style="text-align: right;" >
+                                        <input type="submit" id="insert" class="button is-primary is-medium" value="登録" onclick="checkMessage();"/>
+                                    </div>
+                                </div>
+                            </section>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>

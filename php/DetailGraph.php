@@ -56,107 +56,159 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
 <head>
 <meta charset="utf-8">
 <title>ペット詳細</title>
-<link rel="stylesheet" href="../css/Element.css">
-<link rel="stylesheet" href="../css/pet.css">
+<link rel="stylesheet" href="../css/bulma.css">
 <link rel="stylesheet" href="../css/c3.css">
 <script src="../js/DetailGraph.js"></script>
 <script src="../js/c3.js"></script>
 <script src="../js/d3.min.js"></script>
 <script src="../js/Util.js"></script>
 </head>
-<body>
-    <header>
-        <h1>ペット詳細</h1>
-    </header>
-    <aside>
-        <ul>
-            <li><a href="Select.php">ペット一覧</a></li>
-            <li><a href="InsertPetInfo.php">ペット情報登録</a></li>
-        </ul>
-    </aside>
-    <article>
-        <section>
-            <h2><?php echo $pet_name ?></h2>
-            <div class="flex">
-                <img src="<?php echo $image_path ?>" class="detailImage">
-                <table class="detailTable">
-                    <tr>
-                        <th>
-                            ペット名
-                        </th>
-                        <td>
-                            <?php echo $pet_name ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            誕生日
-                        </th>
-                        <td>
-                            <?php echo $birthday ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            年齢
-                        </th>
-                        <td>
-                            <?php echo $age ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            品種
-                        </th>
-                        <td>
-                            <?php echo $type ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            カラー
-                        </th>
-                        <td>
-                            <?php echo $color ?>
-                        </td>
-                    </tr>
-                    <tr style="height: 100px;">
-                        <th>
-                            備考
-                        </th>
-                        <td>
-                            <?php echo $remarks ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="text-align: center;">
-                            
-                        </td>
-                    </tr>
-                </table>
+<body class="layout-documentation">
+    <nav class="navbar">
+        <div class="navbar has-shadow is-spaced">
+            <div class="container">
+                <div class="navbar-brand">
+                    <div class="navbar-item">
+                        <h4 class="title is-4" style="padding-left: 1em;">ぺット体調管理</h4>
+                    </div>
+                    <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div class="navbar-menu" id="navMenu">
+                    <a href="Select.php" class="navbar-item">ペット一覧</a>
+                    <a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a>
+                </div>
             </div>
-        </section>
-        <div class="underLineNav">
-            <nav>
-                <form action="" method="POST" id="form">
-                    <a onclick="formSubmit('');"  style="border-bottom-color: #e36209">体重グラフ</a>
-                    <a onclick="formSubmit('InsertBodyWeight.php');" >体重入力</a>
-                    <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
-                </form>
-            </nav>
         </div>
-        <section>
-            <div id="chart">
+    </nav>
+    <main class="bd-main">
+        <div class="bd-side-background"></div>
+        <div class="bd-main-container container">
+            <div class="bd-duo">
+                <div class="bd-lead" style="padding: 1.5rem;">
+                    <div class="bd-breadcrumb">
+                        <nav class="breadcrumb" aria-label="breadcrumbs">
+                            <ul>
+                                <li><a href="#">ホーム</a></li>
+                                <li><a href="#">ぺットを探す</a></li>
+                                <li class="is-active"><a><?php echo $pet_name ?></a></li>
+                            </ul>
+                        </nav>
+                        <div class="columns is-multiline">
+                            <div class="column is-half" style="padding-left: 3rem;">
+                            <figure class="image is-1by1">
+                                <img src="<?php echo $image_path ?>">
+                            </figure>
+                            </div>
+                            <div class="column is-half" style="padding-right: 3rem;">
+                                <table class="table is-bordered is-striped is-narrow is-fullwidth">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                ペット名
+                                            </th>
+                                            <td>
+                                                <?php echo $pet_name ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                誕生日
+                                            </th>
+                                            <td>
+                                                <?php echo $birthday ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                年齢
+                                            </th>
+                                            <td>
+                                                <?php echo $age ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                品種
+                                            </th>
+                                            <td>
+                                                <?php echo $type ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                カラー
+                                            </th>
+                                            <td>
+                                                <?php echo $color ?>
+                                            </td>
+                                        </tr>
+                                        <tr style="height: 100px;">
+                                            <th>
+                                                備考
+                                            </th>
+                                            <td>
+                                                <?php echo $remarks ?>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tabs">
+                            <form action="" method="POST" id="form">
+                                <ul>
+                                    <li class="is-active">
+                                        <a onclick="formSubmit('');">体重グラフ</a>
+                                    </li>
+                                    <li>
+                                        <a onclick="formSubmit('InsertBodyWeight.php');" >体重入力</a>
+                                    </li>
+                                    <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal">
+                                <label class="label">体重表示日程</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field" style="flex-grow: 0;">
+                                    <p class="control is-expanded">
+                                        <input type="date" class="input" style="width: 10rem;" id="start" name="start" value="<?php echo $start ?>" />
+                                    </p>
+                                </div>
+                                <div class="field" style="flex-grow: 0;">
+                                    <label class="label">_</label>
+                                </div>
+                                <div class="field">
+                                    <p class="control is-expanded">
+                                        <input type="date" class="input" style="width: 10rem;" id="end" name="end" value="<?php echo $end ?>" />
+                                    </p>
+                                </div>
+                                <div class="field">
+                                    <p class="control is-expanded">
+                                    <input type="button" class="button is-primary" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="section">
+                            <div class="container">
+                                <div id="chart">
+                                <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
+                            </div>
+                        </section>
+                    </div>
+                </div>
             </div>
-            <label>
-                体重表示日程
-                <input type="date" id="start" name="start" value="<?php echo $start ?>" />
-                -
-                <input type="date" id="end" name="end" value="<?php echo $end ?>" />
-            </label>
-            <input type="button" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
-        </section>
+        </div>
+    </main>
+    <article>
     </article>
-    <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
 </body>
 </html>
