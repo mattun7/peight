@@ -141,7 +141,7 @@ $image_path = $result[0]['IMAGE_PATH'];
                                 </ul>
                             </form>
                         </div>
-                        <form action="" method="post" enctype="multipart/form-data" >
+                        <form action="" method="POST" >
                             <div class="field">
                                 <label class="label">計測日</label>
                                 <div class="control">
@@ -157,7 +157,8 @@ $image_path = $result[0]['IMAGE_PATH'];
                             <section class="section">
                                 <div class="container">
                                     <div class="control" style="text-align: right;" >
-                                        <input type="submit" id="insert" class="button is-primary is-medium" value="登録" onclick="checkMessage();"/>
+                                        <input type="submit" id="send" class="button is-primary is-medium" value="登録"/>
+                                        <input type="hidden" name="id" value="<?php echo $id ?>" />
                                     </div>
                                 </div>
                             </section>
