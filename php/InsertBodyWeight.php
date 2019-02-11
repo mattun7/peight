@@ -14,7 +14,8 @@ try{
         $dto = new InsertBodyWeightDto();
         $dto->setId($id);
         $dto->setInstrumentationDays($_POST['instrumentationDays']);
-        $dto->setWeight($_POST['weight']);
+        $weight = $_POST['weight'];
+        $dto->setWeight((int)mb_convert_kana($weight, 'kvrn'));
 
         InsertBodyWeightLogic::registInstrumentationDays($pdo, $dto);
     }
