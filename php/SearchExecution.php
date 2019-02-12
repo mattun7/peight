@@ -210,13 +210,13 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                             </li>
                                         <?php } ?>
                                     <?php } ?>
-                                <?php } ?>
-                                <?php if($page === 1) { ?>
-                                        <li>
-                                            <a class="pagination-link" href="<?php echo $url . 3 ?>">
-                                                3
-                                            </a>
-                                        </li>
+                                    <?php if($page === 1) { ?>
+                                            <li>
+                                                <a class="pagination-link" href="<?php echo $url . 3 ?>">
+                                                    3
+                                                </a>
+                                            </li>
+                                    <?php } ?>
                                 <?php } ?>
                                 <?php if($page < ceil($count/3) - 1){ ?>
                                     <li>
