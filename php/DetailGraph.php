@@ -13,6 +13,10 @@ if(empty($_GET['start']) && empty($_GET['end'])){
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
 require_once(dirname(__FILE__).'/Util/DateUtil.php');
 require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
+require_once(dirname(__FILE__).'/Dto/PetTypeDto.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
+require_once(dirname(__FILE__).'/Dto/PetTypeColorDto.php');
 
 try{
     $pdo = DbConnection::getConnection();
@@ -22,6 +26,15 @@ try{
     }
 
     $weightList = DetailGraphDao::getWeight($pdo, $id, $start, $end);
+
+    $petTypeDto = new PetTypeDto();
+    $petTypeDto->setId($petDetail[0]['PET_TYPE']);
+    $resultType = PetTypeDao::fetchPetType($pdo, $petTypeDto);
+
+    $petTypeColorDto = new PetTypeColorDto();
+    $petTypeColorDto->setPetTypeId($petDetail[0]['PET_TYPE']);
+    $petTypeColorDto->setId($petDetail[0]['COLOR']);
+    $resultColor = PetTypeColorDao::fetchColor($pdo, $petTypeColorDto);
 } catch (Exception $e) {
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
     WebAPIException::errorLog($e);
@@ -44,8 +57,8 @@ $json_weightList = json_encode($array);
 $pet_name = $petDetail[0]['PET_NAME'];
 $birthday = date('Y年n月j日', strtotime($petDetail[0]['BIRTHDAY']));
 $age = DateUtil::getAgeFromBirthday($petDetail[0]['BIRTHDAY']);
-$type = $petDetail[0]['PET_TYPE'];
-$color = $petDetail[0]['COLOR'];
+$type = $resultType[0]['PET_TYPE'];
+$color = $resultColor[0]['COLOR'];
 $remarks = $petDetail[0]['REMARKS'];
 $image_path = $petDetail[0]['IMAGE_PATH'];
 

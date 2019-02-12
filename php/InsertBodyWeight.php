@@ -7,6 +7,10 @@ require_once(dirname(__FILE__).'/Util/DateUtil.php');
 require_once(dirname(__FILE__).'/Dao/DetailGraphDao.php');
 require_once(dirname(__FILE__).'/Dto/InsertBodyWeightDto.php');
 require_once(dirname(__FILE__).'/logic/InsertBodyWeightLogic.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
+require_once(dirname(__FILE__).'/Dto/PetTypeDto.php');
+require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
+require_once(dirname(__FILE__).'/Dto/PetTypeColorDto.php');
 
 try{
     $pdo = DbConnection::getConnection();
@@ -24,6 +28,15 @@ try{
     if($result === false || count($result) != 1) {
         throw new Exception('DB検索失敗');
     }
+
+    $petTypeDto = new PetTypeDto();
+    $petTypeDto->setId($result[0]['PET_TYPE']);
+    $resultType = PetTypeDao::fetchPetType($pdo, $petTypeDto);
+
+    $petTypeColorDto = new PetTypeColorDto();
+    $petTypeColorDto->setPetTypeId($result[0]['PET_TYPE']);
+    $petTypeColorDto->setId($result[0]['COLOR']);
+    $resultColor = PetTypeColorDao::fetchColor($pdo, $petTypeColorDto);
 } catch (Exception $e) {
     $pdo->rollback();
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
@@ -35,8 +48,8 @@ try{
 $pet_name = $result[0]['PET_NAME'];
 $birthday = date('Y年n月j日', strtotime($result[0]['BIRTHDAY']));
 $age = DateUtil::getAgeFromBirthday($result[0]['BIRTHDAY']);
-$type = $result[0]['PET_TYPE'];
-$color = $result[0]['COLOR'];
+$type = $resultType[0]['PET_TYPE'];
+$color = $resultColor[0]['COLOR'];
 $remarks = $result[0]['REMARKS'];
 $image_path = $result[0]['IMAGE_PATH'];
 ?>

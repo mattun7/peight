@@ -5,11 +5,11 @@ class PetTypeColorDto {
     private $color;
 
     function getPetTypeId(){
-        return $this->petTypeid;
+        return $this->petTypeId;
     }
 
-    function setPetTypeId($petTypeid){
-        $this->petTypeid = $petTypeid;
+    function setPetTypeId($petTypeId){
+        $this->petTypeId = $petTypeId;
     }
 
     function getId(){

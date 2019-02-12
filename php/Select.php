@@ -9,8 +9,8 @@ require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
 try{
     $pdo = DbConnection::getConnection();
-    $petTypeResult = PetTypeDao::getPetType($pdo);
-    $petTypeColorResult = PetTypeColorDao::getPetTypeColor($pdo);
+    $petTypeResult = PetTypeDao::fetchPetTypeAll($pdo);
+    $petTypeColorResult = PetTypeColorDao::fetchPetTypeColorAll($pdo);
 } catch (Exception $e) {
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
     WebAPIException::errorLog($e);

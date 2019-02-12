@@ -5,9 +5,9 @@ class PetTypeColorDao {
      * 引数のDTOにある種類がPET_TYPE_COLORテーブルに存在するか
      * @return true:存在している　false:存在していない
      */
-    public static function fetchPetTypeColor($pdo, $petTypeDto, $petColorDto) {
+    public static function getColorId($pdo, $petColorDto) {
         require_once(dirname(__FILE__).'/Dao.php');
-        $petTypeId = $petTypeDto->getId();
+        $petTypeId = $petColorDto->getId();
         $petColor = $petColorDto->getColor();
 
         $stmt = $pdo->prepare('
@@ -23,16 +23,38 @@ class PetTypeColorDao {
         if(count($result) != 1) {
             $petColorDto->setPetTypeId($petTypeId);
             PetTypeColorDao::insertPetTypeColor($pdo, $petColorDto);
-            return PetTypeColorDao::fetchPetTypeColor($pdo, $petTypeDto, $petColorDto);
+            return PetTypeColorDao::getColorId($pdo, $petColorDto);
         } else {
             return $result[0]['ID'];
         }
     }
 
     /**
+     * COLORを取得
+     */
+    public static function fetchColor($pdo, $dto) {
+        require_once(dirname(__FILE__).'/Dao.php');
+        $petTypeId = $dto->getPetTypeId();
+        $id = $dto->getId();
+
+        $stmt = $pdo->prepare('
+            SELECT COLOR
+            FROM PET_TYPE_COLOR
+            WHERE PET_TYPE_ID = :pet_type_id 
+              AND ID = :id
+        ');
+
+        $stmt = Dao::setParam($stmt, ':pet_type_id', $petTypeId);
+        $stmt = Dao::setParam($stmt, ':id', $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
      * PET_TYPE_COLORテーブルを全件取得する
      */
-    public static function getPetTypeColor($pdo) {
+    public static function getColorIdAll($pdo) {
         $stmt = $pdo->prepare('
             SELECT PET_TYPE_ID, ID, COLOR
             FROM PET_TYPE_COLOR

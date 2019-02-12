@@ -46,8 +46,8 @@ try{
     $result = PetInfoSelectDao::getPetInfo($pdo, $selectDto);
     $count = PetInfoSelectDao::getCount($pdo, $selectDto);
 
-    $petTypeResult = PetTypeDao::getPetType($pdo);
-    $petTypeColorResult = PetTypeColorDao::getPetTypeColor($pdo);
+    $petTypeResult = PetTypeDao::fetchPetTypeAll($pdo);
+    $petTypeColorResult = PetTypeColorDao::fetchPetTypeColorAll($pdo);
 } catch (Exception $e) {
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
     WebAPIException::errorLog($e);
