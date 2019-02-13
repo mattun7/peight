@@ -7,7 +7,7 @@ class PetTypeColorDao {
      */
     public static function getColorId($pdo, $petColorDto) {
         require_once(dirname(__FILE__).'/Dao.php');
-        $petTypeId = $petColorDto->getId();
+        $petTypeId = $petColorDto->getPetTypeId();
         $petColor = $petColorDto->getColor();
 
         $stmt = $pdo->prepare('

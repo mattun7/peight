@@ -47,7 +47,7 @@ try{
     $count = PetInfoSelectDao::getCount($pdo, $selectDto);
 
     $petTypeResult = PetTypeDao::fetchPetTypeAll($pdo);
-    $petTypeColorResult = PetTypeColorDao::fetchPetTypeColorAll($pdo);
+    $petTypeColorResult = PetTypeColorDao::getColorIdAll($pdo);
 } catch (Exception $e) {
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
     WebAPIException::errorLog($e);
@@ -109,7 +109,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                                 <select id="type" name="type" onchange="setColor()">
                                                     <option></option>
                                                     <?php foreach($petTypeResult as $petType): ?>
-                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                        <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
                                                     <?php endforeach ?>
                                                 </select>
                                             </div>
