@@ -92,12 +92,12 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                             </ul>
                         </nav>
                         <div class="columns is-multiline">
-                            <div class="column is-half" style="padding-left: 3rem;">
+                            <div class="column is-half">
                             <figure class="image is-1by1">
                                 <img src="<?php echo $image_path ?>">
                             </figure>
                             </div>
-                            <div class="column is-half" style="padding-right: 3rem;">
+                            <div class="column is-half">
                                 <table class="table is-bordered is-striped is-narrow is-fullwidth">
                                     <thead></thead>
                                     <tbody>
@@ -166,7 +166,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                                 </ul>
                             </form>
                         </div>
-                        <div class="field is-horizontal">
+                        <div class="field is-horizontal" style="padding-bottom: 1rem;">
                             <div class="field-label is-normal">
                                 <label class="label">体重表示日程</label>
                             </div>
@@ -191,12 +191,8 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                                 </div>
                             </div>
                         </div>
-                        <section class="section">
-                            <div class="container">
-                                <div id="chart">
-                                <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
-                            </div>
-                        </section>
+                        <div id="chart">
+                        <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
                     </div>
                 </div>
             </div>
