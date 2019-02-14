@@ -138,30 +138,33 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                         </section>
                         <div class="columns">
                             <?php foreach($result as $key): ?>
-                                    <div class="column">
-                                        <div class="card">
-                                            <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['ID'] ?>">
-                                                <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
-                                                    <div class="card-image">
-                                                        <figure class="image is-square">
-                                                            <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="card-content">
-                                                        <div class="media">
-                                                            <div class="media-content">
-                                                                <p class="subtitle is-4">
-                                                                    <?php echo $key['PET_NAME'] ?>
-                                                                </p>
-                                                            </div>
+                                <div class="column">
+                                    <div class="card">
+                                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['ID'] ?>">
+                                            <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
+                                                <div class="card-image">
+                                                    <figure class="image is-square">
+                                                        <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
+                                                    </figure>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="media">
+                                                        <div class="media-content">
+                                                            <p class="subtitle is-4">
+                                                                <?php echo $key['PET_NAME'] ?>
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="id" value="<?php echo $key['ID']; ?>" />
-                                                </a>
-                                            </form>
-                                        </div>
+                                                </div>
+                                                <input type="hidden" name="id" value="<?php echo $key['ID']; ?>" />
+                                            </a>
+                                        </form>
                                     </div>
+                                </div>
                             <?php endforeach; ?>
+                            <?php for($i=count($result); $i < 3; $i++) { ?>
+                                <div class="column"></div>
+                            <?php } ?>
                         </div>
                         <nav class="pagination is-rounded is-centered" style="margin-top: 2rem;" role="navigation" aria-label="pagination">
                             <?php if(($page) >= 2){ ?>
