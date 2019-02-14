@@ -112,6 +112,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                                         <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
                                                     <?php endforeach ?>
                                                 </select>
+                                                <input type="hidden" id="pet_type" value="<?php echo $type ?>"> 
                                             </div>
                                         </div>
                                     </div>
