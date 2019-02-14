@@ -81,12 +81,12 @@ $image_path = $result[0]['IMAGE_PATH'];
                             </ul>
                         </nav>
                         <div class="columns is-multiline">
-                            <div class="column is-half" style="padding-left: 3rem;">
+                            <div class="column is-half">
                             <figure class="image is-1by1">
                                 <img src="<?php echo $image_path ?>">
                             </figure>
                             </div>
-                            <div class="column is-half" style="padding-right: 3rem;">
+                            <div class="column is-half">
                                 <table class="table is-bordered is-striped is-narrow is-fullwidth">
                                     <thead></thead>
                                     <tbody>
