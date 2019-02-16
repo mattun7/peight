@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", function(){
 
 function dispDetailGraph(weightList) {
     let result = weightList.map((keisoku, index) => {
-        return {INSTRUMENTANTION_DAYS: keisoku['INSTRUMENTANTION_DAYS'], 
-                WEIGHT: parseInt(keisoku['WEIGHT'])};
+        return {'計測日': keisoku['INSTRUMENTANTION_DAYS'].substr(5), 
+                '体重': parseInt(keisoku['WEIGHT'])};
     });
 
     var graph = c3.generate({
@@ -14,8 +14,8 @@ function dispDetailGraph(weightList) {
             json: result
             ,
             keys:{
-                x: 'INSTRUMENTANTION_DAYS',
-                value: ['WEIGHT']
+                x: '計測日',
+                value: ['体重']
             }
         },
         axis: {

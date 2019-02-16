@@ -47,7 +47,8 @@ $key_i = 0;
 
 for($i=0; $i < count($weightList); $i++){
     $list = $weightList[$i];
-    $array += array($i=>array('INSTRUMENTANTION_DAYS' => $list['INSTRUMENTANTION_DAYS'],
+    $instrumentationDays = date('Y年n月j日', strtotime($list['INSTRUMENTANTION_DAYS']));
+    $array += array($i=>array('INSTRUMENTANTION_DAYS' => $instrumentationDays,
                           'WEIGHT' => $list['WEIGHT']));
 }
 
