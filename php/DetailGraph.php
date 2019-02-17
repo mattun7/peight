@@ -155,17 +155,15 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                             </div>
                         </div>
                         <div class="tabs">
-                            <form action="" method="POST" id="form">
-                                <ul>
-                                    <li id="a_DetailGraph">
-                                        <a onclick="formSubmit('');">体重グラフ</a>
-                                    </li>
-                                    <li id="a_InsertBodyWeight">
-                                        <a onclick="formSubmit('InsertBodyWeight.php');" >体重入力</a>
-                                    </li>
-                                    <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
-                                </ul>
-                            </form>
+                            <ul>
+                                <li id="a_DetailGraph">
+                                    <a onclick="changePage('DetailGraph');">体重グラフ</a>
+                                </li>
+                                <li id="a_InsertBodyWeight">
+                                    <a onclick="changePage('InsertBodyWeight');" >体重入力</a>
+                                </li>
+                                <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
+                            </ul>
                         </div>
                         <div id="InsertBodyWeight">
                             <div class="field">
@@ -189,33 +187,35 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                                 </div>
                             </section>
                         </div>
-                        <div id="DetailGraph" class="field is-horizontal" style="padding-bottom: 1rem;">
-                            <div class="field-label is-normal">
-                                <label class="label">体重表示日程</label>
+                        <div id="DetailGraph">
+                            <div class="field is-horizontal" style="padding-bottom: 1rem;">
+                                <div class="field-label is-normal">
+                                    <label class="label">体重表示日程</label>
+                                </div>
+                                <div class="field-body">
+                                    <div class="field" style="flex-grow: 0;">
+                                        <p class="control is-expanded">
+                                            <input type="date" class="input" style="width: 10rem;" id="start" name="start" value="<?php echo $start ?>" />
+                                        </p>
+                                    </div>
+                                    <div class="field" style="flex-grow: 0;">
+                                        <label class="label">_</label>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                            <input type="date" class="input" style="width: 10rem;" id="end" name="end" value="<?php echo $end ?>" />
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control is-expanded">
+                                        <input type="button" class="button is-primary" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="field-body">
-                                <div class="field" style="flex-grow: 0;">
-                                    <p class="control is-expanded">
-                                        <input type="date" class="input" style="width: 10rem;" id="start" name="start" value="<?php echo $start ?>" />
-                                    </p>
-                                </div>
-                                <div class="field" style="flex-grow: 0;">
-                                    <label class="label">_</label>
-                                </div>
-                                <div class="field">
-                                    <p class="control is-expanded">
-                                        <input type="date" class="input" style="width: 10rem;" id="end" name="end" value="<?php echo $end ?>" />
-                                    </p>
-                                </div>
-                                <div class="field">
-                                    <p class="control is-expanded">
-                                    <input type="button" class="button is-primary" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
-                                    </p>
-                                </div>
-                            </div>
+                            <div id="chart">
+                            <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
                         </div>
-                        <div id="chart">
-                        <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
                     </div>
                 </div>
             </div>

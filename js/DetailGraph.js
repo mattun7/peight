@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(){
     $('instrumentationDays').value = date;
     // 体重グラフをアクティブに設定
     $('a_DetailGraph').classList.add('is-active');
+    $('InsertBodyWeight').style.display = 'none';
     // グラフ設定
     let json_weightList = JSON.parse($('json_weightList').value);
     dispDetailGraph(json_weightList);
@@ -42,22 +43,19 @@ function dispDetailGraph(weightList) {
     });
 }
 
-function formSubmit(action) {
-    let form = $('form');
-    form.action = action;
-
-    form.submit();
-}
-
 function changePage(pageName) {
     switch (pageName) {
         case 'InsertBodyWeight':
             $('a_InsertBodyWeight').classList.add('is-active');
             $('a_DetailGraph').classList.remove('is-active');
+            $('InsertBodyWeight').style.display = 'block';
+            $('DetailGraph').style.display = 'none';
             break;
         case 'DetailGraph':
             $('a_DetailGraph').classList.add('is-active');
             $('a_InsertBodyWeight').classList.remove('is-active');
+            $('DetailGraph').style.display = 'block';
+            $('InsertBodyWeight').style.display = 'none';
             break;
     }
     pageName.classList.add(is-active);
