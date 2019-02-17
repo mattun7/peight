@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function(){
+    // 現在日付を計測日に設定
+    var date = getSysDate();
+    $('instrumentationDays').value = date;
+    // 体重グラフをアクティブに設定
+    $('a_DetailGraph').classList.add('is-active');
+    // グラフ設定
     let json_weightList = JSON.parse($('json_weightList').value);
     dispDetailGraph(json_weightList);
 })
@@ -41,6 +47,20 @@ function formSubmit(action) {
     form.action = action;
 
     form.submit();
+}
+
+function changePage(pageName) {
+    switch (pageName) {
+        case 'InsertBodyWeight':
+            $('a_InsertBodyWeight').classList.add('is-active');
+            $('a_DetailGraph').classList.remove('is-active');
+            break;
+        case 'DetailGraph':
+            $('a_DetailGraph').classList.add('is-active');
+            $('a_InsertBodyWeight').classList.remove('is-active');
+            break;
+    }
+    pageName.classList.add(is-active);
 }
 
 function ajaxGraph() {
