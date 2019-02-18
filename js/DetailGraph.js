@@ -58,7 +58,6 @@ function changePage(pageName) {
             $('InsertBodyWeight').style.display = 'none';
             break;
     }
-    pageName.classList.add(is-active);
 }
 
 function ajaxGraph() {
@@ -86,4 +85,36 @@ function ajaxGraph() {
                    + 'end=' + encodeURIComponent(end)
            ,true);
    req.send();
+}
+
+function ajaxInsertBodyWeight() {
+    let req = new XMLHttpRequest();
+ 
+    req.onreadystatechange = function() {
+        if(req.readyState == 4) {
+             if(req.status == 200) {
+                 alert('登録が完了しました。');
+                 let json_weightList = JSON.parse(req.responseText);
+                 dispDetailGraph(json_weightList);
+             } else {
+                
+             }
+        }
+    }
+
+    const id = $('id').value;
+    const start = $('start').value;
+    const end = $('end').value;
+    const instrumentationDays = $('instrumentationDays').value;
+    const weight = $('weight').value;
+
+    req.open('GET'
+            ,'logic/InsertBodyWeightLogic.php?'  
+                + 'id=' + encodeURIComponent(id) + '&'
+                + 'instrumentationDays=' + encodeURIComponent(instrumentationDays) + '&'
+                + 'weight=' + encodeURIComponent(weight) + '&'
+                + 'start=' + encodeURIComponent(start) + '&'
+                + 'end=' + encodeURIComponent(end)
+            ,true);
+    req.send();
 }

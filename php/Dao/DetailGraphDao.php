@@ -38,7 +38,15 @@ class DetailGraphDao{
         
         $stmt->execute();
         $result = $stmt->fetchAll();
-        return $result;
+
+        $array = array();
+        for($i=0; $i < count($result); $i++){
+            $list = $result[$i];
+            $instrumentationDays = date('Y年n月j日', strtotime($list['INSTRUMENTANTION_DAYS']));
+            $array += array($i=>array('INSTRUMENTANTION_DAYS' => $instrumentationDays,
+                                  'WEIGHT' => $list['WEIGHT']));
+        }
+        return $array;
     }
 }
 

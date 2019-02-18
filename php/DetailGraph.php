@@ -41,19 +41,7 @@ try{
 } finally {
     $pdo = null;
 }
-
-$array = array();
-$key_i = 0;
-
-for($i=0; $i < count($weightList); $i++){
-    $list = $weightList[$i];
-    $instrumentationDays = date('Y年n月j日', strtotime($list['INSTRUMENTANTION_DAYS']));
-    $array += array($i=>array('INSTRUMENTANTION_DAYS' => $instrumentationDays,
-                          'WEIGHT' => $list['WEIGHT']));
-}
-
-
-$json_weightList = json_encode($array);
+$json_weightList = json_encode($weightList);
 
 $pet_name = $petDetail[0]['PET_NAME'];
 $birthday = date('Y年n月j日', strtotime($petDetail[0]['BIRTHDAY']));
@@ -165,28 +153,6 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                                 <input type="hidden" id="id" name="id" value="<?php echo $id ?>" />
                             </ul>
                         </div>
-                        <div id="InsertBodyWeight">
-                            <div class="field">
-                                <label class="label">計測日</label>
-                                <div class="control">
-                                    <input type="date" class="input" id="instrumentationDays" name="instrumentationDays" require />
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="label">体重</label>
-                                <div class="control">
-                                    <input type="tel" class="input" id="weight" name="weight" require />
-                                </div>
-                            </div>
-                            <section class="section">
-                                <div class="container">
-                                    <div class="control" style="text-align: right;" >
-                                        <input type="submit" id="send" class="button is-primary is-medium" value="登録"/>
-                                        <input type="hidden" name="id" value="<?php echo $id ?>" />
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
                         <div id="DetailGraph">
                             <div class="field is-horizontal" style="padding-bottom: 1rem;">
                                 <div class="field-label is-normal">
@@ -217,6 +183,27 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                             <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
                         </div>
                     </div>
+                        <div id="InsertBodyWeight">
+                            <div class="field">
+                                <label class="label">計測日</label>
+                                <div class="control">
+                                    <input type="date" class="input" id="instrumentationDays" name="instrumentationDays" require />
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">体重</label>
+                                <div class="control">
+                                    <input type="tel" class="input" id="weight" name="weight" require />
+                                </div>
+                            </div>
+                            <section class="section">
+                                <div class="container">
+                                    <div class="control" style="text-align: right;" >
+                                        <input type="submit" id="send" class="button is-primary is-medium" value="登録" onclick="ajaxInsertBodyWeight()" />
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                 </div>
             </div>
         </div>

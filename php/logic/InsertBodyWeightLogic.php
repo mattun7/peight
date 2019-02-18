@@ -1,21 +1,37 @@
 <?php
-class InsertBodyWeightLogic {
+require_once(dirname(__FILE__).'/../Util/DbConnection.php');
+require_once(dirname(__FILE__).'/../Dao/InsertBodyWeightDao.php');
+require_once(dirname(__FILE__).'/../Dao/DetailGraphDao.php');
+require_once(dirname(__FILE__).'/../Dto/InsertBodyWeightDto.php');
 
-    /**
-     * 計測日・体重登録
-     */
-    public static function registInstrumentationDays($pdo, $dto){
+$id = $_GET['id'];
+$instrumentationDays = $_GET['instrumentationDays'];
+$weight = $_GET['weight'];
+$start = $_GET['start'];
+$end = $_GET['end'];
 
-        require_once(dirname(__FILE__).'/../Dao/InsertBodyWeightDao.php');
-        $result = InsertBodyWeightDao::checkInstrumentationDays($pdo, $dto);
+$dto = new InsertBodyWeightDto();
+$dto->setId($id);
+$dto->setInstrumentationDays($instrumentationDays);
+$dto->setWeight($weight);
 
-        $pdo->beginTransaction();
-        if($result) {
-            InsertBodyWeightDao::insertPetWeight($pdo, $dto);
-        } else {
-            InsertBodyWeightDao::updatePetWeight($pdo, $dto);
-        }
-        $pdo->commit();
+try{
+    $pdo = DbConnection::getConnection();
+    $result = InsertBodyWeightDao::checkInstrumentationDays($pdo, $dto);
+
+    $pdo->beginTransaction();
+    if($result) {
+        InsertBodyWeightDao::insertPetWeight($pdo, $dto);
+    } else {
+        InsertBodyWeightDao::updatePetWeight($pdo, $dto);
     }
+    $pdo->commit();
+    $weightList = DetailGraphDao::getWeight($pdo, $id, $start, $end);
+} catch (Exception $e) {
+    require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
+    WebAPIException::errorLog($e);
+} finally {
+    $pdo = null;
 }
+echo json_encode($weightList);
 ?>
