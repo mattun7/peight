@@ -183,27 +183,23 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                             <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
                         </div>
                     </div>
-                        <div id="InsertBodyWeight">
-                            <div class="field">
-                                <label class="label">計測日</label>
-                                <div class="control">
-                                    <input type="date" class="input" id="instrumentationDays" name="instrumentationDays" require />
-                                </div>
+                    <div id="InsertBodyWeight" style="height: 100px;">
+                        <div class="field">
+                            <label class="label">計測日</label>
+                            <div class="control">
+                                <input type="date" class="input" id="instrumentationDays" name="instrumentationDays" require />
                             </div>
-                            <div class="field">
-                                <label class="label">体重</label>
-                                <div class="control">
-                                    <input type="tel" class="input" id="weight" name="weight" require />
-                                </div>
-                            </div>
-                            <section class="section">
-                                <div class="container">
-                                    <div class="control" style="text-align: right;" >
-                                        <input type="submit" id="send" class="button is-primary is-medium" value="登録" onclick="ajaxInsertBodyWeight()" />
-                                    </div>
-                                </div>
-                            </section>
                         </div>
+                        <div class="field">
+                            <label class="label">体重</label>
+                            <div class="control">
+                                <input type="tel" class="input" id="weight" name="weight" require />
+                            </div>
+                        </div>
+                        <section class="section" style="text-align: right;">
+                            <input type="submit" id="send" class="button is-primary is-medium" value="登録" onclick="ajaxInsertBodyWeight()" />
+                        </section>
+                    </div>
                 </div>
             </div>
         </div>
