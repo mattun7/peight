@@ -39,7 +39,7 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
                                 <li><a href="#">ホーム</a></li>
-                                <li><a href="#">ぺットを探す</a></li>
+                                <li class="is-active"><a href="#">ぺットを探す</a></li>
                             </ul>
                         </nav>
                         <form action="SearchExecution.php" method="GET">
