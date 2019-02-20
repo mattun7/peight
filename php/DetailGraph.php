@@ -183,7 +183,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                             <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
                         </div>
                     </div>
-                    <div id="InsertBodyWeight" style="height: 100px;">
+                    <div id="InsertBodyWeight" style="height: 350px;">
                         <div class="field">
                             <label class="label">計測日</label>
                             <div class="control">

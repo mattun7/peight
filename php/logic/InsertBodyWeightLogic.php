@@ -6,7 +6,7 @@ require_once(dirname(__FILE__).'/../Dto/InsertBodyWeightDto.php');
 
 $id = $_GET['id'];
 $instrumentationDays = $_GET['instrumentationDays'];
-$weight = $_GET['weight'];
+$weight = (int)mb_convert_kana($_GET['weight'], 'kvrn');
 $start = $_GET['start'];
 $end = $_GET['end'];
 
