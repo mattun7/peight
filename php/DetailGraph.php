@@ -76,7 +76,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
                                 <li><a href="#">ホーム</a></li>
-                                <li><a href="SearchExecution.php">ぺットを探す</a></li>
+                                <li><a href="SearchExecution">ぺットを探す</a></li>
                                 <li class="is-active"><a><?php echo $pet_name ?></a></li>
                             </ul>
                         </nav>

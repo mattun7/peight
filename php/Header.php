@@ -12,8 +12,8 @@
                 </div>
             </div>
             <div class="navbar-menu" id="navMenu">
-                <a href="Select.php" class="navbar-item">ペット一覧</a>
-                <a href="InsertPetInfo.php" class="navbar-item">ペット情報登録</a>
+                <a href="Select" class="navbar-item">ペット一覧</a>
+                <a href="InsertPetInfo" class="navbar-item">ペット情報登録</a>
             </div>
         </div>
     </div>
