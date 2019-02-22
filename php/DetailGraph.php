@@ -80,7 +80,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                                 <li class="is-active"><a><?php echo $pet_name ?></a></li>
                             </ul>
                         </nav>
-                        <div class="columns is-multiline">
+                        <div class="columns petImageWidth">
                             <div class="column is-half">
                             <figure class="image is-1by1">
                                 <img src="<?php echo $image_path ?>">
@@ -155,28 +155,25 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                         </div>
                         <div id="DetailGraph">
                             <div class="field is-horizontal" style="padding-bottom: 1rem;">
-                                <div class="field-label is-normal">
-                                    <label class="label">体重表示日程</label>
-                                </div>
                                 <div class="field-body">
-                                    <div class="field" style="flex-grow: 0;">
-                                        <p class="control is-expanded">
+                                    <span class="field" style="flex-grow: 0;">
+                                        <span class="control is-expanded">
                                             <input type="date" class="input" style="width: 10rem;" id="start" name="start" value="<?php echo $start ?>" />
-                                        </p>
-                                    </div>
-                                    <div class="field" style="flex-grow: 0;">
-                                        <label class="label">_</label>
-                                    </div>
-                                    <div class="field">
-                                        <p class="control is-expanded">
+                                        </span>
+                                    </span>
+                                    <span class="field" style="flex-grow: 0;">
+                                        <label class="label">-</label>
+                                    </span>
+                                    <span class="field">
+                                        <span class="control is-expanded">
                                             <input type="date" class="input" style="width: 10rem;" id="end" name="end" value="<?php echo $end ?>" />
-                                        </p>
-                                    </div>
-                                    <div class="field">
-                                        <p class="control is-expanded">
-                                        <input type="button" class="button is-primary" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
-                                        </p>
-                                    </div>
+                                        </span>
+                                    </span>
+                                    <span class="field">
+                                        <span class="control is-expanded">
+                                            <input type="button" class="button is-primary" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
+                                        </span>
+                                    </span>
                                 </div>
                             </div>
                             <div id="chart">

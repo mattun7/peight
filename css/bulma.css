@@ -10300,3 +10300,11 @@ label.panel-block:hover {
   padding: 3rem 1.5rem 6rem;
 }
 /*# sourceMappingURL=bulma.css.map */
+
+
+@media screen and (max-width: 769px), print {
+  .petImageWidth {
+    width : 352px;
+    margin: 0 auto;
+  }
+}
