@@ -137,7 +137,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                 <h1 class="subtitle">検索結果<?php echo $count ?>件</h1>
                             </div>
                         </section>
-                        <div class="columns">
+                        <div class="columns petImageWidth">
                             <?php foreach($result as $key): ?>
                                 <div class="column">
                                     <div class="card">
