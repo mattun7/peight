@@ -4,10 +4,14 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
 
+<Files ~ "^\.(htaccess|htpasswd)$">
+deny from all
+</Files>
 Options -Indexes
 DirectoryIndex index.php       
 order deny,allow
 deny from all 
 allow from localhost
 allow from 49.242.17.112
+allow from .ap.yournet.ne.jp
 allow from 1.79.84.215
