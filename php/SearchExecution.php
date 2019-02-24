@@ -87,45 +87,35 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                         <form action="SearchExecution.php" method="GET">
                             <div class="columns">
                                 <div class="column">
-                                    <label>ぺット名</label>
-                                </div>
-                                <div class="column">
-                                    <label>品種</label>
-                                </div>
-                                <div class="column">
-                                    <label>カラー</label>
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
+                                    <div class="field">
+                                    <label class="label">ぺット名</label>
                                     <div class="control">
                                         <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
                                     </div>
+                                    </div>
                                 </div>
-                                <div class="column">
-                                    <div class="field">
-                                        <div class="control">
-                                            <div class="select is-success">
-                                                <select id="type" name="type" onchange="setColor()">
-                                                    <option></option>
-                                                    <?php foreach($petTypeResult as $petType): ?>
-                                                        <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                                <input type="hidden" id="pet_type" value="<?php echo $type ?>"> 
-                                            </div>
+                                <div class="column field">
+                                    <labell class="label">品種</labell>
+                                    <div class="control">
+                                        <div class="select is-success">
+                                            <select id="type" name="type" onchange="setColor()">
+                                                <option></option>
+                                                <?php foreach($petTypeResult as $petType): ?>
+                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <input type="hidden" id="pet_type" value="<?php echo $type ?>"> 
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column">
-                                    <div class="field">
-                                        <div class="control" style="width: 100%;">
-                                            <div class="select is-success">
-                                                <select id="color" name="color">
-                                                    <option></option>
-                                                </select>
-                                                <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
-                                            </div>
+                                <div class="column field">
+                                    <label class="label">カラー</label>
+                                    <div class="control" style="width: 100%;">
+                                        <div class="select is-success">
+                                            <select id="color" name="color">
+                                                <option></option>
+                                            </select>
+                                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                                         </div>
                                     </div>
                                 </div>
@@ -168,15 +158,6 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             <?php } ?>
                         </div>
                         <nav class="pagination is-rounded is-centered" style="margin-top: 2rem;" role="navigation" aria-label="pagination">
-                            <?php if(($page) >= 2){ ?>
-                                <a class="pagination-previous" href="<?php echo $url . ($page-1); ?>">
-                                    前のページ
-                                </a>
-                            <?php } else { ?>
-                                <a class="pagination-previous" style="visibility: hidden;">
-                                    前のページ
-                                </a>
-                            <?php } ?>
                             <ul class="pagination-list">
                                 <?php if(($page) > 2){ ?>
                                     <li>
@@ -242,15 +223,6 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                     </li>
                                 <?php } ?>
                             </ul>
-                            <?php if($page != ceil($count/3)){ ?>
-                                <a class="pagination-next" href="<?php echo $url . ceil($page+1) ?>">
-                                    次のページ
-                                </a>
-                            <?php } else { ?>
-                                <a class="pagination-next" style="visibility: hidden;">
-                                    次のページ
-                                </a>
-                            <?php } ?>
                         </nav>
                     </div>
                 </div>
