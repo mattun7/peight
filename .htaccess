@@ -12,9 +12,9 @@ DirectoryIndex index.php
 order deny,allow
 deny from all 
 allow from localhost
-allow from 112.17.242.49
+allow from 49.242.17.112
 allow from 1.79.84.215
-AuthUserfile /フルパス/.htpasswd
+AuthUserfile /.htpasswd
 AuthGroupfile /dev/null
 AuthName "Please enter your ID and password"
 AuthType Basic
