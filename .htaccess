@@ -8,5 +8,6 @@ RewriteRule ^(.*)$ $1.php
 deny from all
 </Files>
 Options -Indexes
-DirectoryIndex index.php       
+DirectoryIndex index.php     
+allow from 49.242.17.112  
 order deny,allow
