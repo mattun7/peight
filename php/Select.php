@@ -23,6 +23,7 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ペット情報</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/Util.js"></script>

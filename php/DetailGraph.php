@@ -57,6 +57,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ペット詳細</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <link rel="stylesheet" href="../css/c3.css">

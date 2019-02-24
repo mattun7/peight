@@ -65,6 +65,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
 <html lang="ja">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ペット情報</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/Util.js"></script>
@@ -85,7 +86,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             </ul>
                         </nav>
                         <form action="SearchExecution.php" method="GET">
-                            <div class="columns">
+                            <div class="columns is-mobile">
                                 <div class="column">
                                     <div class="field">
                                     <label class="label">ぺット名</label>
