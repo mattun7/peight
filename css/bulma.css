@@ -10304,7 +10304,19 @@ label.panel-block:hover {
 
 @media screen and (max-width: 768px), print {
   .petImageWidth {
-    width : 352px;
+    max-width : 420px;
+    width: auto;
     margin: 0 auto;
+  }
+}
+
+.bd-lead {
+  padding: 1.5rem;
+}
+
+@media screen and (max-width: 320px) {
+  .pagination-ellipsis.is-mobile {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

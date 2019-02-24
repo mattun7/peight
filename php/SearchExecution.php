@@ -77,7 +77,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
         <div class="bd-side-background"></div>
         <div class="bd-main-container container">
             <div class="bd-duo">
-                <div class="bd-lead" style="padding: 1.5rem;">
+                <div class="bd-lead">
                     <div class="bd-breadcrumb">
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
@@ -86,13 +86,13 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             </ul>
                         </nav>
                         <form action="SearchExecution.php" method="GET">
-                            <div class="columns is-mobile">
+                            <div class="columns">
                                 <div class="column">
                                     <div class="field">
                                     <label class="label">ぺット名</label>
-                                    <div class="control">
-                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
-                                    </div>
+                                        <div class="control">
+                                            <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="column field">
@@ -167,7 +167,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                         </a>
                                     </li>
                                     <li>
-                                        <span class="pagination-ellipsis">...</span>
+                                        <span class="pagination-ellipsis is-mobile">...</span>
                                     </li>
                                 <?php } else { ?>
                                     <li>
@@ -176,7 +176,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                         </a>
                                     </li>
                                     <li>
-                                        <span class="pagination-ellipsis" style="visibility: hidden;">...</span>
+                                        <span class="pagination-ellipsis is-mobile" style="visibility: hidden;">...</span>
                                     </li>
                                 <?php } ?>
                                 <?php if($page == ceil($count/3) && ceil($count/3) != 1) { ?>
@@ -206,7 +206,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                 <?php } ?>
                                 <?php if($page < ceil($count/3) - 1){ ?>
                                     <li>
-                                        <span class="pagination-ellipsis">...</span>
+                                        <span class="pagination-ellipsis is-mobile">...</span>
                                     </li>
                                     <li>
                                         <a class="pagination-link" href="<?php echo $url . ceil($count/3) ?>">

@@ -72,7 +72,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
         <div class="bd-side-background"></div>
         <div class="bd-main-container container">
             <div class="bd-duo">
-                <div class="bd-lead" style="padding: 1.5rem;">
+                <div class="bd-lead">
                     <div class="bd-breadcrumb">
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>

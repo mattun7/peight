@@ -35,7 +35,7 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
         <div class="bd-side-background"></div>
         <div class="bd-main-container container">
             <div class="bd-duo">
-                <div class="bd-lead" style="padding: 1.5rem;">
+                <div class="bd-lead">
                     <div class="bd-breadcrumb">
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
@@ -46,44 +46,35 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
                         <form action="SearchExecution.php" method="GET">
                             <div class="columns">
                                 <div class="column">
-                                    <label>ぺット名</label>
-                                </div>
-                                <div class="column">
-                                    <label>品種</label>
-                                </div>
-                                <div class="column">
-                                    <label>カラー</label>
-                                </div>
-                            </div>
-                            <div class="columns">
-                                <div class="column">
-                                    <div class="control">
-                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
-                                    </div>
-                                </div>
-                                <div class="column">
                                     <div class="field">
+                                    <label class="label">ぺット名</label>
                                         <div class="control">
-                                            <div class="select is-success">
-                                                <select id="type" name="type" onchange="setColor()">
-                                                    <option></option>
-                                                    <?php foreach($petTypeResult as $petType): ?>
-                                                        <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
-                                                    <?php endforeach ?>
-                                                </select>
-                                            </div>
+                                            <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column">
-                                    <div class="field">
-                                        <div class="control" style="width: 100%;">
-                                            <div class="select is-success">
-                                                <select id="color" name="color">
-                                                    <option></option>
-                                                </select>
-                                                <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
-                                            </div>
+                                <div class="column field">
+                                    <labell class="label">品種</labell>
+                                    <div class="control">
+                                        <div class="select is-success">
+                                            <select id="type" name="type" onchange="setColor()">
+                                                <option></option>
+                                                <?php foreach($petTypeResult as $petType): ?>
+                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                <?php endforeach ?>
+                                            </select>
+                                            <input type="hidden" id="pet_type" value="<?php echo $type ?>"> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column field">
+                                    <label class="label">カラー</label>
+                                    <div class="control" style="width: 100%;">
+                                        <div class="select is-success">
+                                            <select id="color" name="color">
+                                                <option></option>
+                                            </select>
+                                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                                         </div>
                                     </div>
                                 </div>
