@@ -10,7 +10,6 @@ deny from all
 Options -Indexes
 DirectoryIndex index.php       
 order deny,allow
-deny from all 
 allow from localhost
 allow from 49.242.17.112
 allow from 	112.17.242.49.ap.yournet.ne.jp
