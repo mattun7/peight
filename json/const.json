@@ -1,4 +1,5 @@
 {
     "petImagePath": "../img/",
-    "pagination": "3"
+    "pagination": "3",
+    "db_local": "mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4"
 }

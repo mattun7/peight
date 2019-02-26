@@ -5,7 +5,12 @@ class DbConnection {
 
     public static function getConnection(){
         if(is_null(self::$pdo)){
-            $dsn = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
+            $host = $_SERVER["HTTP_HOST"];
+            if($host === 'localhost'){
+                $dsn = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
+            } else {
+                
+            }
             $username = 'root';
             $password = '';
             try{
