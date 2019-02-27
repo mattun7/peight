@@ -8,12 +8,4 @@ RewriteRule ^(.*)$ $1.php
 deny from all
 </Files>
 Options -Indexes
-<<<<<<< HEAD
 DirectoryIndex index.php
-=======
-DirectoryIndex index.php       
-AuthUserFile /.htpasswd
-AuthType Basic
-AuthName "Restricted Access"
-Require valid-user
->>>>>>> 835f37bd53df49ab800091352f5289c0928e652e
