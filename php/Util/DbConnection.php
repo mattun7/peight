@@ -4,15 +4,20 @@ class DbConnection {
     public static $pdo = NULL;
 
     public static function getConnection(){
+        require_once(dirname(__FILE__).'/Json.php');
         if(is_null(self::$pdo)){
             $host = $_SERVER["HTTP_HOST"];
             if($host === 'localhost'){
-                $dsn = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
+                $db_local = Json::getJson('db_local');
+                $dsn = $db_local;
+                $username = 'root';
+                $password = '';
             } else {
-                
+                $url = parse_url(getenv('DATABASE_URL'));
+                $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+                $username = $url['user'];
+                $password = $url['pass'];
             }
-            $username = 'root';
-            $password = '';
             try{
                 self::$pdo = new PDO($dsn, $username, $password);
             } catch (Exception $e) {
