@@ -1,9 +1,17 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="ja" class="route-documentation fontawesome-i2svg-active fontawesome-i2svg-complete translated-ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ペット情報</title>
+=======
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ペット詳細</title>
+>>>>>>> 835f37bd53df49ab800091352f5289c0928e652e
 <link rel="stylesheet" href="/css/bulma.css">
 <script src="/js/Util.js"></script>
 </head>
@@ -27,5 +35,9 @@
 			</div>
 		</div>
 	</nav>
+<<<<<<< HEAD
+=======
+<?php	echo $_SERVER["REMOTE_ADDR"] ; ?>
+>>>>>>> 835f37bd53df49ab800091352f5289c0928e652e
 </body>
 </html>
