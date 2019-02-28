@@ -27,9 +27,5 @@
 			</div>
 		</div>
 	</nav>
-<<<<<<< HEAD
-=======
-<?php	echo $_SERVER["REMOTE_ADDR"] ; ?>
->>>>>>> 835f37bd53df49ab800091352f5289c0928e652e
 </body>
 </html>
