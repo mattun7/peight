@@ -15,7 +15,7 @@
     if(isset($_POST['pet_name'])){
 
         // 画像データを保存するファイルパスを取得
-        $image_path = Json::getJson('petImagePath');
+        $image_path = '../img/';
         $pet_image = $_FILES['pet_image']['name'];
         
         // 画像アップロード

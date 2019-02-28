@@ -8,7 +8,7 @@ class DbConnection {
         if(is_null(self::$pdo)){
             $host = $_SERVER["HTTP_HOST"];
             if($host === 'localhost'){
-                $db_local = Json::getJson('db_local');
+                $db_local = 'mysql:dbname=PetWeightInfo;host=localhost;charset=utf8mb4';
                 $dsn = $db_local;
                 $username = 'root';
                 $password = '';

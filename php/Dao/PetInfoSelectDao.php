@@ -9,7 +9,7 @@ class PetInfoSelectDao {
         $type = $dto->getType();
         $color = $dto->getColor();
         require_once(dirname(__FILE__).'/../Util/Json.php');
-        $pagination = Json::getJson('pagination');
+        $pagination = '3';
         $limitStart = ($dto->getPage()-1) * $pagination;
         $limitEnd = (int)$pagination;
 
