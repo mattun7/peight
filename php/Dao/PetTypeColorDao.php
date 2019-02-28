@@ -100,7 +100,8 @@ class PetTypeColorDao {
         $stmt = Dao::setParam($stmt, ':petTypeId', $petTypeId);
         $stmt->execute();
         $result = $stmt->fetchAll();
-        return $result[0]['ID'];
+        
+        return Count($result) === 0 ? 1 : $result[0]['ID'];
     }
 }
 ?>
