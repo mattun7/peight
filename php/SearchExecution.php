@@ -1,7 +1,6 @@
 <?php
 require_once(dirname(__FILE__).'/Dto/PetInfoSelectDto.php');
 session_start();
-
 if(empty($_GET['page'])){
     $page = 1;
 } else {
