@@ -17,12 +17,20 @@
         // 画像データを保存するファイルパスを取得
         $image_path = '../img/';
         $pet_image = $_FILES['pet_image']['name'];
+        $pet_file = file_get_contents($_FILES['pet_image']['tmp_name']);
         
         // 画像アップロード
         if(empty($pet_image)){
             $image_path = '';
+            $pet_file = null;
         } else {
-            $image_path .= $pet_image;
+            $host = $_SERVER["HTTP_HOST"];
+            if($host === 'localhost'){
+                $pet_file = null;
+                $image_path .= $pet_image;
+            } else {
+                $image_path .= '';
+            }
         }
 
         // dto設定
@@ -31,6 +39,7 @@
         $insertPetInfoDto->setBirthday($_POST['birthday']);
         $insertPetInfoDto->setRemarks($_POST['remarks']);
         $insertPetInfoDto->setImagePath($image_path);
+        $insertPetInfoDto->setPetFile($pet_file);
 
         $petTypeDto = new PetTypeDto();
         $petTypeDto->setPetType($_POST['pet_type']);
@@ -54,7 +63,9 @@
 
             // ぺット情報の登録
             InsertPetInfoDao::insertPetInfo($pdo, $insertPetInfoDto);
-            FileUtil::imageUpload($image_path);
+            if($host === 'localhost'){
+                FileUtil::imageUpload($image_path);
+            }
             $pdo->commit();
         } catch (PDOException $e) {
             $pdo->rollBack();

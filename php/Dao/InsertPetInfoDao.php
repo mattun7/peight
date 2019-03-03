@@ -9,6 +9,7 @@ class InsertPetInfoDao {
         $color = $dto->getColor();
         $remarks = $dto->getRemarks();
         $image_path = $dto->getImagePath();
+        $pet_file = $dto->getPetFile();
 
         $stmt = $pdo->prepare('
             INSERT INTO PET_INFO 
@@ -18,7 +19,7 @@ class InsertPetInfoDao {
                 , COLOR
                 , REMARKS
                 , IMAGE_PATH
-                , CREATE_TIME) 
+                , PET_FILE) 
             VALUES 
                 (:pet_name
                 , :birthday
@@ -26,7 +27,7 @@ class InsertPetInfoDao {
                 , :color
                 , :remarks
                 , :image_path
-                , NOW())
+                , :pet_file)
             ');
 
         require_once(dirname(__FILE__).'/Dao.php');
@@ -36,6 +37,7 @@ class InsertPetInfoDao {
         $stmt->bindParam(':color', $color, PDO::PARAM_STR);
         $stmt->bindParam(':remarks', $remarks, PDO::PARAM_STR);
         $stmt->bindParam(':image_path', $image_path, PDO::PARAM_STR);
+        $stmt->bindParam(':pet_file', $pet_file, PDO::PARAM_STR);
         
         $stmt->execute();
     }

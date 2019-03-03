@@ -6,6 +6,7 @@ class InsertPetInfoDto {
     private $color;
     private $remarks;
     private $image_path;
+    private $pet_file;
 
     public function getPetName() {
         return $this->pet_name;
@@ -53,6 +54,14 @@ class InsertPetInfoDto {
 
     public function setImagePath($image_path) {
         $this->image_path = $image_path;
+    }
+
+    public function getPetFile() {
+        return $this->pet_file;
+    }
+
+    public function setPetFile($pet_file) {
+        $this->pet_file = $pet_file;
     }
 }
 ?>
