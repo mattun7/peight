@@ -27,6 +27,10 @@
 			</div>
 		</div>
 	</nav>
-	<?php echo parse_url(getenv('DATABASE_URL')); ?>
+	<?php 
+	echo getenv('DATABASE_URL');
+	$url = parse_url(getenv('DATABASE_URL'));
+	if(empty($url['path']))echo $url['path'];
+	?>
 </body>
 </html>
