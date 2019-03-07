@@ -14,7 +14,7 @@ class PetInfoSelectDao {
         $limitEnd = (int)$pagination;
 
         $sql = 'SELECT ID, PET_NAME, '
-            . 'BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH ' 
+            . 'BIRTHDAY, PET_TYPE, COLOR, REMARKS, IMAGE_PATH, PET_FILE ' 
             . 'FROM PET_INFO ';
 
         require_once(dirname(__FILE__).'/Dao.php');

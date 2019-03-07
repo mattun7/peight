@@ -63,7 +63,7 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
                                                     <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
-                                            <input type="hidden" id="pet_type" value="<?php echo $type ?>"> 
+                                            <input type="hidden" id="pet_type" value="<?php echo $petTypeResult ?>"> 
                                         </div>
                                     </div>
                                 </div>

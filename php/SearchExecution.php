@@ -95,7 +95,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                     </div>
                                 </div>
                                 <div class="column field">
-                                    <labell class="label">品種</labell>
+                                    <label class="label">品種</label>
                                     <div class="control">
                                         <div class="select is-success">
                                             <select id="type" name="type" onchange="setColor()">
@@ -104,7 +104,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                                     <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
-                                            <input type="hidden" id="pet_type" value="<?php echo $type ?>"> 
+                                            <input type="hidden" id="pet_type" value="<?php echo $petTypeResult ?>"> 
                                         </div>
                                     </div>
                                 </div>
@@ -135,7 +135,13 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                             <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
                                                 <div class="card-image">
                                                     <figure class="image is-square">
-                                                        <img src="<?php echo $key['IMAGE_PATH'] ?>" class="selectImage">
+                                                        <img src="<?php if($_SERVER["HTTP_HOST"] !== 'localhost') { 
+                                                                            echo $key['IMAGE_PATH']; 
+                                                                        } else { 
+                                                                            header("Content-Type: image/jpeg");
+                                                                            echo $key['PET_FILE']; 
+                                                                        } 
+                                                                    ?>" class="selectImage">
                                                     </figure>
                                                 </div>
                                                 <div class="card-content">

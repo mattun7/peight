@@ -25,7 +25,7 @@
             $pet_file = null;
         } else {
             $host = $_SERVER["HTTP_HOST"];
-            if($host === 'localhost'){
+            if($host !== 'localhost'){
                 $pet_file = null;
                 $image_path .= $pet_image;
             } else {
@@ -63,7 +63,7 @@
 
             // ぺット情報の登録
             InsertPetInfoDao::insertPetInfo($pdo, $insertPetInfoDto);
-            if($host === 'localhost'){
+            if($host !== 'localhost'){
                 FileUtil::imageUpload($image_path);
             }
             $pdo->commit();
