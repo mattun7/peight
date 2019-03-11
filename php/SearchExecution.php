@@ -135,12 +135,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                             <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
                                                 <div class="card-image">
                                                     <figure class="image is-square">
-                                                        <?php if($_SERVER["HTTP_HOST"] !== 'localhost') {  ?>
-                                                            <img src="<?php echo $key['IMAGE_PATH']; ?>" class="selectImage">
-                                                        <?php } else { 
-                                                                header("Content-Type: image/jpeg");
-                                                                echo $key['PET_FILE']; 
-                                                            } ?>
+                                                        <img src="<?php echo $key['IMAGE_PATH']; ?>" class="selectImage">
                                                     </figure>
                                                 </div>
                                                 <div class="card-content">
