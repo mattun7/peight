@@ -23,7 +23,12 @@ class PetInfoSelectDao {
         $sql = Dao::where($sql, 'PET_TYPE = :pet_type', $type);
         $sql = Dao::where($sql, 'COLOR = :color', $color);
 
-        $sql .= ' LIMIT :limitStart, :limitEnd';
+        $host = $_SERVER["HTTP_HOST"];
+        if($host === 'localhost') {
+            $sql .= ' LIMIT :limitStart, :limitEnd';
+        } else {
+            $sql .= ' LIMIT :limitEnd OFFSET :limitStart';
+        }
 
         $stmt = $pdo->prepare($sql);
 

@@ -56,6 +56,7 @@ try{
 
 $_SESSION['selectDto'] = $selectDto;
 
+$json_petTypeResult = json_encode($petTypeResult);
 $json_petTypeColorResult = json_encode($petTypeColorResult);
 
 $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&page=';
@@ -101,10 +102,9 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                             <select id="type" name="type" onchange="setColor()">
                                                 <option></option>
                                                 <?php foreach($petTypeResult as $petType): ?>
-                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                    <option value="<?php echo $petType['id'] ?>"><?php echo $petType['pet_type'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
-                                            <input type="hidden" id="pet_type" value="<?php echo $petTypeResult ?>"> 
                                         </div>
                                     </div>
                                 </div>
@@ -115,13 +115,14 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                             <select id="color" name="color">
                                                 <option></option>
                                             </select>
-                                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <input type="submit" id="search" class="button is-primary is-medium" value="検索" onclick="setSelectedColorIndex()"/>
                         </form>
+                        <input type="hidden" id="pet_type" value="<?php echo $json_petTypeResult ?>"> 
+                        <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                         <section class="section" style="margin-top: 2rem;">
                             <div class="container">
                                 <h1 class="subtitle">検索結果<?php echo $count ?>件</h1>
@@ -131,23 +132,23 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             <?php foreach($result as $key): ?>
                                 <div class="column">
                                     <div class="card">
-                                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['ID'] ?>">
-                                            <a onclick="formSubmit(<?php echo $key['ID'] ?>);">
+                                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['id'] ?>">
+                                            <a onclick="formSubmit(<?php echo $key['id'] ?>);">
                                                 <div class="card-image">
                                                     <figure class="image is-square">
-                                                        <img src="<?php echo $key['IMAGE_PATH']; ?>" class="selectImage">
+                                                        <img src="<?php echo $key['image_path']; ?>" class="selectImage">
                                                     </figure>
                                                 </div>
                                                 <div class="card-content">
                                                     <div class="media">
                                                         <div class="media-content">
                                                             <p class="subtitle is-4">
-                                                                <?php echo $key['PET_NAME'] ?>
+                                                                <?php echo $key['pet_name'] ?>
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="id" value="<?php echo $key['ID']; ?>" />
+                                                <input type="hidden" name="id" value="<?php echo $key['id']; ?>" />
                                             </a>
                                         </form>
                                     </div>
