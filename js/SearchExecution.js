@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(){
     // Select.phpで選択した品種を設定する
-    const type = Number($('pet_type').value);
+    const type = Number($('type').value);
     $('type').selectedIndex = type;
 
     // Select.phpで選択した色を設定する
@@ -12,11 +12,13 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 function setColor(selectedColor) {
+    const host = location.host;
+
     const typeId = $('type').value;
     const json_petTypeColorResult = JSON.parse($('json_petTypeColorResult').value);
 
     let petTypeColorList = json_petTypeColorResult.filter((petTypeColor) => {
-        return petTypeColor['PET_TYPE_ID'] == typeId;
+        return petTypeColor[DbName.pet_type_id(host)] == typeId;
     });
 
     let color = $('color');
@@ -30,8 +32,8 @@ function setColor(selectedColor) {
 
     for(let i=0, length=petTypeColorList.length; i < length; i++) {
         let petTypeColor = petTypeColorList[i];
-        let id = petTypeColor['ID'];
-        let color = petTypeColor['COLOR'];
+        let id = petTypeColor[DbName.id(host)];
+        let color = petTypeColor[DbName.color(host)];
         setOption('color', id, color);
     }
 

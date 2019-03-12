@@ -1,5 +1,6 @@
 <?php
 require_once(dirname(__FILE__).'/Dto/PetInfoSelectDto.php');
+require_once(dirname(__FILE__).'/Util/DbName.php');
 session_start();
 if(empty($_GET['page'])){
     $page = 1;
@@ -60,6 +61,8 @@ $json_petTypeResult = json_encode($petTypeResult);
 $json_petTypeColorResult = json_encode($petTypeColorResult);
 
 $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&page=';
+
+$host = $_SERVER['HTTP_HOST'];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -102,7 +105,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                             <select id="type" name="type" onchange="setColor()">
                                                 <option></option>
                                                 <?php foreach($petTypeResult as $petType): ?>
-                                                    <option value="<?php echo $petType['id'] ?>"><?php echo $petType['pet_type'] ?></option>
+                                                    <option value="<?php echo $petType[DbName::id($host)] ?>"><?php echo $petType[DbName::pet_type($host)] ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
@@ -132,23 +135,23 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             <?php foreach($result as $key): ?>
                                 <div class="column">
                                     <div class="card">
-                                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key['id'] ?>">
-                                            <a onclick="formSubmit(<?php echo $key['id'] ?>);">
+                                        <form action="DetailGraph.php" method="GET" id="petInfo_<?php echo $key[DbName::id($host)] ?>">
+                                            <a onclick="formSubmit(<?php echo $key[DbName::id($host)] ?>);">
                                                 <div class="card-image">
                                                     <figure class="image is-square">
-                                                        <img src="<?php echo $key['image_path']; ?>" class="selectImage">
+                                                        <img src="<?php echo $key[DbName::image_path($host)]; ?>" class="selectImage">
                                                     </figure>
                                                 </div>
                                                 <div class="card-content">
                                                     <div class="media">
                                                         <div class="media-content">
                                                             <p class="subtitle is-4">
-                                                                <?php echo $key['pet_name'] ?>
+                                                                <?php echo $key[DbName::pet_name($host)] ?>
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="id" value="<?php echo $key['id']; ?>" />
+                                                <input type="hidden" name="id" value="<?php echo $key[DbName::id($host)]; ?>" />
                                             </a>
                                         </form>
                                     </div>

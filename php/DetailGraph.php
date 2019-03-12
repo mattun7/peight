@@ -17,6 +17,9 @@ require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
 require_once(dirname(__FILE__).'/Dto/PetTypeDto.php');
 require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
 require_once(dirname(__FILE__).'/Dto/PetTypeColorDto.php');
+require_once(dirname(__FILE__).'/Util/DbName.php');
+
+$host = $_SERVER['HTTP_HOST'];
 
 try{
     $pdo = DbConnection::getConnection();
@@ -28,12 +31,12 @@ try{
     $weightList = DetailGraphDao::getWeight($pdo, $id, $start, $end);
 
     $petTypeDto = new PetTypeDto();
-    $petTypeDto->setId($petDetail[0]['PET_TYPE']);
+    $petTypeDto->setId($petDetail[0][DbName::pet_type($host)]);
     $resultType = PetTypeDao::fetchPetType($pdo, $petTypeDto);
 
     $petTypeColorDto = new PetTypeColorDto();
-    $petTypeColorDto->setPetTypeId($petDetail[0]['PET_TYPE']);
-    $petTypeColorDto->setId($petDetail[0]['COLOR']);
+    $petTypeColorDto->setPetTypeId($petDetail[0][DbName::pet_type($host)]);
+    $petTypeColorDto->setId($petDetail[0][DbName::color($host)]);
     $resultColor = PetTypeColorDao::fetchColor($pdo, $petTypeColorDto);
 } catch (Exception $e) {
     require_once(dirname(__FILE__).'/Exception/WebAPIException.php');
@@ -42,14 +45,13 @@ try{
     $pdo = null;
 }
 $json_weightList = json_encode($weightList);
-
-$pet_name = $petDetail[0]['PET_NAME'];
-$birthday = date('Y年n月j日', strtotime($petDetail[0]['BIRTHDAY']));
-$age = DateUtil::getAgeFromBirthday($petDetail[0]['BIRTHDAY']);
-$type = $resultType[0]['PET_TYPE'];
-$color = $resultColor[0]['COLOR'];
-$remarks = $petDetail[0]['REMARKS'];
-$image_path = $petDetail[0]['IMAGE_PATH'];
+$pet_name = $petDetail[0][DbName::pet_name($host)];
+$birthday = date('Y年n月j日', strtotime($petDetail[0][DbName::birthday($host)]));
+$age = DateUtil::getAgeFromBirthday($petDetail[0][DbName::birthday($host)]);
+$type = $resultType[0][DbName::pet_type($host)];
+$color = $resultColor[0][DbName::color($host)];
+$remarks = $petDetail[0][DbName::remarks($host)];
+$image_path = $petDetail[0][DbName::image_path($host)];
 
 
 ?>
@@ -58,7 +60,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ペット詳細</title>
+<title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <link rel="stylesheet" href="../css/c3.css">
 <script src="../js/DetailGraph.js"></script>

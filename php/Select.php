@@ -7,6 +7,7 @@ if(empty($_SESSION['select_dto'])){
 require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
 require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
+require_once(dirname(__FILE__).'/Util/DbName.php');
 try{
     $pdo = DbConnection::getConnection();
     $petTypeResult = PetTypeDao::fetchPetTypeAll($pdo);
@@ -18,6 +19,7 @@ try{
     $pdo = null;
 }
 $json_petTypeColorResult = json_encode($petTypeColorResult);
+$host = $_SERVER['HTTP_HOST'];
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -60,10 +62,9 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
                                             <select id="type" name="type" onchange="setColor()">
                                                 <option></option>
                                                 <?php foreach($petTypeResult as $petType): ?>
-                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
+                                                    <option value="<?php echo $petType[DbName::id($host)] ?>"><?php echo $petType[DbName::pet_type($host)] ?></option>
                                                 <?php endforeach ?>
                                             </select>
-                                            <input type="hidden" id="pet_type" value="<?php echo $petTypeResult ?>"> 
                                         </div>
                                     </div>
                                 </div>
@@ -74,13 +75,14 @@ $json_petTypeColorResult = json_encode($petTypeColorResult);
                                             <select id="color" name="color">
                                                 <option></option>
                                             </select>
-                                            <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <input type="submit" id="search" class="button is-primary is-medium" value="検索" onclick="setSelectedColorIndex()"/>
                         </form>
+                        <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
+                        <input type="hidden" id="pet_type" value="<?php echo $petTypeResult ?>"> 
                     </div>
                 </div>
             </div>
