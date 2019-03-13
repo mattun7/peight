@@ -11,9 +11,11 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 function dispDetailGraph(weightList) {
+    const host = location.host;
+
     let result = weightList.map((keisoku, index) => {
-        return {'計測日': keisoku['INSTRUMENTANTION_DAYS'].substr(5), 
-                '体重': parseInt(keisoku['WEIGHT'])};
+        return {'計測日': keisoku[DbName.instrumentantion_days(host)].substr(5), 
+                '体重': parseInt(keisoku[DbName.weight(host)])};
     });
 
     var graph = c3.generate({

@@ -50,4 +50,12 @@ class DbName {
   static color(host) {
     return host === 'localhost' ? 'COLOR' : 'color';
   }
+  
+  static instrumentantion_days(host) {
+    return host === 'localhost' ? 'INSTRUMENTANTION_DAYS' : 'instrumentantion_days';
+  }
+  
+  static weight(host) {
+    return host === 'localhost' ? 'WEIGHT' : 'weight';
+  }
 }
