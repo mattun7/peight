@@ -25,11 +25,13 @@ class DetailGraphDao{
             SELECT INSTRUMENTANTION_DAYS, WEIGHT
             FROM PET_WEIGHT
             WHERE ID = :id 
-            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS SIGNED) >= :start
-            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS SIGNED) <= :end
+            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS INTEGER) >= :start
+            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS INTEGER) <= :end
+            ORDER BY INSTRUMENTANTION_DAYS
         ");
 
         require_once(dirname(__FILE__).'/Dao.php');
+        require_once(dirname(__FILE__).'/../Util/DbName.php');
         
         $stmt = $pdo->prepare($sql);
         $stmt = Dao::setParam($stmt, ':id', $id);
@@ -40,11 +42,12 @@ class DetailGraphDao{
         $result = $stmt->fetchAll();
 
         $array = array();
+        $host = $_SERVER['HTTP_HOST'];
         for($i=0; $i < count($result); $i++){
             $list = $result[$i];
-            $instrumentationDays = date('Y年n月j日', strtotime($list['INSTRUMENTANTION_DAYS']));
-            $array += array($i=>array('INSTRUMENTANTION_DAYS' => $instrumentationDays,
-                                  'WEIGHT' => $list['WEIGHT']));
+            $instrumentationDays = date('Y年n月j日', strtotime($list[DbName::instrumentantion_days($host)]));
+            $array += array($i=>array(DbName::instrumentantion_days($host) => $instrumentationDays,
+                                  DbName::weight($host) => $list[DbName::weight($host)]));
         }
         return $array;
     }

@@ -27,5 +27,12 @@ class DbName {
     public static function image_path($host) {
         return $host === 'localhost' ? 'IMAGE_PATH' : 'image_path';
     }
+    public static function instrumentantion_days($host) {
+      return $host === 'localhost' ? 'INSTRUMENTANTION_DAYS' : 'instrumentantion_days';
+    }
+    
+    public static function weight($host) {
+      return $host === 'localhost' ? 'WEIGHT' : 'weight';
+    }
 }
 ?>
