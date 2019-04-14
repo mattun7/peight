@@ -81,7 +81,7 @@ function ajaxGraph() {
    const end = $('end').value;
 
    req.open('GET'
-           ,'logic/DetailGraphLogic.php?'  
+           ,'logic/DetailGraphLogic?'  
                    + 'id=' + encodeURIComponent(id) + '&'
                    + 'start=' + encodeURIComponent(start) + '&'
                    + 'end=' + encodeURIComponent(end)
@@ -111,7 +111,7 @@ function ajaxInsertBodyWeight() {
     const weight = $('weight').value;
 
     req.open('GET'
-            ,'logic/InsertBodyWeightLogic.php?'  
+            ,'logic/InsertBodyWeightLogic?'  
                 + 'id=' + encodeURIComponent(id) + '&'
                 + 'instrumentationDays=' + encodeURIComponent(instrumentationDays) + '&'
                 + 'weight=' + encodeURIComponent(weight) + '&'
