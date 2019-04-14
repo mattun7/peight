@@ -37,25 +37,3 @@ function setOption(id, value, text) {
     option.text = text;
     $(id).appendChild(option);
 }
-
-class DbName {
-  static id(host) {
-    return host === 'localhost' ? 'ID' : 'id';
-  }
-
-  static pet_type_id(host) {
-    return host === 'localhost' ? 'PET_TYPE_ID' : 'pet_type_id';
-  }
-  
-  static color(host) {
-    return host === 'localhost' ? 'COLOR' : 'color';
-  }
-  
-  static instrumentantion_days(host) {
-    return host === 'localhost' ? 'INSTRUMENTANTION_DAYS' : 'instrumentantion_days';
-  }
-  
-  static weight(host) {
-    return host === 'localhost' ? 'WEIGHT' : 'weight';
-  }
-}

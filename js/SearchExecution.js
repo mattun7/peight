@@ -18,7 +18,7 @@ function setColor(selectedColor) {
     const json_petTypeColorResult = JSON.parse($('json_petTypeColorResult').value);
 
     let petTypeColorList = json_petTypeColorResult.filter((petTypeColor) => {
-        return petTypeColor[DbName.pet_type_id(host)] == typeId;
+        return petTypeColor['pet_type_id'] == typeId;
     });
 
     let color = $('color');
@@ -32,8 +32,8 @@ function setColor(selectedColor) {
 
     for(let i=0, length=petTypeColorList.length; i < length; i++) {
         let petTypeColor = petTypeColorList[i];
-        let id = petTypeColor[DbName.id(host)];
-        let color = petTypeColor[DbName.color(host)];
+        let id = petTypeColor['ID'];
+        let color = petTypeColor['COLOR'];
         setOption('color', id, color);
     }
 

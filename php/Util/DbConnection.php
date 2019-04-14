@@ -14,7 +14,7 @@ class DbConnection {
                 $password = '';
             } else {
                 $url = parse_url(getenv('DATABASE_URL'));
-                $dsn = sprintf('pgsql:host=%s;dbname=%s', $url['host'], substr($url['path'], 1));
+                $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $url['host'], substr($url['path'], 1));
                 $username = $url['user'];
                 $password = $url['pass'];
             }

@@ -7,7 +7,6 @@ if(empty($_SESSION['select_dto'])){
 require_once(dirname(__FILE__).'/Dao/PetTypeDao.php');
 require_once(dirname(__FILE__).'/Dao/PetTypeColorDao.php');
 require_once(dirname(__FILE__).'/Util/DbConnection.php');
-require_once(dirname(__FILE__).'/Util/DbName.php');
 try{
     $pdo = DbConnection::getConnection();
     $petTypeResult = PetTypeDao::fetchPetTypeAll($pdo);
@@ -62,7 +61,7 @@ $host = $_SERVER['HTTP_HOST'];
                                             <select id="type" name="type" onchange="setColor()">
                                                 <option></option>
                                                 <?php foreach($petTypeResult as $petType): ?>
-                                                    <option value="<?php echo $petType[DbName::id($host)] ?>"><?php echo $petType[DbName::pet_type($host)] ?></option>
+                                                    <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
