@@ -1,7 +1,0 @@
-{
-    "name": "peight",
-    "description": "ぺットの体重管理",
-    "require": {
-    　　　"ext-mbstring": "*"
-　}
-}
