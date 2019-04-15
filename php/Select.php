@@ -60,9 +60,9 @@ $host = $_SERVER['HTTP_HOST'];
                                         <div class="select is-success">
                                             <select id="type" name="type" onchange="setColor()">
                                                 <option></option>
-                                                <?php foreach($petTypeResult as $petType): ?>
+                                                <?php foreach($petTypeResult as $petType){ ?>
                                                     <option value="<?php echo $petType['ID'] ?>"><?php echo $petType['PET_TYPE'] ?></option>
-                                                <?php endforeach ?>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                     </div>
