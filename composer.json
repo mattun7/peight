@@ -6,7 +6,9 @@
             "email": "saxon773@yahoo.co.jp"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "7.1.23"
+    },
     "config": {
         "platform": {
             "php": "7.1.23"
