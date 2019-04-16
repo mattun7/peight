@@ -1,0 +1,15 @@
+{
+    "name": "daigoro7/pet-weight-info",
+    "authors": [
+        {
+            "name": "大吾郎",
+            "email": "saxon773@yahoo.co.jp"
+        }
+    ],
+    "require": {},
+    "config": {
+        "platform": {
+            "php": "7.1.23"
+        }
+    }
+}
