@@ -25,8 +25,8 @@ class DetailGraphDao{
             SELECT INSTRUMENTANTION_DAYS, WEIGHT
             FROM PET_WEIGHT
             WHERE ID = :id 
-            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS INTEGER) >= :start
-            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS INTEGER) <= :end
+            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS SIGNED) >= :start
+            AND CAST(REPLACE(INSTRUMENTANTION_DAYS, '-', '') AS SIGNED) <= :end
             ORDER BY INSTRUMENTANTION_DAYS
         ");
 
