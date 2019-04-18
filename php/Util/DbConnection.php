@@ -13,7 +13,7 @@ class DbConnection {
                 $username = 'root';
                 $password = '';
             } else {
-                $url = parse_url(getenv('DATABASE_URL'));
+                $url = parse_url(getenv('CLEARDB_DATABASE_URL'));
                 $dsn = sprintf('mysql:host=%s;dbname=%s;charset=utf8mb4', $url['host'], substr($url['path'], 1));
                 $username = $url['user'];
                 $password = $url['pass'];
