@@ -81,7 +81,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ペット情報</title>
+<title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/InsertPetInfo.js"></script>
 <script src="../js/Util.js"></script>

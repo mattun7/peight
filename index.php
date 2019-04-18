@@ -27,6 +27,5 @@
 			</div>
 		</div>
 	</nav>
-	<?php phpinfo() ?>
 </body>
 </html>

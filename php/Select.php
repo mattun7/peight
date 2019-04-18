@@ -25,7 +25,7 @@ $host = $_SERVER['HTTP_HOST'];
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ペット情報</title>
+<title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/Util.js"></script>
 <script src="../js/Select.js"></script>
@@ -47,15 +47,13 @@ $host = $_SERVER['HTTP_HOST'];
                         <form action="SearchExecution.php" method="GET">
                             <div class="columns">
                                 <div class="column">
-                                    <div class="field">
                                     <label class="label">ぺット名</label>
-                                        <div class="control">
-                                            <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
-                                        </div>
+                                    <div class="control">
+                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
                                     </div>
                                 </div>
-                                <div class="column field">
-                                    <labell class="label">品種</labell>
+                                <div class="column">
+                                    <label class="label">品種</label>
                                     <div class="control">
                                         <div class="select is-success">
                                             <select id="type" name="type" onchange="setColor()">
@@ -67,7 +65,7 @@ $host = $_SERVER['HTTP_HOST'];
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column field">
+                                <div class="column">
                                     <label class="label">カラー</label>
                                     <div class="control" style="width: 100%;">
                                         <div class="select is-success">

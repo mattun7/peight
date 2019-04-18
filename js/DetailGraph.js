@@ -29,8 +29,10 @@ function dispDetailGraph(weightList) {
             x: {
                 type: 'category',
                 label: {
-                    text: '計測日',
                     position: 'outer-right',
+                },
+                tick: {
+                    count: 7,
                 },
             },
             y: {

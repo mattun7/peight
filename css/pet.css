@@ -157,3 +157,14 @@
 .insertBodyWeightTable td{
     text-align: center;
 }
+
+.date {
+    width: 10rem;
+}
+
+@media screen and (max-width: 399px) {
+    .date {
+        width: 8rem;
+        font-size: 0.7rem;
+    }
+}

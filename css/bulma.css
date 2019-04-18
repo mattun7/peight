@@ -7558,6 +7558,12 @@ label.panel-block:hover {
   padding: 0.75rem;
 }
 
+@media screen and (max-width: 768px) {
+  .column {
+    padding-top: 0px;
+  }
+}
+
 .columns.is-mobile > .column.is-narrow {
   flex: none;
 }

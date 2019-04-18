@@ -66,7 +66,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ペット情報</title>
+<title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
 <script src="../js/Util.js"></script>
 <script src="../js/SearchExecution.js"></script>
@@ -88,14 +88,12 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                         <form action="SearchExecution.php" method="GET">
                             <div class="columns">
                                 <div class="column">
-                                    <div class="field">
                                     <label class="label">ぺット名</label>
-                                        <div class="control">
-                                            <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
-                                        </div>
+                                    <div class="control">
+                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
                                     </div>
                                 </div>
-                                <div class="column field">
+                                <div class="column">
                                     <label class="label">品種</label>
                                     <div class="control">
                                         <div class="select is-success">
@@ -108,7 +106,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                         </div>
                                     </div>
                                 </div>
-                                <div class="column field">
+                                <div class="column">
                                     <label class="label">カラー</label>
                                     <div class="control" style="width: 100%;">
                                         <div class="select is-success">

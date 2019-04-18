@@ -61,6 +61,7 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
+<link rel="stylesheet" href="../css/pet.css">
 <link rel="stylesheet" href="../css/c3.css">
 <script src="../js/DetailGraph.js"></script>
 <script src="../js/c3.js"></script>
@@ -156,27 +157,10 @@ $image_path = $petDetail[0]['IMAGE_PATH'];
                             </ul>
                         </div>
                         <div id="DetailGraph">
-                            <div class="field is-horizontal" style="padding-bottom: 1rem;">
-                                <div class="field-body">
-                                    <span class="field" style="flex-grow: 0;">
-                                        <span class="control is-expanded">
-                                            <input type="date" class="input" style="width: 10rem;" id="start" name="start" value="<?php echo $start ?>" />
-                                        </span>
-                                    </span>
-                                    <span class="field" style="flex-grow: 0;">
-                                        <label class="label">-</label>
-                                    </span>
-                                    <span class="field">
-                                        <span class="control is-expanded">
-                                            <input type="date" class="input" style="width: 10rem;" id="end" name="end" value="<?php echo $end ?>" />
-                                        </span>
-                                    </span>
-                                    <span class="field">
-                                        <span class="control is-expanded">
-                                            <input type="button" class="button is-primary" id="bodyWeightDisplay" value="体重表示" onclick="ajaxGraph()" />
-                                        </span>
-                                    </span>
-                                </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <input type="date" class="input date" id="start" name="start" value="<?php echo $start ?>" onchange="ajaxGraph()" />
+                                -
+                                <input type="date" class="input date" id="end" name="end" value="<?php echo $end ?>" onchange="ajaxGraph()" />
                             </div>
                             <div id="chart">
                             <input type="hidden" id="json_weightList" name="json_weightList" value='<?php echo $json_weightList; ?>' />
