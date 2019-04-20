@@ -3,7 +3,7 @@
         <div class="container">
             <div class="navbar-brand">
                 <div class="navbar-item">
-                    <h4 class="title is-4" style="padding-left: 1em;">Peight</h4>
+                    <h4 class="title is-4"><a href="../">Peight</a></h4>
                 </div>
                 <div class="navbar-burger burger" data-target="navMenu" aria-label="menu" aria-expanded="false">
                     <span aria-hidden="true"></span>

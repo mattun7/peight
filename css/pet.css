@@ -168,3 +168,12 @@
         font-size: 0.7rem;
     }
 }
+
+.title {
+    padding-left: 1em; 
+    cursor: pointer;
+}
+
+.title a {
+    color: #363636;
+}
