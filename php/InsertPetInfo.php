@@ -83,6 +83,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
+<link rel="stylesheet" href="../css/pet.css">
 <script src="../js/InsertPetInfo.js"></script>
 <script src="../js/Util.js"></script>
 </head>
