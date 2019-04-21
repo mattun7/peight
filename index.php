@@ -21,7 +21,7 @@
 					</div>
 				</div>
 				<div class="navbar-menu" id="navMenu">
-					<a href="php/Select" class="navbar-item">ペットを探す</a>
+					<a href="php/logic/NewSearch" class="navbar-item">ペットを探す</a>
 					<a href="php/InsertPetInfo" class="navbar-item">ペットを登録する</a>
 				</div>
 			</div>

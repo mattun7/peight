@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="navbar-menu" id="navMenu">
-                <a href="SearchExecution" class="navbar-item">ペットを探す</a>
+                <a href="logic/NewSearch" class="navbar-item">ペットを探す</a>
                 <a href="InsertPetInfo" class="navbar-item">ペットを登録する</a>
             </div>
         </div>

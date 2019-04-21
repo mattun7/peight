@@ -9,7 +9,7 @@ if(empty($_GET['page'])){
 
 $referer = $_SERVER['HTTP_REFERER'];
 
-if(preg_match('/SearchExecution.php/', $referer) || empty($_SESSION['selectDto'])){
+if(preg_match('/SearchExecution/', $referer) || empty($_SESSION['selectDto'])){
     // 検索ボタンを押下
     $pet_name = $_GET['pet_name'];
     $type = $_GET['type'];
@@ -68,6 +68,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
+<link rel="stylesheet" href="../css/pet.css">
 <script src="../js/Util.js"></script>
 <script src="../js/SearchExecution.js"></script>
 </head>
@@ -81,7 +82,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                     <div class="bd-breadcrumb">
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
-                                <li><a href="#">ホーム</a></li>
+                                <li><a href="../">ホーム</a></li>
                                 <li class="is-active"><a href="#"class="is-active">ぺットを探す</a></li>
                             </ul>
                         </nav>
@@ -90,7 +91,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                                 <div class="column">
                                     <label class="label">ぺット名</label>
                                     <div class="control">
-                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText">
+                                        <input type="text" class="input" id="pet_name" name="pet_name" class="searchText" value="<?php echo $pet_name ?>">
                                     </div>
                                 </div>
                                 <div class="column">
@@ -119,7 +120,8 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                             </div>
                             <input type="submit" id="search" class="button is-primary is-medium" value="検索" onclick="setSelectedColorIndex()"/>
                         </form>
-                        <input type="hidden" id="pet_type" value="<?php echo $json_petTypeResult ?>"> 
+                        <input type="hidden" id="typeId" value="<?php echo $type ?>"> 
+                        <input type="hidden" id="colorId" value="<?php echo $color ?>"> 
                         <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
                         <section id="section" class="section" style="margin-top: 2rem;">
                             <div class="container">

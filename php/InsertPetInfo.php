@@ -96,7 +96,7 @@
                     <div class="bd-breadcrumb">
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
-                                <li><a href="#">ホーム</a></li>
+                                <li><a href="../">ホーム</a></li>
                                 <li class="is-active"><a href="#">ぺット情報登録</a></li>
                             </ul>
                         </nav>
