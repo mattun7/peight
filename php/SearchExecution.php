@@ -68,7 +68,6 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Peight</title>
 <link rel="stylesheet" href="../css/bulma.css">
-<link rel="stylesheet" href="../css/pet.css">
 <script src="../js/Util.js"></script>
 <script src="../js/SearchExecution.js"></script>
 </head>
@@ -82,11 +81,11 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                     <div class="bd-breadcrumb">
                         <nav class="breadcrumb" aria-label="breadcrumbs">
                             <ul>
-                                <li><a href="../">ホーム</a></li>
+                                <li><a href="#">ホーム</a></li>
                                 <li class="is-active"><a href="#"class="is-active">ぺットを探す</a></li>
                             </ul>
                         </nav>
-                        <form action="SearchExecution.php" method="GET">
+                        <form action="#section" method="GET">
                             <div class="columns">
                                 <div class="column">
                                     <label class="label">ぺット名</label>
@@ -122,7 +121,7 @@ $url = '?pet_name=' . $pet_name . '&type=' . $type  . '&color=' . $color . '&pag
                         </form>
                         <input type="hidden" id="pet_type" value="<?php echo $json_petTypeResult ?>"> 
                         <input type="hidden" id="json_petTypeColorResult" name="json_petTypeColorResult" value='<?php echo $json_petTypeColorResult; ?>' />
-                        <section class="section" style="margin-top: 2rem;">
+                        <section id="section" class="section" style="margin-top: 2rem;">
                             <div class="container">
                                 <h1 class="subtitle">検索結果<?php echo $count ?>件</h1>
                             </div>
